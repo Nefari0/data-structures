@@ -1,7 +1,44 @@
-.App {
+/* .App {
   height: 500px;
   width: 500px;
   background-color: blueviolet;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+} */
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  /* background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70); original */
+  /* background-image: linear-gradient(99deg, #ff5959, #ff9770 40%, #6d8bcc 73%, #33497a); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.auth-container {
+  border-radius: 8px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  /* background-image: linear-gradient(97deg, #ff7a6e, #Ffd670); */
+  /* background-image: linear-gradient(97deg, #c31432, #240b36); */
+  background-image: linear-gradient(97deg, #7a0101, #1e07e6);
+  width: 35vw;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  position: relative;
 }
 
 .header {

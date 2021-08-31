@@ -1,10 +1,15 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Auth from './Components/Auth/Auth'
 
 function App() {
   return (
     <div className="App">
-      <header className="header"><h3>React</h3></header>
+      <Auth/>
+      {/* <header className="header"><h3>React</h3></header> */}
+      {/* <body> */}
+        {/* <h3>elements</h3> */}
+      {/* </body> */}
 
       
     </div>
