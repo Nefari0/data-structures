@@ -1,0 +1,15 @@
+.header {
+    /* height: 10vh; */
+    height: 100px;
+    width: 100%;
+    /* color: blueviolet */
+    /* background-color: yellow; */
+    /* border-bottom: 1px solid #297F87; */
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+    height: 95px;
+    /* height: 90%; */
+}

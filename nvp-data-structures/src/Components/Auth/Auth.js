@@ -28,7 +28,7 @@ class Auth extends Component {
                 </div>
                 <div className='auth-button-container'>
                     <button className='dark-button' onClick={this.login}> Login </button>
-                    <button className='dark-button' onClick={this.register}> Register </button>
+                    {/* <button className='dark-button' onClick={this.register}> Register </button> */}
                 </div>
             </div>
         )

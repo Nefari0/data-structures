@@ -7,8 +7,10 @@
     /* background-image: linear-gradient(100deg,rgba(0,0,0,.7), #7a0101 -20%, rgb(161, 139, 139) 60%, rgb(145, 145, 145) 70%, #1e07e6 200%),url(chessboard2.png); */
     /* background-image: linear-gradient(97deg,rgba(0,0,0,.7),#7a0101 10%,#1e07e6 20%,rgba(0,0,0,.7)),url(chessboard2.png); */
     background-image: linear-gradient(97deg,#b92525 20%,#297F87 20%,rgba(0,0,0,.7)),url(fence.jpg);
-    width: 35vw;
-    height: 55vh;
+    /* width: 35vw; */
+    width: 400px;
+    /* height: 55vh; */
+    height: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;

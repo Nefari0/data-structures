@@ -16,17 +16,28 @@
   background-color: #fff;
   /* background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70); original */
   /* background-image: linear-gradient(99deg, #ff5959, #ff9770 40%, #6d8bcc 73%, #33497a); */
-  position: absolute;
+  /* position: absolute;
   top: 0;
-  left: 0;
+  left: 0; */
+
   display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
 }
 
-.header {
+h4,
+h3,
+h2,
+h1 {    
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+/* .header {
   height: 100px;
   width: 100vw;
   background-color: brown;
-}
+} */
