@@ -1,0 +1,1 @@
+SELECT * FROM nvp_user WHERE email = $1
