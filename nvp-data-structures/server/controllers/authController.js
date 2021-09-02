@@ -10,22 +10,26 @@ module.exports = {
             return res.status(409).send('This email is being used by another user')
         }
         const salt = bcrypt.genSaltSync(10);
-        hash = bcrypt.hashSync(password,salt)
-        const registeredUser = await db.auth.register_user([first_name,last_name,email,password])
+        const hash = bcrypt.hashSync(password,salt)
+        const registeredUser = await db.auth.register_user([first_name,last_name,email,hash])
         const user = registeredUser[0]
+        // console.log('this is user',user)
 
         req.session.user = {
             firstName:user.first_name,
             lastName:user.last_name,
             email:user.email,
-            id:user.id
+            id:user.user_id,
+            isAdmin:user.is_admin,
+            auth:isAuthenticated
         }
-        return res.status(201).send(req.session.user).catch(err => console.log(err))
+        return res.status(201).send(req.session.user)
     },
 
     login: async (req,res) => {
         const { email,password } = req.body
-        const foundUser = await req.app.get('db').get_user([email])
+        const db = req.app.get('db')
+        const foundUser = await db.auth.get_user([email])
         const user = foundUser[0];
         if (!user) {
             return res.status(401).send("user not found")
@@ -36,9 +40,11 @@ module.exports = {
         }
 
         req.session.user = {
+            firstName:user.first_name,
+            lastName:user.last_name,
             email:user.email,
-            name:user.first_name,
-            id:user.id,
+            id:user.user_id,
+            isAdmin:user.is_admin,
             auth:isAuthenticated
         }
         return res.status(200).send(req.session.user)

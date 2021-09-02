@@ -20,7 +20,8 @@ app.use(
     )
 
 // user end points
-// app.post('/api/auth/register', authController.re    gister)
+app.post('/api/auth/register', authController.register)
+app.get('/api/auth/login', authController.login)
 
 massive({
     connectionString: CONNECTION_STRING,
