@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
+const authController = require('./controllers/authController')
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -17,6 +18,9 @@ app.use(
             cookie: { maxAge: 1000 * 60 * 5 },
         }),
     )
+
+// user end points
+app.post('/api/auth/register', authController.register)
 
 massive({
     connectionString: CONNECTION_STRING,
