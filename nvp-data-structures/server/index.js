@@ -3,6 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
 const authController = require('./controllers/authController')
+const dataTestController = require('./controllers/dataTestController')
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -22,6 +23,10 @@ app.use(
 // user end points
 app.post('/api/auth/register', authController.register)
 app.get('/api/auth/login', authController.login)
+// app.post('/api/auth/login', authController.login)
+
+// test data endpoints
+app.get('/api/testdata/all', dataTestController.getData)
 
 massive({
     connectionString: CONNECTION_STRING,
