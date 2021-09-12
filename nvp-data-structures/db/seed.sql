@@ -24,3 +24,6 @@
 --   'password',
 --   false
 -- )
+
+-- ---- cancer database/calculator ---- --
+-- database and calculator are generated in jupyter notebook

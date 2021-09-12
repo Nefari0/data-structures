@@ -4,7 +4,8 @@ module.exports = {
         const index = 1
         const db = req.app.get('db')
         const data = await db.testdata.get_testdata();
-        console.log(data[0])
+        // console.log(data[0])
+        console.log(data)
         return res.status(200).send(data)
     }
 }

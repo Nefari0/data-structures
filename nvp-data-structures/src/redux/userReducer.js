@@ -9,7 +9,7 @@ const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 
 export function loginUser(email, password) {
-    console.log('this is reducer')
+    console.log(email)
     return {
         type: LOGIN_USER,
         payload: axios.get('/api/auth/login', {email,password})

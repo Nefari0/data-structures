@@ -1,29 +1,47 @@
 import React, { Component } from 'react'
+// import a
 import './Auth.css'
 import { loginUser,logoutUser } from '../../redux/userReducer'
+import { characters } from '../../redux/breakingBadReducer'
 import { connect } from 'react-redux'
+import axios from 'axios'
 
 class Auth extends Component {
 
     constructor(props){
-        super();
+        super(props);
 
         this.state = {
+            user:{},
             email:'',
-            password:''
+            password:'',
+            setPermission:true,
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.login = this.login.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.resetState = this.resetState.bind(this)
     }
 
-    // componentDidMount(){
-    //     const { user } = this.props
-    // }
-
-    componentWillUpdate(){
+    componentDidMount(){
         const { user } = this.props
     }
+
+    componentWillUpdate(){
+        // console.log('characters',characters)
+        // const { user } = this.props
+        // const { setPermission } = this.state
+
+        // if(user.isLoggedIn === true && setPermission===true){
+        //     // this.setState({username:user.user.data.user,setPermission:false})
+        //     this.setState({username:user.user.user.user,isLoggedInState:user.isLoggedIn,setPermission:false})
+        // }
+    }
+
+    //     componentDidUpdate(){
+    //     const { user } = this.props
+    //     console.log('this. props',this.props)
+    // }
 
     resetState(){
         this.setState({
@@ -40,9 +58,13 @@ class Auth extends Component {
     
     handleLogin(){
         const { email,password } = this.state
-        const { loginUser } = this.props
-        loginUser(email,password)
-        this.resetState()
+        console.log('email',email)
+        // const { loginUser } = this.props
+        // loginUser(email,password)
+        axios.post('/api/auth/login',{email,password}).then(res => {
+            this.setState({user:res.data})
+        })
+        // this.resetState()
     }
 
     login(){
@@ -66,7 +88,7 @@ class Auth extends Component {
                     <input value={this.state.password} type='password' onChange={e => this.handleChange('password', e.target.value)} />
                 </div>
                 <div className='auth-button-container'>
-                    <button className='dark-button' onClick={this.login}> Login </button>
+                    <button className='dark-button' onClick={this.handleLogin}> Login </button>
                     {/* <button className='dark-button' onClick={this.register}> Register </button> */}
                 </div>
             </div>
@@ -79,4 +101,4 @@ function mapStateToProps(reduxState){
 }
 
 // export default Auth
-export default connect(mapStateToProps, {loginUser})(Auth)
+export default connect(mapStateToProps, {loginUser,logoutUser})(Auth)
