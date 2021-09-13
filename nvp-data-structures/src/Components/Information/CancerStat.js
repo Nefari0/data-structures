@@ -4,11 +4,11 @@ import './Info.css'
 
 const CancerStat = (props) => {
 
-    const { eclass } = props
+    const { eclass,id } = props
 
     return(
         <div className="info-list">
-            <p className="p-text">text</p>
+            <p className="p-text">{id}</p>
             <p className="p-text">{eclass}</p>
         </div>
     )
