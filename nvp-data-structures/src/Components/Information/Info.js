@@ -19,13 +19,25 @@ class Info extends Component {
             dataView:false,
             data1View:false,
             data2View:false,
-            cancerDataInput:false
+            cancerDataInput:false,
+            id:"",
+            clump_thickness:0,
+            uniformity_of_cell_size:0,
+            uniformity_of_cell_shape:0,
+            marginal_adhesion:"",
+            single_epithelial_cell_size:0,
+            bare_nuclei:0,
+            bland_chromatin:0,
+            normal_nuceoli:0,
+            mitoses:0
+            
         }
         this.dataSelected = this.dataSelected.bind(this)
         this.data1Selected = this.data1Selected.bind(this)
         this.data2Selected = this.data2Selected.bind(this)
         this.resetView = this.resetView.bind(this)
         this.addCancerData = this.addCancerData.bind(this)
+        this.addToCancerPending = this.addToCancerPending.bind(this)
         // this.changeView = this.changeView.bind(this)
     }
 
@@ -48,6 +60,28 @@ class Info extends Component {
         })
 
         this.setState({dataItems:data})
+    }
+
+    handleCancerForm(prop,val) {
+        this.setState({
+            [prop]:val
+        })
+    }
+
+    addToCancerPending() {
+        const {
+            id,
+            clump_thickness,
+            uniformity_of_cell_size,
+            uniformity_of_cell_shape,
+            marginal_adhesion,
+            single_epithelial_cell_size,
+            bare_nuclei,
+            bland_chromatin,
+            normal_nuceoli,
+            mitoses
+        } = this.state
+        axios.post('/api/cancer/add',{id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses})
     }
 
     // -- database salection -- //
@@ -85,19 +119,6 @@ class Info extends Component {
             data2View:false
         })
     }
-
-    // build switch statement to replace redundant code lines
-    // changeView(params) {
-    //     this.resetView()
-    //     switch (params) {
-    //         case 'data':
-    //             this.setState({data1View:!this.state.data1View})
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-
     // -------------------------------------------- //
 
     render(){
@@ -130,8 +151,8 @@ class Info extends Component {
                     <p className="p-logout-text" onClick={this.props.logout}>logout</p>
                     {data2View ? (
                         <div>
-                            <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p>
-                            {cancerDataInput ?(<div className="cancer-stats-input">
+                            {/* <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p>
+                            {cancerDataInput ?(<div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
                                 <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
                                 <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
                                 <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
@@ -144,7 +165,21 @@ class Info extends Component {
                                 <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
                             </div>)
                             : 
-                            (<div></div>)}
+                            (<div></div>)} */}
+                                                        <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p>
+                            <div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
+                                <div className="input-element"><input placeholder="id" onChange={e => this.handleCancerForm('id',e.target.value)}/><p className="p-text-generic">id</p></div>
+                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleCancerForm('"clump_thickness"',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell size" onChange={e => this.handleCancerForm('uniformity_of_cell_size',e.target.value)}/><p className="p-text-generic">Uniformity of cell size</p></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell shape" onChange={e => this.handleCancerForm('uniformity_of_cell_shape',e.target.value)}/><p className="p-text-generic">Uniformity of cell shape</p></div>
+                                <div className="input-element"><input placeholder="Marginal adhesion" onChange={e => this.handleCancerForm('marginal_adhesion',e.target.value)}/><p className="p-text-generic">Marginal adhesion</p></div>
+                                <div className="input-element"><input placeholder="Sinlge opithelial cell size" onChange={e => this.handleCancerForm('single_epithelial_cell_size',e.target.value)}/><p className="p-text-generic">Sinlge opithelial cell size</p></div>
+                                <div className="input-element"><input placeholder="Bare nuclei" onChange={e => this.handleCancerForm('bare_nuclei',e.target.value)}/><p className="p-text-generic">Bare nuclei</p></div>
+                                <div className="input-element"><input placeholder="Bland nuceoli" onChange={e => this.handleCancerForm('bland_chromatin',e.target.value)}/><p className="p-text-generic">Bland nuceoli</p></div>
+                                <div className="input-element"><input placeholder="Normal nuceoli" onChange={e => this.handleCancerForm('normal_nuceoli',e.target.value)}/><p className="p-text-generic">Normal nuceoli</p></div>
+                                <div className="input-element"><input placeholder="Mitoses" onChange={e => this.handleCancerForm('mitoses',e.target.value)}/><p className="p-text-generic">Mitoses</p></div>
+                                <button onClick={this.addToCancerPending}>submit</button>
+                            </div>
                             <div className="info-list"><h4>id</h4><h4>results</h4></div>
                             {mappedCancerStats}
                         </div>
