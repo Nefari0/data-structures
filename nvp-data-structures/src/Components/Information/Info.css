@@ -47,6 +47,22 @@
 
 .p-text{
     margin: auto;
+    /* color: orange; */
+    color: #555;
+}
+
+.p-text-generic{
+    color: #555;
+    float: right;
+    margin: auto;
+}
+
+.p-logout-text{
+    margin-left: 100%;
+    color: orange;
+}
+
+.p-add-stat-text{
     color: orange;
 }
 
@@ -60,10 +76,21 @@
 }
 
 .cancer-stats-input{
-    height: 100px;
-    width: 100px;
+    height: 300px;
+    width: 385px;
     margin: auto;
-    background-color: orchid;
+    border-radius: 2%;
+    /* background-color: rgb(240, 240, 240); */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    opacity: 100;
+    transition: all 500ms;
+    z-index: 5;
+}
+
+.input-element{
+    height: 30px;
+    margin: none;
 }
 
 /* .id-result{

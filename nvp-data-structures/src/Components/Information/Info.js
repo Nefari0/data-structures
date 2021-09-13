@@ -6,6 +6,7 @@ import data from './data'
 import InfoItem from './InfoItem'
 import BookData from './BookData'
 import CancerStat from './CancerStat'
+import AddCancerStat from './AddCancerStat'
 
 class Info extends Component {
     constructor(props){
@@ -49,7 +50,7 @@ class Info extends Component {
         this.setState({dataItems:data})
     }
 
-    // -- changing this to be more modular. pending removal -- //
+    // -- database salection -- //
     dataSelected(params) {
         this.resetView()
         this.setState({
@@ -73,7 +74,7 @@ class Info extends Component {
 
     addCancerData(params) {
         this.setState({
-            cancerDataInput:!this.cancerDataInput
+            cancerDataInput:!this.state.cancerDataInput
         })
     }
 
@@ -97,7 +98,7 @@ class Info extends Component {
     //     }
     // }
 
-    // ------ //
+    // -------------------------------------------- //
 
     render(){
         
@@ -112,7 +113,7 @@ class Info extends Component {
         })
 
         const mappedCancerStats = cancerStats.map(element => {
-            return <CancerStat key={element.index} eclass={element.class} />
+            return <CancerStat key={element.index} eclass={element.class} id={element.id} />
         })
         
         return(
@@ -126,26 +127,26 @@ class Info extends Component {
                     {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>info 3</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>info 3</h4>)}
                 </section>
                 <section className="right-column">
-
+                    <p className="p-logout-text" onClick={this.props.logout}>logout</p>
                     {data2View ? (
                         <div>
-                            <div className="info-list"><h4>id</h4><h4>results</h4></div>
-                            {mappedCancerStats}
-                            <p className="p-text" onClick={this.addCancerData}>add info?</p>
+                            <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p>
                             {cancerDataInput ?(<div className="cancer-stats-input">
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
+                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
                             </div>)
                             : 
                             (<div></div>)}
+                            <div className="info-list"><h4>id</h4><h4>results</h4></div>
+                            {mappedCancerStats}
                         </div>
                     ) : (<div></div>)}
 

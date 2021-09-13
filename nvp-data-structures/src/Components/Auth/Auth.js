@@ -5,6 +5,7 @@ import { loginUser,logoutUser } from '../../redux/userReducer'
 import { characters } from '../../redux/breakingBadReducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import Info from '../Information/Info'
 
 class Auth extends Component {
 
@@ -16,19 +17,28 @@ class Auth extends Component {
             email:'',
             password:'',
             setPermission:true,
+            isAuthenticated:false
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.login = this.login.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.resetState = this.resetState.bind(this)
+        this.displayData = this.displayData.bind(this)
+        this.thisLogout = this.thisLogout.bind(this)
     }
 
     componentDidMount(){
         const { user } = this.props
     }
 
-    componentWillUpdate(){
-        // console.log('characters',characters)
+    componentDidUpdate(){
+        const { auth } = this.state.user
+        const { isAuthenticated } = this.state
+        if(auth === true && isAuthenticated === false) {
+            this.setState({isAuthenticated:true})
+        }
+        // console.log('auth',auth)
+        // console.lo g('characters',characters)
         // const { user } = this.props
         // const { setPermission } = this.state
 
@@ -56,26 +66,44 @@ class Auth extends Component {
         })
     }
     
-    handleLogin(){
+    handleLogin = async () => {
         const { email,password } = this.state
-        console.log('email',email)
+        // console.log('email',email)
         // const { loginUser } = this.props
         // loginUser(email,password)
         axios.post('/api/auth/login',{email,password}).then(res => {
             this.setState({user:res.data})
-        })
-        // this.resetState()
+        }).then(this.displayData())
+        this.resetState()
+        // this.displayData()
+    }
+
+    displayData = (params) => {
+        const { auth } = this.state.user
+        console.log('auth',auth)
     }
 
     login(){
         this.handleLogin()
     }
 
+    thisLogout() {
+        this.setState({
+            isAuthenticated:false,
+            user:{}
+        })
+    }
+
 
     render() {
+        const { auth } = this.state.user
+        const {isAuthenticated } = this.state
 
         return(
-            <div className="auth-container">
+            // <div className="auth-container">
+            <div>
+                { !isAuthenticated ?
+                (<div className="auth-container">
                 {/* <img src={logo} alt='logo' /> */}
                 <h1 className='auth-title'>Data Structures</h1>
                 {this.state.errorMsg && <h3 className='auth-error-msg'>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
@@ -91,6 +119,9 @@ class Auth extends Component {
                     <button className='dark-button' onClick={this.handleLogin}> Login </button>
                     {/* <button className='dark-button' onClick={this.register}> Register </button> */}
                 </div>
+                </div>)
+                : (<Info {...this.state} logout={this.thisLogout}/>)
+                }
             </div>
         )
     }
