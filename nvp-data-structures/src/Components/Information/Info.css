@@ -1,7 +1,7 @@
 
 .info-container{
     min-height: 100vh;
-    width: 100vw;
+    min-width: 100vw;
     /* background-color: #555; */
     display: flex;
 	flex-direction: row;
@@ -10,16 +10,47 @@
     align-content: center;
 }
 
-.left-column{
+/* .info-container{
+        min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+} */
+
+.header-menu{
+    /* position: absolute; */
     height: 800px;
-    width: 200px;
-    margin: 5px;
+    width: 800px;
+    /* margin: 50px; */
+    /* padding-right: 10px; */
+    /* padding-left: 10px; */
     background-color: #fff;
+    /* border-right: 1px solid #297F87; */
+    border-bottom: 1px solid #4bdfec;
+    /* border-left: 1px solid #297F87; */
+    /* overflow: auto; */
+}
+
+.data-header{
+    width: 80vw;
+    /* padding-left: 60px; */
+    /* background-color: palegoldenrod; */
+    border-bottom: 1px solid #4bdfec;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
 }
 
 .right-column{
     height: 800px;
-    width: 500px;
+    min-width: 500px;
     margin: 5px;
     background-color: #fff;
     display: flex;
@@ -47,6 +78,7 @@
 
 .p-text{
     margin: auto;
+    margin-left: 0;
     /* color: orange; */
     color: #555;
 }
@@ -58,21 +90,23 @@
 }
 
 .p-logout-text{
-    margin-left: 100%;
+    margin-left: 75%;
     color: orange;
 }
 
 .p-add-stat-text{
     color: orange;
+    margin-left: 20px;
 }
 
 .info-list{
-    display: flex;
+	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: stretch;
 	align-content: stretch;
+    overflow: hidden;
 }
 
 .cancer-stats-input{
@@ -83,7 +117,7 @@
     border-radius: 2%;
     /* background-color: rgb(240, 240, 240); */
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    overflow: auto;
     opacity: 100;
     transition: all 500ms;
     z-index: 5;
@@ -97,9 +131,49 @@
     margin: 0px;
 }
 
+div.scrollmenu {
+    /* background-color: #333; */
+    background-color: #297F87;
+    overflow: auto;
+    white-space: nowrap;
+    /* margin-left: 10px; */
+    padding-left: 15px;
+  }
+
+  div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+
+  div.scrollitems{
+    /* background-color: #297F87; */
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: stretch;
+    overflow: auto;
+    /* white-space: nowrap; */
+  }
+
+  div.scrollitems a {
+      position: relative;
+      /* margin: none; */
+      width: 40px;
+      margin-left: 15px;
+  }
+
 .input-element{
     height: 30px;
-    margin: none;
+    /* margin-left: 10px; */
 }
 
 /* .id-result{
