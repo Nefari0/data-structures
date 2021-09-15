@@ -13,6 +13,7 @@ class Info extends Component {
         super();
 
         this.state = {
+            isMobile:false,
             dataItems:[],
             dataItems1:[],
             cancerStats:[],
@@ -21,11 +22,11 @@ class Info extends Component {
             data2View:false,
             cancerDataInput:false,
             cancerSearch:"",
-            id:"",
+            id:0,
             clump_thickness:0,
             uniformity_of_cell_size:0,
             uniformity_of_cell_shape:0,
-            marginal_adhesion:"",
+            marginal_adhesion:0,
             single_epithelial_cell_size:0,
             bare_nuclei:0,
             bland_chromatin:0,
@@ -39,6 +40,9 @@ class Info extends Component {
         this.resetView = this.resetView.bind(this)
         this.addCancerData = this.addCancerData.bind(this)
         this.addToCancerPending = this.addToCancerPending.bind(this)
+        this.handleCancerForm = this.handleCancerForm.bind(this)
+        this.refreshCancer = this.refreshCancer.bind(this)
+        this.resetCancerStats = this.resetCancerStats.bind(this)
         // this.changeView = this.changeView.bind(this)
     }
 
@@ -63,16 +67,15 @@ class Info extends Component {
         this.setState({dataItems:data})
     }
 
+    // ---- cancer data functions ---- //
     handleCancerSearch = (filter) => {
         this.setState({cancerSearch:filter})
     }
-
     handleCancerForm(prop,val) {
         this.setState({
             [prop]:val
         })
     }
-
     addToCancerPending() {
         const {
             id,
@@ -87,36 +90,60 @@ class Info extends Component {
             mitoses
         } = this.state
         axios.post('/api/cancer/add',{id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses})
+            this.addCancerData()
+            this.setState({
+                id:0,
+                clump_thickness:0,
+                uniformity_of_cell_size:0,
+                uniformity_of_cell_shape:0,
+                marginal_adhesion:0,
+                single_epithelial_cell_size:0,
+                bare_nuclei:0,
+                bland_chromatin:0,
+                normal_nuceoli:0,
+                mitoses:0
+            })
     }
+    addCancerData(params) {
+        this.setState({
+            cancerDataInput:!this.state.cancerDataInput
+        })
+    }
+    refreshCancer = async () => {
+        console.log('refresh list')
+        this.resetCancerStats().then(
+        axios.get('api/cancer/all').then(res => {
+            this.setState({cancerStats : res.data})
+        })
+        )}
+    resetCancerStats = async () => {
+        this.setState({
+            cancerStats:[],
+            cancerSearch:""  
+        })
+    }
+    // -- ^ cancer information above ^ -- //
+    // ---------------------------------------------//
 
-    // -- database salection -- //
+    // ---- database salection ---- //
     dataSelected(params) {
         this.resetView()
         this.setState({
             dataView:!this.state.dataView
         })
     }
-
     data1Selected(params) {
         this.resetView()
         this.setState({
             data1View:!this.state.data1View
         })
     }
-
     data2Selected(params) {
         this.resetView()
         this.setState({
             data2View:!this.state.data2View
         })
     }
-
-    addCancerData(params) {
-        this.setState({
-            cancerDataInput:!this.state.cancerDataInput
-        })
-    }
-
     resetView() {
         this.setState({
             dataView:false,
@@ -128,7 +155,7 @@ class Info extends Component {
 
     render(){
         
-        const { cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats } = this.state
+        const { cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results}/>
@@ -136,10 +163,6 @@ class Info extends Component {
 
         const mappedBookData = dataItems.map(element => {
             return <BookData key={element.id} author={element.author} />
-        })
-
-        const mappedCancerStats = cancerStats.map(element => {
-            return <CancerStat key={element.index} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
         })
 
         // -- seach for a particular cancer data by element.id -- //
@@ -185,11 +208,11 @@ class Info extends Component {
                             </div>)
                             : 
                             (<div></div>)} */}
-                            <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p>
-                            <div className="cancer-search-bar" ><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" /><p className="p-text-search">search</p></div>
+                            {/* <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p> */}
+                            <div className="cancer-search-bar" ><p className="p-search-line" onClick={this.addCancerData}>add info?</p><p className="p-search-line" onClick={this.refreshCancer}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                             <div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
-                                <div className="input-element"><input placeholder="id" onChange={e => this.handleCancerForm('id',e.target.value)}/><p className="p-text-generic">id</p></div>
-                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleCancerForm('"clump_thickness"',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
+                                <div className="input-element"><input placeholder="id" onChange={e => this.handleCancerForm('id',e.target.value)}/><p className="p-text-generic">id</p><p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p></div>
+                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleCancerForm('clump_thickness',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
                                 <div className="input-element"><input placeholder="Uniformity of cell size" onChange={e => this.handleCancerForm('uniformity_of_cell_size',e.target.value)}/><p className="p-text-generic">Uniformity of cell size</p></div>
                                 <div className="input-element"><input placeholder="Uniformity of cell shape" onChange={e => this.handleCancerForm('uniformity_of_cell_shape',e.target.value)}/><p className="p-text-generic">Uniformity of cell shape</p></div>
                                 <div className="input-element"><input placeholder="Marginal adhesion" onChange={e => this.handleCancerForm('marginal_adhesion',e.target.value)}/><p className="p-text-generic">Marginal adhesion</p></div>
@@ -201,7 +224,7 @@ class Info extends Component {
                                 <button onClick={this.addToCancerPending}>submit</button>
                             </div>
                             {/* <div className="info-list"><h4>id</h4><a>clump Thickness</a><h6>uniformity of cell size</h6><h6>uniformity of cell shape</h6><h6>marginal adhesion</h6><h6>single epithelial cell size</h6><h6>id</h6><h6>id</h6><h6>id</h6><h6>id</h6><h4>results</h4></div> */}
-                            <div className="scrollmenu"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div>
+                            <div className="data-spec"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div>
                             {mappedCancerStatsS}
                         </div>
                     ) : (<div></div>)}

@@ -36,7 +36,7 @@
 }
 
 .data-header{
-    width: 80vw;
+    width: 100vw;
     /* padding-left: 60px; */
     /* background-color: palegoldenrod; */
     border-bottom: 1px solid #4bdfec;
@@ -51,7 +51,8 @@
 .right-column{
     height: 800px;
     min-width: 500px;
-    margin: 5px;
+    /* width: 100%; */
+    /* margin: 5px; */
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -138,7 +139,7 @@
     margin: 0px;
 }
 
-div.scrollmenu {
+div.data-spec {
     /* background-color: #333; */
     background-color: #297F87;
     overflow: auto;
@@ -147,7 +148,7 @@ div.scrollmenu {
     padding-left: 15px;
   }
 
-  div.scrollmenu a {
+  div.data-spec a {
     display: inline-block;
     color: white;
     text-align: center;
@@ -155,7 +156,7 @@ div.scrollmenu {
     text-decoration: none;
   }
 
-  div.scrollmenu a:hover {
+  div.data-spec a:hover {
     background-color: #777;
   }
 
@@ -184,16 +185,42 @@ div.scrollmenu {
 }
 
 .cancer-search-bar{
-    margin-left: 900px;
-    margin-bottom: 5px;
+    margin-left: 20px;
+    /* margin-bottom: 5px; */
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	align-content: center;
 }
 
-/* .id-result{
+.search-input {
+    margin: none;
+    margin-left: 40px;
+}
 
+.p-search-line {
+    color: orange;
+    margin: none;
+    margin-left: 20px;
+}
+
+/* ------- screen size query ------- */
+@media (max-width: 1600px) {
+    .info-container {
+        width: 100vw;
+    }
+}
+
+/* @media(max-width:1160px) {
+    .cancer-search-bar {
+        margin-left: 70%;
+    }
+}
+
+@media(max-width: 770px) {
+    .cancer-search-bar {
+        margin-left: 60%;
+    }
 } */

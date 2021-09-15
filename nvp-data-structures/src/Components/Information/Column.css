@@ -1,0 +1,11 @@
+.col-1{
+    background-color: orchid;
+    margin-left: 50px;
+    /* margin: none; */
+}
+
+.col-2{
+    background-color: palegoldenrod;
+    /* width: 100px; */
+    /* margin-left: 200px; */
+}
