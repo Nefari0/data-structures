@@ -68,12 +68,19 @@
     color: #555;
 }
 
+.info-h4:hover {
+    background-color: orange;
+}
+
 .info-h4-selected{
+    /* color: orange; */
     color: orange;
+    border-bottom: 1px solid orange;
 }
 
 .info-h2{
-    color: #555;
+    /* color: #555; */
+    color: #297F87;
     margin-left: 35%;
 }
 
@@ -82,7 +89,7 @@
     margin: auto;
     margin-left: 0;
     /* color: orange; */
-    color: #555;
+    color: #297F87;
 }
 
 .p-text-search{
@@ -90,7 +97,7 @@
 }
 
 .p-text-generic{
-    color: #555;
+    color: #297F87;
     float: right;
     margin: auto;
 }
@@ -157,7 +164,7 @@ div.data-spec {
   }
 
   div.data-spec a:hover {
-    background-color: #777;
+    background-color: #DF2E2E;
   }
 
   div.scrollitems{
