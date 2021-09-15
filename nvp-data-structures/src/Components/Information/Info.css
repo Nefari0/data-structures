@@ -76,11 +76,16 @@
     margin-left: 35%;
 }
 
+.p-text-search,
 .p-text{
     margin: auto;
     margin-left: 0;
     /* color: orange; */
     color: #555;
+}
+
+.p-text-search{
+    margin-left: 4px;
 }
 
 .p-text-generic{
@@ -111,15 +116,17 @@
 
 .cancer-stats-input{
     /* height: 300px; */
+    position: absolute;
     height: 340px;
     width: 385px;
     margin: auto;
+    padding: 10px;
     border-radius: 2%;
-    /* background-color: rgb(240, 240, 240); */
+    background-color: rgb(240, 240, 240);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
     overflow: auto;
     opacity: 100;
-    transition: all 500ms;
+    transition: all 150ms;
     z-index: 5;
     /* background-color: #555; */
 }
@@ -174,6 +181,17 @@ div.scrollmenu {
 .input-element{
     height: 30px;
     /* margin-left: 10px; */
+}
+
+.cancer-search-bar{
+    margin-left: 900px;
+    margin-bottom: 5px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
 }
 
 /* .id-result{

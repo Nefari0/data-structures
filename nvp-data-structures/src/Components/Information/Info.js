@@ -20,6 +20,7 @@ class Info extends Component {
             data1View:false,
             data2View:false,
             cancerDataInput:false,
+            cancerSearch:"",
             id:"",
             clump_thickness:0,
             uniformity_of_cell_size:0,
@@ -60,6 +61,10 @@ class Info extends Component {
         })
 
         this.setState({dataItems:data})
+    }
+
+    handleCancerSearch = (filter) => {
+        this.setState({cancerSearch:filter})
     }
 
     handleCancerForm(prop,val) {
@@ -123,7 +128,7 @@ class Info extends Component {
 
     render(){
         
-        const { dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats } = this.state
+        const { cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results}/>
@@ -134,6 +139,12 @@ class Info extends Component {
         })
 
         const mappedCancerStats = cancerStats.map(element => {
+            return <CancerStat key={element.index} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
+        })
+
+        // -- seach for a particular cancer data by element.id -- //
+        const filterCancer = cancerStats.filter(element => element.id.toString().includes(cancerSearch))
+        const mappedCancerStatsS = filterCancer.map(element => {
             return <CancerStat key={element.index} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
         })
         
@@ -175,6 +186,7 @@ class Info extends Component {
                             : 
                             (<div></div>)} */}
                             <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p>
+                            <div className="cancer-search-bar" ><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" /><p className="p-text-search">search</p></div>
                             <div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
                                 <div className="input-element"><input placeholder="id" onChange={e => this.handleCancerForm('id',e.target.value)}/><p className="p-text-generic">id</p></div>
                                 <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleCancerForm('"clump_thickness"',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
@@ -190,7 +202,7 @@ class Info extends Component {
                             </div>
                             {/* <div className="info-list"><h4>id</h4><a>clump Thickness</a><h6>uniformity of cell size</h6><h6>uniformity of cell shape</h6><h6>marginal adhesion</h6><h6>single epithelial cell size</h6><h6>id</h6><h6>id</h6><h6>id</h6><h6>id</h6><h4>results</h4></div> */}
                             <div className="scrollmenu"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div>
-                            {mappedCancerStats}
+                            {mappedCancerStatsS}
                         </div>
                     ) : (<div></div>)}
 
