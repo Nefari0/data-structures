@@ -7,9 +7,9 @@ const Employee = (props) => {
     let data_num = id % 2 === 0
 
     return(
-        <div className={`scrollitems ${data_num ? true : 'scrollitems-dark'}`}>
+        <div className={`scrollitems emp-a ${data_num ? true : 'scrollitems-dark emp-a'}`}>
         {/* {data_num === true ? (<a>true</a>) : (<a>false  </a>)} */}
-        <a >{name}</a>
+        <a>{name}</a>
         <a>{age}</a>
         <a>{start_month}</a>
         <a>{start_year}</a>

@@ -1,5 +1,3 @@
-import axios from 'axios'
-import react from 'react'
 import './Info.css'
 // import './Column.css'
 import React, { useState, useEffect } from 'react';

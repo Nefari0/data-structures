@@ -207,6 +207,10 @@ div.data-spec {
       transition: all 500ms;
   }
 
+  .emp-a {
+      height: 40px;
+  }
+
 .input-element{
     height: 30px;
     /* margin-left: 10px; */
