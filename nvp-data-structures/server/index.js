@@ -5,6 +5,7 @@ const massive = require('massive')
 const authController = require('./controllers/authController');
 const cancerStatController = require('./controllers/cancerStatController');
 const dataTestController = require('./controllers/dataTestController')
+const employeeController = require('./controllers/employeeController')
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -36,6 +37,9 @@ app.post('/api/cancer/add',cancerStatController.addToDatabase)
 
 // breaking bad endpoints
 // app.get('/api/bb/all')
+
+// employee endpoints
+app.get('/api/employees/all',employeeController.getAllEmployees)
 
 massive({
     connectionString: CONNECTION_STRING,

@@ -67,9 +67,12 @@
 .info-h3{
     color: #555;
 }
-
+/* opacity: 100; */
+/* transition: all 150ms; */
+.info-h3:hover,
 .info-h4:hover {
-    background-color: orange;
+    background-color: #FFF7AE;
+    transition: all 500ms;
 }
 
 .info-h4-selected{
@@ -165,6 +168,7 @@ div.data-spec {
 
   div.data-spec a:hover {
     background-color: #DF2E2E;
+    transition: all 500ms;
   }
 
   div.scrollitems{
@@ -197,7 +201,11 @@ div.data-spec {
       margin-left: 15px;
   }
 
-  /* .tr:nth-child(even) {background: rgb(158, 214, 26)} */
+  div.scrollitems:hover {
+      background-color: #297F87;
+      color: #fff;
+      transition: all 500ms;
+  }
 
 .input-element{
     height: 30px;

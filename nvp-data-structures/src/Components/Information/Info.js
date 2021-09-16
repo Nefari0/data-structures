@@ -185,7 +185,7 @@ class Info extends Component {
                 <section className="right-column">
                 <div className="data-header">
                 <h3 className="info-h4">Database</h3>
-                    {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>samples data</h4>)}
+                    {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>sample data</h4>)}
 
                     {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)}
 
@@ -194,22 +194,6 @@ class Info extends Component {
                     <p className="p-logout-text" onClick={this.props.logout}>logout</p>
                     {data2View ? (
                         <div>
-                            {/* <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p>
-                            {cancerDataInput ?(<div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                                <div className="input-element"><input placeholder="text"/><p className="p-text-generic">text</p></div>
-                            </div>)
-                            : 
-                            (<div></div>)} */}
-                            {/* <p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p> */}
                             <div className="cancer-search-bar" ><p className="p-search-line" onClick={this.addCancerData}>add info?</p><p className="p-search-line" onClick={this.refreshCancer}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                             <div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
                                 <div className="input-element"><input placeholder="id" onChange={e => this.handleCancerForm('id',e.target.value)}/><p className="p-text-generic">id</p><p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p></div>
