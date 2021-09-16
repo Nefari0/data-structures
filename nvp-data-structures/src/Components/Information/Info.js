@@ -13,6 +13,7 @@ class Info extends Component {
         super();
 
         this.state = {
+            indexing:0,
             isMobile:false,
             dataItems:[],
             dataItems1:[],
@@ -155,10 +156,10 @@ class Info extends Component {
 
     render(){
         
-        const { cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile } = this.state
+        const { cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable } = this.state
 
         const mappedData = dataItems1.map(element => {
-            return <InfoItem key={element.index} ids={element.ids} results={element.results}/>
+            return <InfoItem key={element.index} ids={element.ids} results={element.results} />
         })
 
         const mappedBookData = dataItems.map(element => {
@@ -167,9 +168,8 @@ class Info extends Component {
 
         // -- seach for a particular cancer data by element.id -- //
         const filterCancer = cancerStats.filter(element => element.id.toString().includes(cancerSearch))
-        const mappedCancerStatsS = filterCancer.map(element => {
-            const indexing = filterCancer.length
-            return <CancerStat key={element.data_id} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
+        const mappedCancerStatsS = filterCancer.map(element => {            
+            return <CancerStat key={element.data_id} data_id={element.data_id} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
         })
         
         return(

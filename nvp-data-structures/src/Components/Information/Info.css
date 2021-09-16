@@ -178,6 +178,17 @@ div.data-spec {
     overflow: auto;
     /* white-space: nowrap; */
   }
+  div.scrollitems-dark{
+    background-color: rgb(240, 240, 240);
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: stretch;
+    overflow: auto;
+    /* white-space: nowrap; */
+  }
 
   div.scrollitems a {
       position: relative;
@@ -185,6 +196,8 @@ div.data-spec {
       width: 40px;
       margin-left: 15px;
   }
+
+  /* .tr:nth-child(even) {background: rgb(158, 214, 26)} */
 
 .input-element{
     height: 30px;
