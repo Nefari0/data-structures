@@ -7,12 +7,14 @@ import InfoItem from './InfoItem'
 import BookData from './BookData'
 import CancerStat from './CancerStat'
 import AddCancerStat from './AddCancerStat'
+import Employee from './Employee'
 
 class Info extends Component {
     constructor(props){
         super();
 
         this.state = {
+            nvpEmployees:[],
             indexing:0,
             isMobile:false,
             dataItems:[],
@@ -21,6 +23,7 @@ class Info extends Component {
             dataView:false,
             data1View:false,
             data2View:false,
+            data3View:false,
             cancerDataInput:false,
             cancerSearch:"",
             id:0,
@@ -63,6 +66,10 @@ class Info extends Component {
 
         axios.get('api/cancer/all').then(res => {
             this.setState({cancerStats : res.data})
+        })
+
+        axios.get('api/employees/all').then(res => {
+            this.setState({nvpEmployees : res.data})
         })
 
         this.setState({dataItems:data})
@@ -156,7 +163,7 @@ class Info extends Component {
 
     render(){
         
-        const { cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable } = this.state
+        const { data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results} />
@@ -170,6 +177,10 @@ class Info extends Component {
         const filterCancer = cancerStats.filter(element => element.id.toString().includes(cancerSearch))
         const mappedCancerStatsS = filterCancer.map(element => {            
             return <CancerStat key={element.data_id} data_id={element.data_id} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
+        })
+
+        const mappedEmployees = nvpEmployees.map(element => {
+            return <Employee key={element.index} id={element.index} name={element.name} age={element.age} start_month={element.start_month} start_year={element.start_year} end_month={element.end_month} end_year={element.end_year} employment_duration={element.employment_duration} distance={element.distance} married={element.married} pay={element.pay} attendance={element.attendance} />
         })
         
         return(
@@ -213,6 +224,11 @@ class Info extends Component {
                             {mappedCancerStatsS}
                         </div>
                     ) : (<div></div>)}
+
+                    {data3View ? (<div>
+                        <div className="data-spec"><a>Name</a><a>Age</a><a>Start Month</a><a>Start Year</a><a>End Month</a><a>End Year</a><a>Employment Duration</a><a>Distance</a><a>Married</a><a>Pay Rate</a><a>Attendance</a></div>
+                        {mappedEmployees}
+                    </div>) : (<div></div>)}
 
                     {data1View ? (
                         <div>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import react from 'react'
 import './Info.css'
-import './Column.css'
+// import './Column.css'
 import React, { useState, useEffect } from 'react';
 
 const CancerStat = (props) => {
@@ -11,7 +11,7 @@ const CancerStat = (props) => {
     // --- this changes background color according to even odd values -- //
 
     let data_num = data_id % 2 === 0
-    console.log('data',data_num)
+    // console.log('data',data_num)
     return(
         
         // <div className="scrollitems">
