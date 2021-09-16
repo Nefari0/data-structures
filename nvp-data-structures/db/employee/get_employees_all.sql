@@ -1,0 +1,1 @@
+SELECT * FROM nvp_employee
