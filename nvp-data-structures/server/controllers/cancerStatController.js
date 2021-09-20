@@ -3,6 +3,8 @@ module.exports = {
     getAllStats: async (req,res) => {
         const db = req.app.get('db')
         const stats = await db.cancer.get_cancer_all()
+        let totalNumber = stats.length
+        console.log('total number',totalNumber)
         return res.status(200).send(stats)
     },
 

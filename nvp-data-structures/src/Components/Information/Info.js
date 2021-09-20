@@ -14,6 +14,8 @@ class Info extends Component {
         super();
 
         this.state = {
+            showMachineLearning:true,
+            showDatabaselist:false,
             employeeSearch:"",
             nvpEmployees:[],
             indexing:0,
@@ -42,12 +44,15 @@ class Info extends Component {
         this.dataSelected = this.dataSelected.bind(this)
         this.data1Selected = this.data1Selected.bind(this)
         this.data2Selected = this.data2Selected.bind(this)
+        this.data3Selected = this.data3Selected.bind(this)
         this.resetView = this.resetView.bind(this)
         this.addCancerData = this.addCancerData.bind(this)
         this.addToCancerPending = this.addToCancerPending.bind(this)
         this.handleCancerForm = this.handleCancerForm.bind(this)
         this.refreshCancer = this.refreshCancer.bind(this)
         this.resetCancerStats = this.resetCancerStats.bind(this)
+        this.handleShowDatabase = this.handleShowDatabase.bind(this)
+        this.handleShowMachineLearning = this.handleShowMachineLearning.bind(this)
         // this.filterCancer = this.filterCancer.bind(this)
         // this.filterEmployee = this.filterEmployee.bind(this)
 
@@ -78,6 +83,17 @@ class Info extends Component {
 
         this.setState({dataItems:data})
     }
+    // ---- show database options ---- //
+    handleShowDatabase(params) {
+        this.setState({showDatabaselist:!this.state.showDatabaselist})
+    }
+    // ------------------------------- //
+
+    //  ---- show machine learning options ---- //
+    handleShowMachineLearning(params) {
+        this.setState({showMachineLearning:!this.state.showMachineLearning})
+    }
+    // ---------------------------------------- //
 
     // ---- Employee data functions ---- //
     handleEmployeeSearch = (filter) => {
@@ -162,18 +178,27 @@ class Info extends Component {
             data2View:!this.state.data2View
         })
     }
+    data3Selected(params) {
+        this.resetView()
+        this.setState({
+            data3View:!this.state.data3View
+        })
+    }
     resetView() {
         this.setState({
             dataView:false,
             data1View:false,
-            data2View:false
+            data2View:false,
+            data3View:false,
+            showDatabaselist:false,
+            showMachineLearning:true    
         })
     }
     // -------------------------------------------- //
 
     render(){
         
-        const { data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch } = this.state
+        const { showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results} />
@@ -186,7 +211,7 @@ class Info extends Component {
         // -- seach for and display a particular cancer data by element.id -- //
         const filterCancer = cancerStats.filter(element => element.id.toString().includes(cancerSearch))
         const mappedCancerStatsS = filterCancer.map(element => {            
-            return <CancerStat key={element.data_id} data_id={element.data_id} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
+            return <CancerStat key={element.data_id} data_id={element.data_id} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} cols={cols} />
         })
         // ------------------------------------------------------------------- //
 
@@ -207,12 +232,34 @@ class Info extends Component {
                 </section> */}
                 <section className="right-column">
                 <div className="data-header">
-                <h3 className="info-h4">Database</h3>
-                    {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>sample data</h4>)}
+                    <div><h3 className="info-h4" onClick={this.handleShowDatabase} >Database</h3>
+                        <div className={`database-dropdown ${showDatabaselist ? true : 'database-dropdown-hide'}`}>
+                            {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)}
+                            {!data3View ? (<h4 className="info-h3" onClick={this.data3Selected}>employees</h4>) : (<h4 className="info-h4-selected" onClick={this.data3Selected}>employees</h4>)}
+                            {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>sample data</h4>)}
+                            {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)}
+                        </div>
+                    </div>
+                    <div><h3 className="info-h4" onClick={this.handleShowMachineLearning} >machine learning</h3>
+                        <div className={`database-dropdown ${!showMachineLearning ? true : 'database-dropdown-hide'}`}>
+                            {!data2View ? (<h4 className="info-h3">regression</h4>) : (<h4 className="info-h4-selected" >regression</h4>)}
+                            {!data3View ? (<h4 className="info-h3" >classification</h4>) : (<h4 className="info-h4-selected" >classification</h4>)}
+                            {!data1View ? (<h4 className="info-h3" >clustering</h4>) : (<h4 className="info-h4-selected" >clustering</h4>)}
+                            {!dataView ? (<h4 className="info-h3" >association rule learning</h4>) : (<h4 className="info-h4-selected" >association rule learning</h4>)}
+                            {!dataView ? (<h4 className="info-h3" >reinforcement learning</h4>) : (<h4 className="info-h4-selected" >reinforcement learning</h4>)}
+                            {!dataView ? (<h4 className="info-h3" >natural language processing</h4>) : (<h4 className="info-h4-selected" >natural language processing</h4>)}
+                            {!dataView ? (<h4 className="info-h3" >dimensionality reduction</h4>) : (<h4 className="info-h4-selected" >dimensionality reduction</h4>)}
+                            {!dataView ? (<h4 className="info-h3" >deep learning</h4>) : (<h4 className="info-h4-selected" >deep learning</h4>)}
+                        </div>
+                    </div>
+                    <div><h3 className="info-h4" onClick={this.handleShowMachineLearning} >examples</h3></div>
+                    {/* {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>sample data</h4>)} */}
 
-                    {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)}
+                    {/* {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)} */}
 
-                    {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)}
+                    {/* {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)} */}
+
+                    {/* {!data3View ? (<h4 className="info-h3" onClick={this.data3Selected}>employees</h4>) : (<h4 className="info-h4-selected" onClick={this.data3Selected}>employees</h4>)} */}
                 </div>
                     <p className="p-logout-text" onClick={this.props.logout}>logout</p>
                     {data2View ? (

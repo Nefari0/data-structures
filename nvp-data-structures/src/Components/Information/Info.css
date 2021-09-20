@@ -211,6 +211,29 @@ div.data-spec {
       height: 40px;
   }
 
+  .database-dropdown {
+
+    position: absolute;
+    min-height: 40px;
+    min-width: 40px;
+    /* margin: auto; */
+    padding: 10px;
+    border-radius: 2%;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    opacity: 100;
+    transition: all 150ms;
+    z-index: 5;
+  }
+
+  .database-dropdown-hide{
+    height: 0;
+    width: 0;
+    opacity: 0;
+    margin: 0px;
+}
+
 .input-element{
     height: 30px;
     /* margin-left: 10px; */
