@@ -6,7 +6,7 @@ import { characters } from '../../redux/breakingBadReducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Info from '../Information/Info'
-import Loading from './Loading/Loading'
+import Loading from '../Loading/Loading'
 
 class Auth extends Component {
 

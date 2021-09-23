@@ -8,12 +8,14 @@ import BookData from './BookData'
 import CancerStat from './CancerStat'
 import AddCancerStat from './AddCancerStat'
 import Employee from './Employee'
+import Loading from '../Loading/Loading'
 
 class Info extends Component {
     constructor(props){
         super();
 
         this.state = {
+            isLoading:false,
             showMachineLearning:true,
             showDatabaselist:false,
             employeeSearch:"",
@@ -53,6 +55,7 @@ class Info extends Component {
         this.resetCancerStats = this.resetCancerStats.bind(this)
         this.handleShowDatabase = this.handleShowDatabase.bind(this)
         this.handleShowMachineLearning = this.handleShowMachineLearning.bind(this)
+        this.startLoading = this.startLoading.bind(this)
         // this.filterCancer = this.filterCancer.bind(this)
         // this.filterEmployee = this.filterEmployee.bind(this)
 
@@ -68,6 +71,7 @@ class Info extends Component {
     // }
 
     componentDidMount(){
+        // this.startLoading()
         axios.get('/api/testdata/all').then(res => {
 
             this.setState({ dataItems1 : res.data})
@@ -80,9 +84,18 @@ class Info extends Component {
         axios.get('api/employees/all').then(res => {
             this.setState({nvpEmployees : res.data})
         })
+        
+        // this.startLoading()
 
         this.setState({dataItems:data})
     }
+
+    // ---- loading data image functions --- //
+    startLoading = () => {
+        this.setState({isLoading:!this.state.isLoading})
+    }
+    // ------------------------------------- //
+
     // ---- show database options ---- //
     handleShowDatabase(params) {
         this.setState({showDatabaselist:!this.state.showDatabaselist})
@@ -144,10 +157,11 @@ class Info extends Component {
         })
     }
     refreshCancer = async () => {
-        console.log('refresh list')
+        this.startLoading()
         this.resetCancerStats().then(
         axios.get('api/cancer/all').then(res => {
             this.setState({cancerStats : res.data})
+            this.startLoading()
         })
         )}
     resetCancerStats = async () => {
@@ -198,7 +212,7 @@ class Info extends Component {
 
     render(){
         
-        const { showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols } = this.state
+        const { isLoading,showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results} />
@@ -280,6 +294,7 @@ class Info extends Component {
                             </div>
                             {/* <div className="info-list"><h4>id</h4><a>clump Thickness</a><h6>uniformity of cell size</h6><h6>uniformity of cell shape</h6><h6>marginal adhesion</h6><h6>single epithelial cell size</h6><h6>id</h6><h6>id</h6><h6>id</h6><h6>id</h6><h4>results</h4></div> */}
                             <div className="stats-container">
+                                {isLoading ? <Loading/> : null}
                                 <div className="data-spec"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div>
                                 <span className="data-spec-list">{mappedCancerStatsS}</span>
                             </div>
