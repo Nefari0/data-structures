@@ -29,6 +29,10 @@ class Info extends Component {
             data1View:false,
             data2View:false,
             data3View:false,
+            // employee data //
+            employeeDataInput:false,
+
+            // cancer data //
             cancerDataInput:false,
             cancerSearch:"",
             id:0,
@@ -41,6 +45,8 @@ class Info extends Component {
             bland_chromatin:0,
             normal_nuceoli:0,
             mitoses:0
+            // ------------- //
+
             
         }
         this.dataSelected = this.dataSelected.bind(this)
@@ -50,12 +56,14 @@ class Info extends Component {
         this.resetView = this.resetView.bind(this)
         this.addCancerData = this.addCancerData.bind(this)
         this.addToCancerPending = this.addToCancerPending.bind(this)
-        this.handleCancerForm = this.handleCancerForm.bind(this)
+        this.handleForm = this.handleForm.bind(this)
         this.refreshCancer = this.refreshCancer.bind(this)
         this.resetCancerStats = this.resetCancerStats.bind(this)
         this.handleShowDatabase = this.handleShowDatabase.bind(this)
         this.handleShowMachineLearning = this.handleShowMachineLearning.bind(this)
         this.startLoading = this.startLoading.bind(this)
+        this.addEmployeeData = this.addEmployeeData.bind(this)
+        this.refreshEmployees = this.refreshEmployees.bind(this)
         // this.filterCancer = this.filterCancer.bind(this)
         // this.filterEmployee = this.filterEmployee.bind(this)
 
@@ -90,6 +98,14 @@ class Info extends Component {
         this.setState({dataItems:data})
     }
 
+    // ---- adding info to data base using this form function ---- //
+    handleForm(prop,val) {
+        this.setState({
+            [prop]:val
+        })
+    }
+    // ---------------------------------------------------------- //
+
     // ---- loading data image functions --- //
     startLoading = () => {
         this.setState({isLoading:!this.state.isLoading})
@@ -112,17 +128,31 @@ class Info extends Component {
     handleEmployeeSearch = (filter) => {
         this.setState({employeeSearch:filter})
     }
+    addEmployeeData() {
+        this.setState({employeeDataInput:!this.state.employeeDataInput})
+    }
+    refreshEmployees = async () => {
+        this.startLoading()
+        this.resetEmployeeStats().then(
+            axios.get('api/employees/all').then(res => {
+                this.setState({nvpEmployees:res.data})
+                this.startLoading()
+            })
+        )}
+    resetEmployeeStats = async () => {
+        this.setState({
+            nvpEmployees:[],
+            employeeSearch:""
+        })
+    }
+    // ---------------------------------- //
 
 
     // ---- cancer data functions ---- //
     handleCancerSearch = (filter) => {
         this.setState({cancerSearch:filter})
     }
-    handleCancerForm(prop,val) {
-        this.setState({
-            [prop]:val
-        })
-    }
+
     addToCancerPending() {
         const {
             id,
@@ -158,16 +188,17 @@ class Info extends Component {
     }
     refreshCancer = async () => {
         this.startLoading()
+
         this.resetCancerStats().then(
-        axios.get('api/cancer/all').then(res => {
+            axios.get('api/cancer/all').then(res => {
             this.setState({cancerStats : res.data})
             this.startLoading()
         })
-        )}
+    )}
     resetCancerStats = async () => {
         this.setState({
             cancerStats:[],
-            cancerSearch:""  
+            cancerSearch:""
         })
     }
     // -- ^ cancer information above ^ -- //
@@ -212,7 +243,7 @@ class Info extends Component {
 
     render(){
         
-        const { isLoading,showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols } = this.state
+        const { employeeDataInput,isLoading,showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results} />
@@ -267,29 +298,24 @@ class Info extends Component {
                         </div>
                     </div>
                     <div><h3 className="info-h4" onClick={this.handleShowMachineLearning} >examples</h3></div>
-                    {/* {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>sample data</h4>)} */}
-
-                    {/* {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)} */}
-
-                    {/* {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)} */}
-
-                    {/* {!data3View ? (<h4 className="info-h3" onClick={this.data3Selected}>employees</h4>) : (<h4 className="info-h4-selected" onClick={this.data3Selected}>employees</h4>)} */}
                 </div>
+
                     <p className="p-logout-text" onClick={this.props.logout}>logout</p>
+
                     {data2View ? (
                         <div>
-                            <div className="cancer-search-bar" ><p className="p-search-line" onClick={this.addCancerData}>add info?</p><p className="p-search-line" onClick={this.refreshCancer}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
+                            <div className="search-bar" ><p className="p-search-line" onClick={this.addCancerData}>add info?</p><p className="p-search-line" onClick={this.refreshCancer}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                             <div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
-                                <div className="input-element"><input placeholder="id" onChange={e => this.handleCancerForm('id',e.target.value)}/><p className="p-text-generic">id</p><p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p></div>
-                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleCancerForm('clump_thickness',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
-                                <div className="input-element"><input placeholder="Uniformity of cell size" onChange={e => this.handleCancerForm('uniformity_of_cell_size',e.target.value)}/><p className="p-text-generic">Uniformity of cell size</p></div>
-                                <div className="input-element"><input placeholder="Uniformity of cell shape" onChange={e => this.handleCancerForm('uniformity_of_cell_shape',e.target.value)}/><p className="p-text-generic">Uniformity of cell shape</p></div>
-                                <div className="input-element"><input placeholder="Marginal adhesion" onChange={e => this.handleCancerForm('marginal_adhesion',e.target.value)}/><p className="p-text-generic">Marginal adhesion</p></div>
-                                <div className="input-element"><input placeholder="Sinlge opithelial cell size" onChange={e => this.handleCancerForm('single_epithelial_cell_size',e.target.value)}/><p className="p-text-generic">Sinlge opithelial cell size</p></div>
-                                <div className="input-element"><input placeholder="Bare nuclei" onChange={e => this.handleCancerForm('bare_nuclei',e.target.value)}/><p className="p-text-generic">Bare nuclei</p></div>
-                                <div className="input-element"><input placeholder="Bland nuceoli" onChange={e => this.handleCancerForm('bland_chromatin',e.target.value)}/><p className="p-text-generic">Bland nuceoli</p></div>
-                                <div className="input-element"><input placeholder="Normal nuceoli" onChange={e => this.handleCancerForm('normal_nuceoli',e.target.value)}/><p className="p-text-generic">Normal nuceoli</p></div>
-                                <div className="input-element"><input placeholder="Mitoses" onChange={e => this.handleCancerForm('mitoses',e.target.value)}/><p className="p-text-generic">Mitoses</p></div>
+                                <div className="input-element"><input placeholder="id" onChange={e => this.handleForm('id',e.target.value)}/><p className="p-text-generic">id</p><p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p></div>
+                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleForm('clump_thickness',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell size" onChange={e => this.handleForm('uniformity_of_cell_size',e.target.value)}/><p className="p-text-generic">Uniformity of cell size</p></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell shape" onChange={e => this.handleForm('uniformity_of_cell_shape',e.target.value)}/><p className="p-text-generic">Uniformity of cell shape</p></div>
+                                <div className="input-element"><input placeholder="Marginal adhesion" onChange={e => this.handleForm('marginal_adhesion',e.target.value)}/><p className="p-text-generic">Marginal adhesion</p></div>
+                                <div className="input-element"><input placeholder="Sinlge opithelial cell size" onChange={e => this.handleForm('single_epithelial_cell_size',e.target.value)}/><p className="p-text-generic">Sinlge opithelial cell size</p></div>
+                                <div className="input-element"><input placeholder="Bare nuclei" onChange={e => this.handleForm('bare_nuclei',e.target.value)}/><p className="p-text-generic">Bare nuclei</p></div>
+                                <div className="input-element"><input placeholder="Bland nuceoli" onChange={e => this.handleForm('bland_chromatin',e.target.value)}/><p className="p-text-generic">Bland nuceoli</p></div>
+                                <div className="input-element"><input placeholder="Normal nuceoli" onChange={e => this.handleForm('normal_nuceoli',e.target.value)}/><p className="p-text-generic">Normal nuceoli</p></div>
+                                <div className="input-element"><input placeholder="Mitoses" onChange={e => this.handleForm('mitoses',e.target.value)}/><p className="p-text-generic">Mitoses</p></div>
                                 <button onClick={this.addToCancerPending}>submit</button>
                             </div>
                             {/* <div className="info-list"><h4>id</h4><a>clump Thickness</a><h6>uniformity of cell size</h6><h6>uniformity of cell shape</h6><h6>marginal adhesion</h6><h6>single epithelial cell size</h6><h6>id</h6><h6>id</h6><h6>id</h6><h6>id</h6><h4>results</h4></div> */}
@@ -302,10 +328,24 @@ class Info extends Component {
                     ) : (<div></div>)}
 
                     {data3View ? (<div>
-                        <div className="cancer-search-bar" ><p className="p-search-line" >add info?</p><p className="p-search-line" >refresh</p><input onChange={e => this.handleEmployeeSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
+                        <div className="search-bar" ><p className="p-search-line"  onClick={this.addEmployeeData}>add info?</p><p className="p-search-line" onClick={this.refreshEmployees}>refresh</p><input onChange={e => this.handleEmployeeSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
+                        <div className={`cancer-stats-input ${employeeDataInput ? false : 'cancer-stats-input-hide'}`}>
+                                <div className="input-element"><input placeholder="id" onChange={e => this.handleForm('id',e.target.value)}/><p className="p-text-generic">id</p><p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p></div>
+                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleForm('clump_thickness',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell size" onChange={e => this.handleForm('uniformity_of_cell_size',e.target.value)}/><p className="p-text-generic">Uniformity of cell size</p></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell shape" onChange={e => this.handleForm('uniformity_of_cell_shape',e.target.value)}/><p className="p-text-generic">Uniformity of cell shape</p></div>
+                                <div className="input-element"><input placeholder="Marginal adhesion" onChange={e => this.handleForm('marginal_adhesion',e.target.value)}/><p className="p-text-generic">Marginal adhesion</p></div>
+                                <div className="input-element"><input placeholder="Sinlge opithelial cell size" onChange={e => this.handleForm('single_epithelial_cell_size',e.target.value)}/><p className="p-text-generic">Sinlge opithelial cell size</p></div>
+                                <div className="input-element"><input placeholder="Bare nuclei" onChange={e => this.handleForm('bare_nuclei',e.target.value)}/><p className="p-text-generic">Bare nuclei</p></div>
+                                <div className="input-element"><input placeholder="Bland nuceoli" onChange={e => this.handleForm('bland_chromatin',e.target.value)}/><p className="p-text-generic">Bland nuceoli</p></div>
+                                <div className="input-element"><input placeholder="Normal nuceoli" onChange={e => this.handleForm('normal_nuceoli',e.target.value)}/><p className="p-text-generic">Normal nuceoli</p></div>
+                                <div className="input-element"><input placeholder="Mitoses" onChange={e => this.handleForm('mitoses',e.target.value)}/><p className="p-text-generic">Mitoses</p></div>
+                                <button>submit</button>
+                            </div>
                         <div className="data-spec"><a>Name</a><a>Age</a><a>Start Month</a><a>Start Year</a><a>End Month</a><a>End Year</a><a>Employment Duration</a><a>Distance</a><a>Married</a><a>Pay Rate</a><a>Attendance</a></div>
                         {/* {mappedEmployees} */}
                         <div className="stats-container">
+                            {isLoading ? <Loading/> : null}
                                 {/* <div className="data-spec"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div> */}
                                 <span className="data-spec-list">{mappedEmployees}</span>
                         </div>
