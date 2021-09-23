@@ -150,12 +150,15 @@
 }
 
 div.data-spec {
+    position: sticky;
+    top:0;
     /* background-color: #333; */
     background-color: #297F87;
     overflow: auto;
     white-space: nowrap;
     /* margin-left: 10px; */
     padding-left: 15px;
+    z-index: 4;
   }
 
   div.data-spec a {
@@ -170,6 +173,18 @@ div.data-spec {
     background-color: #DF2E2E;
     transition: all 500ms;
   }
+
+  .stats-container {
+    min-height: 80vh;
+    /* position: fixed; */
+    /* overflow: auto; */
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+}
 
   div.scrollitems{
     /* background-color: #297F87; */
