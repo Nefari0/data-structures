@@ -281,15 +281,19 @@ class Info extends Component {
                             {/* <div className="info-list"><h4>id</h4><a>clump Thickness</a><h6>uniformity of cell size</h6><h6>uniformity of cell shape</h6><h6>marginal adhesion</h6><h6>single epithelial cell size</h6><h6>id</h6><h6>id</h6><h6>id</h6><h6>id</h6><h4>results</h4></div> */}
                             <div className="stats-container">
                                 <div className="data-spec"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div>
-                                {mappedCancerStatsS}
+                                <span className="data-spec-list">{mappedCancerStatsS}</span>
                             </div>
                         </div>
                     ) : (<div></div>)}
 
                     {data3View ? (<div>
-                        <div className="data-spec"><a>Name</a><a>Age</a><a>Start Month</a><a>Start Year</a><a>End Month</a><a>End Year</a><a>Employment Duration</a><a>Distance</a><a>Married</a><a>Pay Rate</a><a>Attendance</a></div>
                         <div className="cancer-search-bar" ><p className="p-search-line" >add info?</p><p className="p-search-line" >refresh</p><input onChange={e => this.handleEmployeeSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
-                        {mappedEmployees}
+                        <div className="data-spec"><a>Name</a><a>Age</a><a>Start Month</a><a>Start Year</a><a>End Month</a><a>End Year</a><a>Employment Duration</a><a>Distance</a><a>Married</a><a>Pay Rate</a><a>Attendance</a></div>
+                        {/* {mappedEmployees} */}
+                        <div className="stats-container">
+                                {/* <div className="data-spec"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div> */}
+                                <span className="data-spec-list">{mappedEmployees}</span>
+                        </div>
 
                     </div>) : (<div></div>)}
 

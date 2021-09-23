@@ -7,7 +7,8 @@ const Employee = (props) => {
     let data_num = id % 2 === 0
 
     return(
-        <div className={`scrollitems emp-a ${data_num ? true : 'scrollitems-dark emp-a'}`}>
+        <div className="scrollitems">
+        {/* <div className={`scrollitems emp-a ${data_num ? true : 'scrollitems-dark emp-a'}`}> */}
         {/* {data_num === true ? (<a>true</a>) : (<a>false  </a>)} */}
         <a>{name}</a>
         <a>{age}</a>
