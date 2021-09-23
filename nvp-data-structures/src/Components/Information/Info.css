@@ -156,9 +156,15 @@ div.data-spec {
     background-color: #297F87;
     overflow: auto;
     white-space: nowrap;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     padding-left: 15px;
     z-index: 4;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: center;
   }
 
   div.data-spec a {
@@ -197,7 +203,7 @@ div.data-spec {
 	align-items: stretch;
 	align-content: stretch;
     overflow: auto;
-    /* white-space: nowrap; */
+    white-space: nowrap;
   }
 
   .data-spec-list div:nth-of-type(2n+1) {
