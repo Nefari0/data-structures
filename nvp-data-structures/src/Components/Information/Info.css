@@ -186,6 +186,14 @@ div.data-spec {
 	align-content: stretch;
 }
 
+  .stats-container:nth-of-type(2n+1) {
+    /* background-color: lime; */
+  }
+  .stats-container div:nth-of-type(2n+1) {
+    /* background-color: blue; */
+    background-color: #297F87;
+  }
+
   div.scrollitems{
     /* background-color: #297F87; */
     display: flex;

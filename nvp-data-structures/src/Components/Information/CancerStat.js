@@ -12,8 +12,9 @@ const CancerStat = (props) => {
     // console.log('data',data_num)
     return(
         
-        // <div className="scrollitems">
-        <div className={`scrollitems ${data_num ? true : 'scrollitems-dark'}`}>
+        <div className="scrollitems">
+        {/* <div className={`scrollitems ${data_num ? true : 'scrollitems-dark'}`}> */}
+        {/* <div> */}
             {/* {data_num === true ? (<a>true</a>) : (<a>false  </a>)} */}
             <a>{id}</a>
             <a >{clump_thickness}</a>
