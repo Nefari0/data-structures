@@ -1,13 +1,16 @@
 
 .info-container{
-    min-height: 100vh;
+    /* position: relative; */
+    /* min-height: 100vh; */
     min-width: 100vw;
-    /* background-color: #555; */
+    /* background-color: #f7f4de; */
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: center;
     align-content: center;
+    /* z-index: 0; */
+    /* box-shadow: 0 0 1px rgba(0, 0, 0, 1); */
 }
 
 /* .info-container{
@@ -36,27 +39,32 @@
 }
 
 .data-header{
-    width: 100vw;
+    width: 1200px;
+    /* width: 100vw; */
     /* padding-left: 60px; */
-    /* background-color: palegoldenrod; */
+    /* background-color: #f7f4de; */
     border-bottom: 1px solid #4bdfec;
     display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
+	/* flex-wrap: nowrap; */
 	justify-content: space-around;
 	align-items: stretch;
 	align-content: stretch;
+
 }
 
 .right-column{
     height: 800px;
-    min-width: 500px;
+    /* min-width: 500px; */
+    width: 1200px;
     /* width: 100%; */
-    /* margin: 5px; */
+    /* padding-top: 50px; */
     background-color: #fff;
+    /* background-color: #8b1b1b; */
     display: flex;
     flex-direction: column;
     align-content: center;
+    overflow: scroll;
 }
 
 ::-webkit-scrollbar {
@@ -158,11 +166,13 @@ div.data-spec {
     white-space: nowrap;
     /* margin-left: 10px; */
     padding-left: 15px;
+    padding-right: 15px;
     z-index: 4;
     display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
+	/* flex-wrap: wrap; */
+	/* justify-content: space-around; */
+    justify-content: space-between;
 	align-items: stretch;
 	align-content: center;
   }

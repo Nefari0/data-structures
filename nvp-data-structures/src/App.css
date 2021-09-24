@@ -12,8 +12,9 @@
 
 .App {
   width: 100vw;
-  height: 100vh;
-  background-color: #fff;
+  min-height: 100vh;
+  /* background-color: brown; */
+  background-color: rgb(253, 253, 253);
   /* background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70); original */
   /* background-image: linear-gradient(99deg, #ff5959, #ff9770 40%, #6d8bcc 73%, #33497a); */
   /* position: absolute;

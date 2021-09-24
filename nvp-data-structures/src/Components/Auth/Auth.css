@@ -1,6 +1,8 @@
 .auth-container {
     border-radius: 8px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+    /* box-shadow: 0 0 25px rgba(0, 0, 0, 0.35); */
+    /* box-shadow: 25px 25px 25px rgba(0, 0, 0, 0.95); */
+    box-shadow: 15px 15px 20px rgba(73, 73, 73,.5);
 
     /* background-image: linear-gradient(97deg,#b92525 20%,#297F87 20%,rgba(0,0,0,.7)),url(fence.jpg); */
     background-image: linear-gradient(97deg,#8b1b1b 20%,#297F87 20%,rgba(0,0,0,.7)),url(fence.jpg);
