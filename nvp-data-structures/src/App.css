@@ -1,3 +1,6 @@
+
+
+
 /* .App {
   height: 500px;
   width: 500px;
@@ -14,9 +17,20 @@
   width: 100vw;
   min-height: 100vh;
   /* background-color: brown; */
-  background-color: rgb(253, 253, 253);
-  /* background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70); original */
+  /* background-color: rgb(253, 253, 253); */
+
+  /* background-color: rgba(175, 175, 175, 0.178); */
+  /* background-image: linear-gradient(97deg,#8b1b1b 20%,#297F87 20%,rgba(0,0,0,.7)),url(dendogram.png); */
+  background-image: linear-gradient(120deg,#ffffff 20%,rgba(150, 150, 150, 0.4)),url(abstract_refined.jfif);
+  background-repeat: no-repeat;
+  /* background-size: 100% 100%; */
+  background-position: right top;
+
+  /* background-image: ; */
+
+  /* background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70); */
   /* background-image: linear-gradient(99deg, #ff5959, #ff9770 40%, #6d8bcc 73%, #33497a); */
+  /* background-image: linear-gradient(97deg,#99e7ee 10%, #4ee4f1 90%,rgba(167, 167, 167, 0.7)); */
   /* position: absolute;
   top: 0;
   left: 0; */

@@ -105,7 +105,9 @@ class Auth extends Component {
             <div>
                 { !isAuthenticated ?
                 (<div className="auth-container">
+
                 {/* <img src={logo} alt='logo' /> */}
+
                 <h1 className='auth-title'>Data Structures</h1>
                 {this.state.errorMsg && <h3 className='auth-error-msg'>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
                 <div className='auth-input-box'>
