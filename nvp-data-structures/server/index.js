@@ -34,6 +34,7 @@ app.get('/api/testdata/all', dataTestController.getData)
 // cancer stats endpoints
 app.get('/api/cancer/all', cancerStatController.getAllStats)
 app.post('/api/cancer/add',cancerStatController.addToDatabase)
+app.get('/api/cancer/result',cancerStatController.oneResult)
 
 // breaking bad endpoints
 // app.get('/api/bb/all')

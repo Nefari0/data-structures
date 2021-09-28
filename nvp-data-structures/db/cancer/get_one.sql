@@ -1,0 +1,1 @@
+SELECT * FROM cancer_stats_results
