@@ -33,6 +33,7 @@ class Info extends Component {
             employeeDataInput:false,
 
             // cancer data //
+            cancer_result:[],
             cancerDataInput:false,
             cancerSearch:"",
             id:0,
@@ -166,7 +167,7 @@ class Info extends Component {
             normal_nuceoli,
             mitoses
         } = this.state
-        axios.post('/api/cancer/add',{id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses})
+        axios.post('/api/cancer/add',{id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses}).then(axios.get('/api/cancer/result').then(res => {this.setState({cancer_result : data})}))
             this.addCancerData()
             this.setState({
                 id:0,
