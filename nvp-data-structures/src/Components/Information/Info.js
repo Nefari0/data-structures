@@ -294,10 +294,12 @@ class Info extends Component {
                             {!dataView ? (<h4 className="info-h3" >reinforcement learning</h4>) : (<h4 className="info-h4-selected" >reinforcement learning</h4>)}
                             {!dataView ? (<h4 className="info-h3" >natural language processing</h4>) : (<h4 className="info-h4-selected" >natural language processing</h4>)}
                             {!dataView ? (<h4 className="info-h3" >dimensionality reduction</h4>) : (<h4 className="info-h4-selected" >dimensionality reduction</h4>)}
-                            {!dataView ? (<h4 className="info-h3" >deep learning</h4>) : (<h4 className="info-h4-selected" >deep learning</h4>)}
+                            {!dataView ? (<h4 className="info-h3" >neural networks</h4>) : (<h4 className="info-h4-selected" >deep learning</h4>)}
                         </div>
                     </div>
-                    <div><h3 className="info-h4" onClick={this.handleShowMachineLearning} >examples</h3></div>
+
+                    <div><h3 className="info-h4" onClick={this.handleShowMachineLearning} >message board</h3></div>
+
                 </div>
 
                     <p className="p-logout-text" onClick={this.props.logout}>logout</p>
