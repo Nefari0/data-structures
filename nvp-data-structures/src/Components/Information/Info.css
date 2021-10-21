@@ -304,14 +304,15 @@ div.data-spec {
 }
 
 .search-input {
-    margin: none;
+    /* margin: none; */
     margin-left: 40px;
 }
 
 .p-search-line {
     color: orange;
-    margin: none;
+    /* margin: none; */
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 /* ------- screen size query ------- */
