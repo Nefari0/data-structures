@@ -65,6 +65,8 @@ class Info extends Component {
         this.startLoading = this.startLoading.bind(this)
         this.addEmployeeData = this.addEmployeeData.bind(this)
         this.refreshEmployees = this.refreshEmployees.bind(this)
+        this.getOneResult = this.getOneResult.bind(this)
+        this.clearCancerDataForm = this.clearCancerDataForm.bind(this)
         // this.filterCancer = this.filterCancer.bind(this)
         // this.filterEmployee = this.filterEmployee.bind(this)
 
@@ -154,6 +156,10 @@ class Info extends Component {
         this.setState({cancerSearch:filter})
     }
 
+    getOneResult = async () => {
+        await axios.get('/api/cancer/result').then(res => this.setState({cancer_result : res.data}))
+    }
+
     addToCancerPending() {
         const {
             id,
@@ -167,24 +173,27 @@ class Info extends Component {
             normal_nuceoli,
             mitoses
         } = this.state
-        axios.post('/api/cancer/add',{id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses}).then(axios.get('/api/cancer/result').then(res => {this.setState({cancer_result : data})}))
+        axios.post('/api/cancer/add',{id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses})
+        // axios.post('/api/cancer/transceive',{id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses})
+            // this.getOneResult()
             this.addCancerData()
-            this.setState({
-                id:0,
-                clump_thickness:0,
-                uniformity_of_cell_size:0,
-                uniformity_of_cell_shape:0,
-                marginal_adhesion:0,
-                single_epithelial_cell_size:0,
-                bare_nuclei:0,
-                bland_chromatin:0,
-                normal_nuceoli:0,
-                mitoses:0
-            })
+            this.clearCancerDataForm()
+            // this.setState({
+            //     id:0,
+            //     clump_thickness:0,
+            //     uniformity_of_cell_size:0,
+            //     uniformity_of_cell_shape:0,
+            //     marginal_adhesion:0,
+            //     single_epithelial_cell_size:0,
+            //     bare_nuclei:0,
+            //     bland_chromatin:0,
+            //     normal_nuceoli:0,
+            //     mitoses:0
+            // })
     }
     addCancerData(params) {
         this.setState({
-            cancerDataInput:!this.state.cancerDataInput
+            cancerDataInput:!this.state.cancerDataInput 
         })
     }
     refreshCancer = async () => {
@@ -200,6 +209,20 @@ class Info extends Component {
         this.setState({
             cancerStats:[],
             cancerSearch:""
+        })
+    }
+    clearCancerDataForm() {
+        this.setState({
+            id:0,
+            clump_thickness:0,
+            uniformity_of_cell_size:0,
+            uniformity_of_cell_shape:0,
+            marginal_adhesion:0,
+            single_epithelial_cell_size:0,
+            bare_nuclei:0,
+            bland_chromatin:0,
+            normal_nuceoli:0,
+            mitoses:0
         })
     }
     // -- ^ cancer information above ^ -- //

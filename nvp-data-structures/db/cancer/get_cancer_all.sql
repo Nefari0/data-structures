@@ -1,1 +1,1 @@
-SELECT * FROM cancer_stats
+SELECT * FROM cancer_stats_results

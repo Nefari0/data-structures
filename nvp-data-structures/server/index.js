@@ -6,6 +6,7 @@ const authController = require('./controllers/authController');
 const cancerStatController = require('./controllers/cancerStatController');
 const dataTestController = require('./controllers/dataTestController')
 const employeeController = require('./controllers/employeeController')
+const path = require('path')
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -34,13 +35,21 @@ app.get('/api/testdata/all', dataTestController.getData)
 // cancer stats endpoints
 app.get('/api/cancer/all', cancerStatController.getAllStats)
 app.post('/api/cancer/add',cancerStatController.addToDatabase)
-app.get('/api/cancer/result',cancerStatController.oneResult)
+app.post('/api/cancer/transceive',cancerStatController.oneResult)
+// app.get('/api/cancer/result',cancerStatController.oneResult)
 
 // breaking bad endpoints
 // app.get('/api/bb/all')
 
 // employee endpoints
 app.get('/api/employees/all',employeeController.getAllEmployees)
+
+// -----server ------
+app.use( express.static( __dirname + '/../build'));
+app.get('*', (req,res) => {
+res.send(path.join(__dirname, '../build/index.html'))
+})
+// -------------------
 
 massive({
     connectionString: CONNECTION_STRING,

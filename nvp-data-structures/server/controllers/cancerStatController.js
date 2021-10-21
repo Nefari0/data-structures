@@ -22,7 +22,13 @@ module.exports = {
     },
 
     oneResult: async (req,res) => {
+        console.log('oneResult firing!')
         const db = req.app.get('db')
+        const { id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses } = req.body
+        sentOnfo = await db.cancer.add_cancer([id,clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,marginal_adhesion,single_epithelial_cell_size,bare_nuclei,bland_chromatin,normal_nuceoli,mitoses])
+        if (!sentOnfo) {
+            return res.status(401).send('request failed')
+        }
         result = await db.cancer.get_one()
         return res.status(200).send(result)
     }
