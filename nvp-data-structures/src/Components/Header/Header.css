@@ -14,3 +14,16 @@
     height: 95px;
     /* height: 90%; */
 }
+
+@media (max-width:475px) {
+    .header {
+        /* width: 300px; */
+        width: 400px;
+    }
+}
+
+@media (max-width:340px) {
+    .header {
+        width: 280px;
+    }
+}

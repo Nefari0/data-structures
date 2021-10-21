@@ -30,3 +30,16 @@
   .auth-p {
       font-weight: 300;
   }
+
+  @media (max-width: 475px) {
+      .auth-container {
+          width: 300px;
+      }
+  }
+
+  @media (max-width:340px) {
+    .auth-container {
+        width: 200px;
+        height: 300px;
+    }
+}

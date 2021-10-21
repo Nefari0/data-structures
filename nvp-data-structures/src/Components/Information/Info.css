@@ -318,14 +318,14 @@ div.data-spec {
     }
 }
 
-/* @media(max-width:1160px) {
-    .cancer-search-bar {
-        margin-left: 70%;
+@media (max-width: 475px) {
+    .info-container {
+        width: 400px;
     }
 }
 
-@media(max-width: 770px) {
-    .cancer-search-bar {
-        margin-left: 60%;
+@media (max-width:340px) {
+    .info-container {
+        width: 200px;
     }
-} */
+} 
