@@ -31,6 +31,12 @@
       font-weight: 300;
   }
 
+  @media (max-width:1090px) {
+      /* .auth-container {
+          width: 800px;
+      } */
+  }
+
   @media (max-width: 475px) {
       .auth-container {
           width: 300px;

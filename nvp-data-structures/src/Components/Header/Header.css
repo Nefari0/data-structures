@@ -4,7 +4,6 @@
     width: 100%;
     background-color: #fff;
     /* color: blueviolet */
-    /* background-color: yellow; */
     /* border-bottom: 1px solid #297F87; */
     margin-bottom: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
@@ -15,10 +14,25 @@
     /* height: 90%; */
 }
 
+@media (max-width:1090px) {
+    .header {
+        /* width: 800px; */
+        width: 100vw;
+        /* background-color: brown; */
+    }
+}
+
 @media (max-width:475px) {
     .header {
         /* width: 300px; */
         width: 400px;
+        /* background-color: chartreuse; */
+    }
+}
+
+@media (max-width:390px) {
+    .header {
+        margin-left: 10px;
     }
 }
 
