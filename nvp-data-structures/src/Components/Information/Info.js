@@ -9,6 +9,8 @@ import CancerStat from './CancerStat'
 import AddCancerStat from './AddCancerStat'
 import Employee from './Employee'
 import Loading from '../Loading/Loading'
+import Titanic from './Titanic/Titanic'
+import Passenger from './Passenger'
 
 class Info extends Component {
     constructor(props){
@@ -31,6 +33,10 @@ class Info extends Component {
             data3View:false,
             // employee data //
             employeeDataInput:false,
+
+            // passenger data
+            showPassengers:false,
+            passengers:[],
 
             // cancer data //
             cancer_result:[],
@@ -67,6 +73,7 @@ class Info extends Component {
         this.refreshEmployees = this.refreshEmployees.bind(this)
         this.getOneResult = this.getOneResult.bind(this)
         this.clearCancerDataForm = this.clearCancerDataForm.bind(this)
+        this.titanicDataSelected = this.titanicDataSelected.bind(this)
         // this.filterCancer = this.filterCancer.bind(this)
         // this.filterEmployee = this.filterEmployee.bind(this)
 
@@ -94,6 +101,10 @@ class Info extends Component {
 
         axios.get('api/employees/all').then(res => {
             this.setState({nvpEmployees : res.data})
+        })
+
+        axios.get('api/passengers/all').then(res => {
+            this.setState({passengers : res.data})
         })
         
         // this.startLoading()
@@ -126,6 +137,10 @@ class Info extends Component {
         this.setState({showMachineLearning:!this.state.showMachineLearning})
     }
     // ---------------------------------------- //
+
+    // ---- Titanic data functions ---- //
+
+    // -------------------------------  //
 
     // ---- Employee data functions ---- //
     handleEmployeeSearch = (filter) => {
@@ -253,6 +268,12 @@ class Info extends Component {
             data3View:!this.state.data3View
         })
     }
+    titanicDataSelected(params) {
+        this.resetView()
+        this.setState({
+            showPassengers:!this.state.showPassengers
+        })
+    }
     resetView() {
         this.setState({
             dataView:false,
@@ -260,6 +281,7 @@ class Info extends Component {
             data2View:false,
             data3View:false,
             showDatabaselist:false,
+            showPassengers:false,
             showMachineLearning:true    
         })
     }
@@ -267,7 +289,7 @@ class Info extends Component {
 
     render(){
         
-        const { employeeDataInput,isLoading,showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols } = this.state
+        const { employeeDataInput,isLoading,showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols,showPassengers,passengers } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results} />
@@ -288,6 +310,10 @@ class Info extends Component {
         const mappedEmployees = filterEmployee.map(element => {
             return <Employee key={element.index} id={element.index} name={element.name} age={element.age} start_month={element.start_month} start_year={element.start_year} end_month={element.end_month} end_year={element.end_year} employment_duration={element.employment_duration} distance={element.distance} married={element.married} pay={element.pay} attendance={element.attendance} />
         })
+
+        const mappedPassengers = passengers.map(element => {
+            return <Passenger data={element} key={element.index} age={element.age} name={element.name} pclass={element.pclass} sex={element.sex} siblings_spouses_aboard={element.siblings_spouses_aboard} parents_children_aboard={element.parents_children_aboard} survived={element.survived} />
+        })
         
         return(
             <div className="info-container">
@@ -304,6 +330,7 @@ class Info extends Component {
                     <div><h3 className="info-h4" onClick={this.handleShowDatabase} >Database</h3>
                         <div className={`database-dropdown ${showDatabaselist ? true : 'database-dropdown-hide'}`}>
                             {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)}
+                            {!showPassengers ? (<h4 className="info-h3" onClick={this.titanicDataSelected}>passengers</h4>) : (<h4 className="info-h4-selected" onClick={this.titanicDataSelected}>passengers</h4>)}
                             {!data3View ? (<h4 className="info-h3" onClick={this.data3Selected}>employees</h4>) : (<h4 className="info-h4-selected" onClick={this.data3Selected}>employees</h4>)}
                             {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>sample data</h4>)}
                             {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)}
@@ -327,6 +354,16 @@ class Info extends Component {
                 </div>
 
                     <p className="p-logout-text" onClick={this.props.logout}>logout</p>
+
+                    {showPassengers ? (
+                        <div>
+                            <div className="stats-container">
+                                {isLoading ? <Loading/> : null}
+                                <div className="data-spec"><a>name</a><a>class</a><a>gender</a><a>siblings_spouses_aboard</a><a>parents_children_aboard</a><a>results</a></div>
+                                <span className="data-spec-list">{mappedPassengers}</span>
+                            </div>
+                        </div>
+                    ) : null}
 
                     {data2View ? (
                         <div>
