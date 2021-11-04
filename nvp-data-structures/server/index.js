@@ -46,7 +46,7 @@ app.post('/api/cancer/transceive',cancerStatController.oneResult)
 app.get('/api/employees/all',employeeController.getAllEmployees)
 
 // titanic end points
-app.get('/api/passengers/all', titanicController.getPassengers)
+app.get('/api/passengers/all', titanicController.getAll)
 
 // -----server ------
 app.use( express.static( __dirname + '/../build'));
