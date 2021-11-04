@@ -13,7 +13,7 @@ const Passenger = (props) => {
             <a>{siblings_spouses_aboard}</a>
             <a style={{marginLeft:'100px'}}>{parents_children_aboard}</a>
             <a>{fare}</a>
-            <a>{survived}</a>
+            <a>{survived > 0 ? 'survived' : 'parished'}</a>
         </div>
     )
 }
