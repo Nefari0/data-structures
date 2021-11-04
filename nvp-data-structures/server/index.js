@@ -4,8 +4,9 @@ const session = require('express-session')
 const massive = require('massive')
 const authController = require('./controllers/authController');
 const cancerStatController = require('./controllers/cancerStatController');
-const dataTestController = require('./controllers/dataTestController')
-const employeeController = require('./controllers/employeeController')
+const dataTestController = require('./controllers/dataTestController');
+const employeeController = require('./controllers/employeeController');
+const titanicController = require('./controllers/titanicController');
 const path = require('path')
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
@@ -43,6 +44,9 @@ app.post('/api/cancer/transceive',cancerStatController.oneResult)
 
 // employee endpoints
 app.get('/api/employees/all',employeeController.getAllEmployees)
+
+// titanic end points
+app.get('/api/passengers/all', titanicController.getPassengers)
 
 // -----server ------
 app.use( express.static( __dirname + '/../build'));

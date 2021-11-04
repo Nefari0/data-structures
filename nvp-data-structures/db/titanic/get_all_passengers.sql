@@ -1,0 +1,1 @@
+SELECT * FROM titanic_data

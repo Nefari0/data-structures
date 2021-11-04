@@ -1,19 +1,32 @@
-import './Titanic.css'
-import React, { useState,useEffect, Children } from 'react'
+import Reac, { Component } from 'react'
+import Passenger from './Passenger'
+import axios from 'axios';
 
-const Titanic = (props) => {
+class Titanic extends Component {
+    constructor(){
+        super();
 
-    const {} = props
+        this.state = {
+            passengers:[]
+        }
+    }
 
-    return(
-        <div>
-            <a>{survived}</a>
-            <a>{pclass}</a>
-            <a>{name}</a>
-            <a>{sex}</a>
-            <a>{siblings_spouses_aboard}</a>
-            <a>{parents_children_aboard}</a>
-            <a>{fare}</a>
-        </div>
-    )
+    componentDidMount(){
+        axios.get('api/passengers/all').then(res => {
+            this.setState({passengers:res.data})
+        })
+    }
+
+    render(){
+
+        const mappedPassengers = passengers.map(element => {
+            return <Passenger />
+        })
+
+        return(
+            <div>
+
+            </div>
+        )
+    }
 }
