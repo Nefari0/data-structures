@@ -74,6 +74,7 @@ class Info extends Component {
         this.getOneResult = this.getOneResult.bind(this)
         this.clearCancerDataForm = this.clearCancerDataForm.bind(this)
         this.titanicDataSelected = this.titanicDataSelected.bind(this)
+        this.refreshPassengers = this.refreshPassengers.bind(this)
         // this.filterCancer = this.filterCancer.bind(this)
         // this.filterEmployee = this.filterEmployee.bind(this)
 
@@ -139,7 +140,13 @@ class Info extends Component {
     // ---------------------------------------- //
 
     // ---- Titanic data functions ---- //
-
+    refreshPassengers() {
+        this.startLoading()
+        axios.get('api/passengers/all').then(res => {
+            this.setState({passengers:res.data})
+            this.startLoading()
+        })
+    }
     // -------------------------------  //
 
     // ---- Employee data functions ---- //
@@ -357,9 +364,10 @@ class Info extends Component {
 
                     {showPassengers ? (
                         <div>
+                            <div className="search-bar" ><p className="p-search-line" >add info?</p><p className="p-search-line" onClick={this.refreshPassengers}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                             <div className="stats-container">
                                 {isLoading ? <Loading/> : null}
-                                <div className="data-spec"><a>name</a><a>class</a><a>gender</a><a>siblings_spouses_aboard</a><a>parents_children_aboard</a><a>results</a></div>
+                                <div className="data-spec"><a style={{marginLeft:'30px',paddingRight:'40px'}}>name</a><a style={{marginLeft:'50px'}}>class</a><a>gender</a><a>siblings_spouses_aboard</a><a>parents_children_aboard</a><a>results</a></div>
                                 <span className="data-spec-list">{mappedPassengers}</span>
                             </div>
                         </div>

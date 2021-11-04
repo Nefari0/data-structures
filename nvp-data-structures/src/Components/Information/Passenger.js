@@ -6,12 +6,12 @@ const Passenger = (props) => {
     const { survived,pclass,name,sex,siblings_spouses_aboard,parents_children_aboard,fare } = props
 
     return(
-        <div className="scrollitems" style={{overflowX:'scroll'}}>
-            <a style={{fontSize:'xx-small'}}>{name}</a>
+        <div className="scrollitems">
+            <a style={{overflow:'auto',width:'200px'}}>{name}</a>
             <a>{pclass}</a>
             <a>{sex}</a>
             <a>{siblings_spouses_aboard}</a>
-            <a>{parents_children_aboard}</a>
+            <a style={{marginLeft:'100px'}}>{parents_children_aboard}</a>
             <a>{fare}</a>
             <a>{survived}</a>
         </div>
