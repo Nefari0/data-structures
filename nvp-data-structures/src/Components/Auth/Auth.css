@@ -6,17 +6,31 @@
 
     /* background-image: linear-gradient(97deg,#b92525 20%,#297F87 20%,rgba(0,0,0,.7)),url(fence.jpg); */
     /* width: 35vw; */
-    width: 400px;
     /* height: 55vh; */
+
+    width: 400px;
     height: 450px;
+
+    /* width: 200px; */
+    /* height: 300px; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     padding: 20px;
-    position: relative;
+    /* position: relative; */
+
+    /* ----- nvp colors ----- */
     /* background-image: linear-gradient(97deg,#8b1b1b 20%,#297F87 20%,rgba(0,0,0,.7)),url(fence.jpg); */
-    background-image: linear-gradient(97deg,#8b1b1b 20%,#297F87 20%,rgba(0,0,0,.7)),url(fence.jpg);
+
+    /* --- cd lab --- */
+    background-image: linear-gradient(97deg,#2D0E94 20%,#00c3d8 20%,rgba(0,0,0,.7)),url(download.png);
+    /* background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70),url(download.png); */
+    background-repeat: no-repeat;
+    /* background-size: 100% 100%; */
+    /* background-position: right top; */
+  
+    /* download.png */
 
   }
 
