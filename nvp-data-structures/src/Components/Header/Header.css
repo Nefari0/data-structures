@@ -5,13 +5,20 @@
     background-color: #fff;
     /* color: blueviolet */
     /* border-bottom: 1px solid #297F87; */
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: baseline;
+	align-content: center;
     margin-bottom: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
 }
 
 .logo {
-    height: 95px;
+    height: 50px;
     /* height: 90%; */
+    margin-left: 15px;
 }
 
 @media (max-width:1090px) {
