@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 // import a
 import './Auth.css'
 import { loginUser,logoutUser } from '../../redux/userReducer'
-import { characters } from '../../redux/breakingBadReducer'
+import { updateCharacters } from '../../redux/breakingBadReducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Info from '../Information/Info'
 import Loading from '../Loading/Loading'
+import { withRouter } from 'react-router'
 
 class Auth extends Component {
 
@@ -21,7 +22,7 @@ class Auth extends Component {
             isAuthenticated:false
         }
         this.handleLogin = this.handleLogin.bind(this)
-        this.login = this.login.bind(this)
+        // this.login = this.login.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.resetState = this.resetState.bind(this)
         this.displayData = this.displayData.bind(this)
@@ -30,10 +31,11 @@ class Auth extends Component {
 
     componentDidMount(){
         const { user } = this.props
+        // this.props.updateCharacters()
     }
 
     componentDidUpdate(){
-        const { auth } = this.state.user
+        const { auth } = this.props.user.user
         const { isAuthenticated } = this.state
         if(auth === true && isAuthenticated === false) {
             this.setState({isAuthenticated:true})
@@ -71,10 +73,13 @@ class Auth extends Component {
         const { email,password } = this.state
         // console.log('email',email)
         // const { loginUser } = this.props
-        // loginUser(email,password)
-        axios.post('/api/auth/login',{email,password}).then(res => {
-            this.setState({user:res.data})
-        }).then(this.displayData())
+        this.props.loginUser(email,password)
+        // axios.post('/api/auth/login',{email,password}).then(res => {
+        //     this.setState({user:res.data})
+        //     this.props.history.push("/info") // marked
+        // }).then(
+        //     )
+
         this.resetState()
         // this.displayData()
     }
@@ -84,9 +89,9 @@ class Auth extends Component {
         console.log('auth',auth)
     }
 
-    login(){
-        this.handleLogin()
-    }
+    // login(){
+    //     this.handleLogin()
+    // }
 
     thisLogout() {
         this.setState({
@@ -104,7 +109,7 @@ class Auth extends Component {
             // <div className="auth-container">
             <div>
                 { !isAuthenticated ?
-                (<div className="auth-container">
+               (<div className="auth-container">
 
                 {/* <img src={logo} alt='logo' /> */}
 
@@ -119,12 +124,11 @@ class Auth extends Component {
                     <input value={this.state.password} type='password' onChange={e => this.handleChange('password', e.target.value)} />
                 </div>
                 <div className='auth-button-container'>
-                    <button className='dark-button' onClick={this.handleLogin}> Login </button>
+                    <button className='dark-button' onClick={() => this.handleLogin()}> Login </button>
                     {/* <button className='dark-button' onClick={this.register}> Register </button> */}
                 </div>
                 </div>)
-                : (<Info {...this.state} logout={this.thisLogout}/>)
-                }
+                : (<Info {...this.state} logout={this.thisLogout}/>)}
             </div>
         )
     }
@@ -135,4 +139,5 @@ function mapStateToProps(reduxState){
 }
 
 // export default Auth
-export default connect(mapStateToProps, {loginUser,logoutUser})(Auth)
+export default connect(mapStateToProps, {loginUser,logoutUser,updateCharacters})(Auth)
+// export default withRouter(connect(null, {loginUser})(Auth))
