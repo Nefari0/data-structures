@@ -1,18 +1,23 @@
 import axios from 'axios'
 
-const initialState= {
+const initialState = {
     user: {},
-    isLoggedIn:false
+    isLoggedIn:false,
+    isLoading:false,
+    isError:false
 }
 
 const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 
 export function loginUser(email, password) {
-    console.log(email)
+    const theData = axios.post('/api/auth/login', {email,password})
+    
+    console.log('data in ducks',theData)
     return {
         type: LOGIN_USER,
-        payload: axios.get('/api/auth/login', {email,password})
+        // payload: axios.post('/api/auth/login', {email,password}).catch(err => console.log('error',err))
+        payload:theData
     }
 }
 
@@ -27,14 +32,28 @@ export function logoutUser() {
 
 // }
 
-export default function userReducer(state = initialState,action) {
+export default function userReducer(state = initialState, action) {
     switch (action.type) {
-        case LOGIN_USER + '_FULFILLED':
+        case LOGIN_USER + '_PENDING':
+            console.log('hit pending')
             return {
                 ...state,
-                user: action.payload, isLoggedIn:true
+                isLoading:true
             }
-        case LOGOUT_USER + '_FULLFILLED':
+            case LOGIN_USER + '_FULFILLED':
+            // console.log('action type', action.type)
+            return {
+                ...state,
+                user: action.payload.data, isLoggedIn:true, isLoading:false
+            }
+        case LOGIN_USER + '_REJECTED':
+            
+            return {
+                ...state,
+                isLoading:false,
+                isError:true
+            }
+        case LOGOUT_USER + '_FULFILLED':
             return {
                 ...state, isLoggedIn: false
             }
