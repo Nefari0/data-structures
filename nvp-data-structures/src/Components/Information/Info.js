@@ -11,6 +11,9 @@ import Employee from './Employee'
 import Loading from '../Loading/Loading'
 import Titanic from './Titanic/Titanic'
 import Passenger from './Passenger'
+import { connect } from 'react-redux'
+import { logoutUser } from './../../redux/userReducer'
+// import Py from '../pytest/Py'
 
 class Info extends Component {
     constructor(props){
@@ -333,6 +336,8 @@ class Info extends Component {
                     {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)}
                 </section> */}
                 <section className="right-column">
+                    {/* <h1>should be here</h1> */}
+                    {/* <Py /> */}
                 <div className="data-header">
                     <div><h3 className="info-h4" onClick={this.handleShowDatabase} >Database</h3>
                         <div className={`database-dropdown ${showDatabaselist ? true : 'database-dropdown-hide'}`}>
@@ -360,8 +365,8 @@ class Info extends Component {
 
                 </div>
 
-                    <p className="p-logout-text" onClick={this.props.logout}>logout</p>
-
+                    <p className="p-logout-text" onClick={() => this.props.logoutUser()}>logout</p>
+                    
                     {showPassengers ? (
                         <div>
                             <div className="search-bar" ><p className="p-search-line" >add info?</p><p className="p-search-line" onClick={this.refreshPassengers}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
@@ -452,12 +457,25 @@ class Info extends Component {
                             <div className="info-list"></div>
                             {mappedBookData}
                         </div>
+
+                       
                     ) : (<div></div>)}
-                    
+
+                     {/* <div>
+                     <h1>should be here</h1>
+                    <Py />
+                     </div> */}
+
                 </section>
             </div>
         )
     }
 }
 
-export default Info
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {logoutUser})(Info)
+
+// export default Info
