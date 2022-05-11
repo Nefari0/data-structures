@@ -38,7 +38,7 @@ module.exports = {
         if (!isAuthenticated) {
             return res.status(403).send("Incorrect Password")
         }
-
+        
         req.session.user = {
             firstName:user.first_name,
             lastName:user.last_name,
@@ -48,7 +48,7 @@ module.exports = {
             // auth:isAuthenticated.true
             auth:isAuthenticated
         }
-        return res.status(200).send(req.session.user)
+        return res.status(201).send(req.session.user)
     },
 
     logout: async (req,res) => {
