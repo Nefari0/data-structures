@@ -45,6 +45,7 @@ module.exports = {
             email:user.email,
             id:user.user_id,
             isAdmin:user.is_admin,
+            // auth:isAuthenticated.true
             auth:isAuthenticated
         }
         return res.status(200).send(req.session.user)

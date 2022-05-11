@@ -24,7 +24,7 @@ class Auth extends Component {
         this.login = this.login.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.resetState = this.resetState.bind(this)
-        this.displayData = this.displayData.bind(this)
+        // this.displayData = this.displayData.bind(this)
         this.thisLogout = this.thisLogout.bind(this)
     }
 
