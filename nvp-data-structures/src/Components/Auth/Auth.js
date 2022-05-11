@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import Info from '../Information/Info'
 import Loading from '../Loading/Loading'
-import { withRouter } from 'react-router'
+import { Route } from 'react-router-dom'
 
 class Auth extends Component {
 
@@ -75,12 +75,12 @@ class Auth extends Component {
         // const { loginUser } = this.props
         this.props.loginUser(email,password)
         // axios.post('/api/auth/login',{email,password}).then(res => {
-        //     this.setState({user:res.data})
-        //     this.props.history.push("/info") // marked
+            // this.setState({user:res.data})
+            // this.props.history.push("/info") // marked
         // }).then(
-        //     )
+            // )
 
-        this.resetState()
+        // this.resetState()
         // this.displayData()
     }
 
@@ -109,7 +109,7 @@ class Auth extends Component {
             // <div className="auth-container">
             <div>
                 { !isAuthenticated ?
-               (<div className="auth-container">
+               <div className="auth-container">
 
                 {/* <img src={logo} alt='logo' /> */}
 
@@ -127,8 +127,9 @@ class Auth extends Component {
                     <button className='dark-button' onClick={() => this.handleLogin()}> Login </button>
                     {/* <button className='dark-button' onClick={this.register}> Register </button> */}
                 </div>
-                </div>)
-                : (<Info {...this.state} logout={this.thisLogout}/>)}
+                </div>
+                : (<Route path="/info" component={Info}/>)}
+                {/* : (<Info logout={this.thisLogout}/>)} */}
             </div>
         )
     }
