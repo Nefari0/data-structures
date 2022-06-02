@@ -327,14 +327,6 @@ class Info extends Component {
         
         return(
             <div className="info-container">
-                {/* <section className="header-menu">
-                    <h3 className="info-h4">Database</h3>
-                    {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>samples data</h4>)}
-
-                    {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)}
-
-                    {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)}
-                </section> */}
                 <section className="right-column">
                     {/* <h1>should be here</h1> */}
                     {/* <Py /> */}
@@ -382,16 +374,16 @@ class Info extends Component {
                         <div>
                             <div className="search-bar" ><p className="p-search-line" onClick={this.addCancerData}>add info?</p><p className="p-search-line" onClick={this.refreshCancer}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                             <div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
-                                <div className="input-element"><input placeholder="id" onChange={e => this.handleForm('id',e.target.value)}/><p className="p-text-generic">id</p><p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p></div>
-                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleForm('clump_thickness',e.target.value)}/><p className="p-text-generic">Clump Thickness</p></div>
-                                <div className="input-element"><input placeholder="Uniformity of cell size" onChange={e => this.handleForm('uniformity_of_cell_size',e.target.value)}/><p className="p-text-generic">Uniformity of cell size</p></div>
-                                <div className="input-element"><input placeholder="Uniformity of cell shape" onChange={e => this.handleForm('uniformity_of_cell_shape',e.target.value)}/><p className="p-text-generic">Uniformity of cell shape</p></div>
-                                <div className="input-element"><input placeholder="Marginal adhesion" onChange={e => this.handleForm('marginal_adhesion',e.target.value)}/><p className="p-text-generic">Marginal adhesion</p></div>
-                                <div className="input-element"><input placeholder="Sinlge opithelial cell size" onChange={e => this.handleForm('single_epithelial_cell_size',e.target.value)}/><p className="p-text-generic">Sinlge opithelial cell size</p></div>
-                                <div className="input-element"><input placeholder="Bare nuclei" onChange={e => this.handleForm('bare_nuclei',e.target.value)}/><p className="p-text-generic">Bare nuclei</p></div>
-                                <div className="input-element"><input placeholder="Bland nuceoli" onChange={e => this.handleForm('bland_chromatin',e.target.value)}/><p className="p-text-generic">Bland nuceoli</p></div>
-                                <div className="input-element"><input placeholder="Normal nuceoli" onChange={e => this.handleForm('normal_nuceoli',e.target.value)}/><p className="p-text-generic">Normal nuceoli</p></div>
-                                <div className="input-element"><input placeholder="Mitoses" onChange={e => this.handleForm('mitoses',e.target.value)}/><p className="p-text-generic">Mitoses</p></div>
+                                <div className="input-element"><input placeholder="id" onChange={e => this.handleForm('id',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Clump Thickness" onChange={e => this.handleForm('clump_thickness',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell size" onChange={e => this.handleForm('uniformity_of_cell_size',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Uniformity of cell shape" onChange={e => this.handleForm('uniformity_of_cell_shape',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Marginal adhesion" onChange={e => this.handleForm('marginal_adhesion',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Sinlge opithelial cell size" onChange={e => this.handleForm('single_epithelial_cell_size',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Bare nuclei" onChange={e => this.handleForm('bare_nuclei',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Bland nuceoli" onChange={e => this.handleForm('bland_chromatin',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Normal nuceoli" onChange={e => this.handleForm('normal_nuceoli',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Mitoses" onChange={e => this.handleForm('mitoses',e.target.value)}/></div>
                                 <button onClick={this.addToCancerPending}>submit</button>
                             </div>
                             {/* <div className="info-list"><h4>id</h4><a>clump Thickness</a><h6>uniformity of cell size</h6><h6>uniformity of cell shape</h6><h6>marginal adhesion</h6><h6>single epithelial cell size</h6><h6>id</h6><h6>id</h6><h6>id</h6><h6>id</h6><h4>results</h4></div> */}
@@ -403,30 +395,29 @@ class Info extends Component {
                         </div>
                     ) : (<div></div>)}
 
-                    {data3View ? (<div>
+                    {data3View ? (
+                    <div>
                         <div className="search-bar" ><p className="p-search-line"  onClick={this.addEmployeeData}>add info?</p><p className="p-search-line" onClick={this.refreshEmployees}>refresh</p><input onChange={e => this.handleEmployeeSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                         <div className={`cancer-stats-input ${employeeDataInput ? false : 'cancer-stats-input-hide'}`}>
-                                <div className="input-element"><input placeholder="name" onChange={e => this.handleForm('id',e.target.value)}/><p className="p-text-generic">name</p><p className="p-add-stat-text" onClick={this.addCancerData}>add info?</p></div>
-                                <div className="input-element"><input placeholder="Age" onChange={e => this.handleForm('clump_thickness',e.target.value)}/><p className="p-text-generic">age</p></div>
-                                <div className="input-element"><input placeholder="Start Month" onChange={e => this.handleForm('uniformity_of_cell_size',e.target.value)}/><p className="p-text-generic">Start Month</p></div>
-                                <div className="input-element"><input placeholder="Start Year" onChange={e => this.handleForm('uniformity_of_cell_shape',e.target.value)}/><p className="p-text-generic">Start Year</p></div>
-                                <div className="input-element"><input placeholder="End Month" onChange={e => this.handleForm('marginal_adhesion',e.target.value)}/><p className="p-text-generic">End Year</p></div>
-                                <div className="input-element"><input placeholder="Employment Duration" onChange={e => this.handleForm('single_epithelial_cell_size',e.target.value)}/><p className="p-text-generic">Employmen Duration</p></div>
-                                <div className="input-element"><input placeholder="Distance" onChange={e => this.handleForm('bare_nuclei',e.target.value)}/><p className="p-text-generic">distance</p></div>
-                                <div className="input-element"><input placeholder="Pay Rate" onChange={e => this.handleForm('bland_chromatin',e.target.value)}/><p className="p-text-generic">Pay Rate</p></div>
-                                <div className="input-element"><input placeholder="Attendance" onChange={e => this.handleForm('normal_nuceoli',e.target.value)}/><p className="p-text-generic">Attendance</p></div>
-                                {/* <div className="input-element"><input placeholder="Mitoses" onChange={e => this.handleForm('mitoses',e.target.value)}/><p className="p-text-generic">Mitoses</p></div> */}
+                                <div className="input-element"><input placeholder="name" onChange={e => this.handleForm('id',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Age" onChange={e => this.handleForm('clump_thickness',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Start Month" onChange={e => this.handleForm('uniformity_of_cell_size',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Start Year" onChange={e => this.handleForm('uniformity_of_cell_shape',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="End Month" onChange={e => this.handleForm('marginal_adhesion',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Employment Duration" onChange={e => this.handleForm('single_epithelial_cell_size',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Distance" onChange={e => this.handleForm('bare_nuclei',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Pay Rate" onChange={e => this.handleForm('bland_chromatin',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="Attendance" onChange={e => this.handleForm('normal_nuceoli',e.target.value)}/></div>
                                 <button>submit</button>
-                            </div>
+                        </div>
                         <div className="data-spec"><a>Name</a><a>Age</a><a>Start Month</a><a>Start Year</a><a>End Month</a><a>End Year</a><a>Employment Duration</a><a>Distance</a><a>Married</a><a>Pay Rate</a><a>Attendance</a></div>
-                        {/* {mappedEmployees} */}
                         <div className="stats-container">
                             {isLoading ? <Loading/> : null}
-                                {/* <div className="data-spec"><a>id</a><a>clump Thickness</a><a>unif. cell size</a><a>unif. cell shape</a><a>marg. adhesion</a><a>single epi. cell size</a><a>bare nuclei</a><a>bland chrom.</a><a>norm. nuceoli</a><a>mitoses</a><a>results</a></div> */}
                                 <span className="data-spec-list">{mappedEmployees}</span>
                         </div>
 
-                    </div>) : (<div></div>)}
+                    </div>) : (<div></div>)
+                    }
 
                     {data1View ? (
                         <div>
