@@ -59,9 +59,40 @@ h1 {
     font-weight: 300;
     text-transform: uppercase;
 }
+h4:hover,
+h3:hover {
+  background-color: #FFF7AE;
+  transition: all 500ms;
+}
+
+.selected {
+  color: orange;
+  border-bottom: 1px solid orange;
+}
 
 /* .header {
   height: 100px;
   width: 100vw;
   background-color: brown;
+} */
+
+/* .info-h4
+.info-h3{
+    color: #555;
+}
+
+.info-h3:hover,
+.info-h4:hover {
+    background-color: #FFF7AE;
+    transition: all 500ms;
+}
+
+.info-h3-selected{
+    color: orange;
+    border-bottom: 1px solid orange;
+}
+
+.info-h2{
+    color: #297F87;
+    margin-left: 35%;
 } */
