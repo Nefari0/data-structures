@@ -74,29 +74,26 @@
     width: 20px;
   }
 
-.info-h4
+/* .info-h4
 .info-h3{
     color: #555;
 }
-/* opacity: 100; */
-/* transition: all 150ms; */
+
 .info-h3:hover,
 .info-h4:hover {
     background-color: #FFF7AE;
     transition: all 500ms;
 }
 
-.info-h4-selected{
-    /* color: orange; */
+.info-h3-selected{
     color: orange;
     border-bottom: 1px solid orange;
 }
 
 .info-h2{
-    /* color: #555; */
     color: #297F87;
     margin-left: 35%;
-}
+} */
 
 .p-text-search,
 .p-text{
