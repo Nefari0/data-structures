@@ -16,8 +16,8 @@ class Auth extends Component {
 
         this.state = {
             user:{},
-            email:'',
-            password:'',
+            email:'email',
+            password:'password',
             setPermission:true,
             isAuthenticated:false
         }
@@ -58,8 +58,8 @@ class Auth extends Component {
 
     resetState(){
         this.setState({
-            email:'',
-            password:''
+            email:'email',
+            password:'password'
         })
     }
 
@@ -102,13 +102,13 @@ class Auth extends Component {
 
 
     render() {
-        const { auth } = this.state.user
-        const {isAuthenticated } = this.state
+        const { auth } = this.props.user.user
+        const { email,password } = this.state
 
         return(
             // <div className="auth-container">
             <div>
-                { !isAuthenticated ?
+                { !auth === true ?
                <div className="auth-container">
 
                 {/* <img src={logo} alt='logo' /> */}
@@ -116,11 +116,10 @@ class Auth extends Component {
                 <h1 className='auth-title'>Data Structures</h1>
                 {this.state.errorMsg && <h3 className='auth-error-msg'>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
                 <div className='auth-input-box'>
-                    <p className="auth-p">Email:</p>
-                    <input value={this.state.email} onChange={e => this.handleChange('email', e.target.value)} />
+                    <p >Email:</p>
+                    <input value={this.state.email} placeholder={email} onChange={e => this.handleChange('email', e.target.value)} />
                 </div>
                 <div className='auth-input-box'>
-                    <p className="auth-p">Password:</p>
                     <input value={this.state.password} type='password' onChange={e => this.handleChange('password', e.target.value)} />
                 </div>
                 <div className='auth-button-container'>
@@ -128,8 +127,8 @@ class Auth extends Component {
                     {/* <button className='dark-button' onClick={this.register}> Register </button> */}
                 </div>
                 </div>
-                : (<Route path="/info" component={Info}/>)}
-                {/* : (<Info logout={this.thisLogout}/>)} */}
+                // : (<Route path="/info" component={Info}/>)}
+                : (<Info logout={this.thisLogout}/>)}
             </div>
         )
     }
