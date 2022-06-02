@@ -58,7 +58,7 @@ export default function userReducer(state = initialState, action) {
         case LOGOUT_USER + '_FULFILLED':
             return {
                 ...state, isLoggedIn: false,
-                user : {}
+                user: {},
             }
 
         default:
