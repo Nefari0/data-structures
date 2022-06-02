@@ -54,9 +54,11 @@ class Info extends Component {
             bare_nuclei:0,
             bland_chromatin:0,
             normal_nuceoli:0,
-            mitoses:0
+            mitoses:0,
             // ------------- //
 
+            // -- symplify selected view -- //
+            currentView:''
             
         }
         this.dataSelected = this.dataSelected.bind(this)
@@ -76,7 +78,7 @@ class Info extends Component {
         this.refreshEmployees = this.refreshEmployees.bind(this)
         this.getOneResult = this.getOneResult.bind(this)
         this.clearCancerDataForm = this.clearCancerDataForm.bind(this)
-        this.titanicDataSelected = this.titanicDataSelected.bind(this)
+        // this.titanicDataSelected = this.titanicDataSelected.bind(this)
         this.refreshPassengers = this.refreshPassengers.bind(this)
         // this.filterCancer = this.filterCancer.bind(this)
         // this.filterEmployee = this.filterEmployee.bind(this)
@@ -278,16 +280,16 @@ class Info extends Component {
             data3View:!this.state.data3View
         })
     }
-    titanicDataSelected(params) {
-        this.resetView()
-        this.setState({
-            showPassengers:!this.state.showPassengers
-        })
-    }
+    // titanicDataSelected(params) {
+    //     this.resetView()
+    //     this.setState({
+    //         showPassengers:!this.state.showPassengers
+    //     })
+    // }
     resetView() {
         this.setState({
             dataView:false,
-            data1View:false,
+            // data1View:false,
             data2View:false,
             data3View:false,
             showDatabaselist:false,
@@ -299,7 +301,7 @@ class Info extends Component {
 
     render(){
         
-        const { employeeDataInput,isLoading,showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols,showPassengers,passengers } = this.state
+        const { currentView,employeeDataInput,isLoading,showDatabaselist,showMachineLearning,data3View,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View: cancerView,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols,showPassengers: passengersView,passengers } = this.state
 
         const mappedData = dataItems1.map(element => {
             return <InfoItem key={element.index} ids={element.ids} results={element.results} />
@@ -333,33 +335,37 @@ class Info extends Component {
                 <div className="data-header">
                     <div><h3 className="info-h4" onClick={this.handleShowDatabase} >Database</h3>
                         <div className={`database-dropdown ${showDatabaselist ? true : 'database-dropdown-hide'}`}>
-                            {!data2View ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)}
-                            {!showPassengers ? (<h4 className="info-h3" onClick={this.titanicDataSelected}>passengers</h4>) : (<h4 className="info-h4-selected" onClick={this.titanicDataSelected}>passengers</h4>)}
+                            {!cancerView ? (<h4 className="info-h3" onClick={this.data2Selected}>cancer stats</h4>) : (<h4 className="info-h4-selected" onClick={this.data2Selected}>cancer stats</h4>)}
+                            {currentView === 'passengersView' ? (<h4 className="info-h3" onClick={() => this.handleForm('currentView','passengersView')}>passengers</h4>) : (<h4 className="info-h4-selected" onClick={() => this.handleForm('currentView','passengersView')}>passengers</h4>)}
                             {!data3View ? (<h4 className="info-h3" onClick={this.data3Selected}>employees</h4>) : (<h4 className="info-h4-selected" onClick={this.data3Selected}>employees</h4>)}
                             {!data1View ? (<h4 className="info-h3" onClick={this.data1Selected}>sample data</h4>) : (<h4 className="info-h4-selected" onClick={this.data1Selected}>sample data</h4>)}
                             {!dataView ? (<h4 className="info-h3" onClick={this.dataSelected}>authors</h4>) : (<h4 className="info-h4-selected" onClick={this.dataSelected}>authors</h4>)}
                         </div>
                     </div>
-                    <div><h3 className="info-h4" onClick={this.handleShowMachineLearning} >machine learning</h3>
+                    <div><h3 className="info-h3" onClick={this.handleShowMachineLearning} >machine learning</h3>
+                        {/* <div className={`database-dropdown ${!showMachineLearning ? true : 'database-dropdown-hide'}`}>
+                            { (<h4 className="info-h3">regression</h4>) : (<h4 className="info-h4-selected" >regression</h4>)}
+                            {(<h4 className="info-h3" >classification</h4>) : (<h4 className="info-h4-selected" >classification</h4>)}
+                            {(<h4 className="info-h3" >clustering</h4>) : (<h4 className="info-h4-selected" >clustering</h4>)}
+                            {(<h4 className="info-h3" >association rule learning</h4>) : (<h4 className="info-h4-selected" >association rule learning</h4>)}
+                            {(<h4 className="info-h3" >reinforcement learning</h4>) : (<h4 className="info-h4-selected" >reinforcement learning</h4>)}
+                            {(<h4 className="info-h3" >neural networks</h4>) : (<h4 className="info-h4-selected" >deep learning</h4>)}
+                            {(<h4 className="info-h3" >natural language processing</h4>) : (<h4 className="info-h4-selected" >natural language processing</h4>)}
+                            {(<h4 className="info-h3" >dimensionality reduction</h4>) : (<h4 className="info-h4-selected" >dimensionality reduction</h4>)}
+                        </div> */}
+
                         <div className={`database-dropdown ${!showMachineLearning ? true : 'database-dropdown-hide'}`}>
-                            {!data2View ? (<h4 className="info-h3">regression</h4>) : (<h4 className="info-h4-selected" >regression</h4>)}
-                            {!data3View ? (<h4 className="info-h3" >classification</h4>) : (<h4 className="info-h4-selected" >classification</h4>)}
-                            {!data1View ? (<h4 className="info-h3" >clustering</h4>) : (<h4 className="info-h4-selected" >clustering</h4>)}
-                            {!dataView ? (<h4 className="info-h3" >association rule learning</h4>) : (<h4 className="info-h4-selected" >association rule learning</h4>)}
-                            {!dataView ? (<h4 className="info-h3" >reinforcement learning</h4>) : (<h4 className="info-h4-selected" >reinforcement learning</h4>)}
-                            {!dataView ? (<h4 className="info-h3" >natural language processing</h4>) : (<h4 className="info-h4-selected" >natural language processing</h4>)}
-                            {!dataView ? (<h4 className="info-h3" >dimensionality reduction</h4>) : (<h4 className="info-h4-selected" >dimensionality reduction</h4>)}
-                            {!dataView ? (<h4 className="info-h3" >neural networks</h4>) : (<h4 className="info-h4-selected" >deep learning</h4>)}
+                        <h4>neural networks</h4>
                         </div>
                     </div>
 
-                    <div><h3 className="info-h4" onClick={this.handleShowMachineLearning} >message board</h3></div>
+                    <div><h3 onClick={this.handleShowMachineLearning} >message board</h3></div>
 
                 </div>
 
                     <p className="p-logout-text" onClick={() => this.props.logoutUser()}>logout</p>
                     
-                    {showPassengers ? (
+                    {currentView === 'passengersView' ? (
                         <div>
                             <div className="search-bar" ><p className="p-search-line" >add info?</p><p className="p-search-line" onClick={this.refreshPassengers}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                             <div className="stats-container">
@@ -370,7 +376,7 @@ class Info extends Component {
                         </div>
                     ) : null}
 
-                    {data2View ? (
+                    {cancerView ? (
                         <div>
                             <div className="search-bar" ><p className="p-search-line" onClick={this.addCancerData}>add info?</p><p className="p-search-line" onClick={this.refreshCancer}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                             <div className={`cancer-stats-input ${cancerDataInput ? false : 'cancer-stats-input-hide'}`}>
@@ -419,30 +425,15 @@ class Info extends Component {
                     </div>) : (<div></div>)
                     }
 
-                    {data1View ? (
+                    {/* {data1View ? (
                         <div>
                             <h2 className="info-h2">predictions</h2>
                             <div className="info-list"><h4>id</h4><h4>results</h4></div>
                             {mappedData}
-                            {/* <p className="p-text" onClick={this.addCancerData}>add info?</p> */}
-                            {/* {cancerDataInput ?(<div className="cancer-stats-input">
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                                <input placeholder="text"/>
-                            </div>)
-                            : 
-                            (<div></div>)} */}
                         </div>
-                    ) : (<div></div>)}
+                    ) : (<div></div>)} */}
 
-                    {dataView ? (
+                    {/* {dataView ? (
                         <div>
                             <h2 className="info-h2">names</h2>
                             <div className="info-list"></div>
@@ -450,7 +441,7 @@ class Info extends Component {
                         </div>
 
                        
-                    ) : (<div></div>)}
+                    ) : (<div></div>)} */}
 
                      {/* <div>
                      <h1>should be here</h1>
