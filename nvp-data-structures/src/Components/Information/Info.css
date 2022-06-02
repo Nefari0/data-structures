@@ -110,11 +110,11 @@
     margin-left: 4px;
 }
 
-.p-text-generic{
+/* .p-text-generic{
     color: #297F87;
     float: right;
     margin: auto;
-}
+} */
 
 .p-logout-text{
     margin-left: 75%;
@@ -140,7 +140,7 @@
     /* height: 300px; */
     position: absolute;
     height: 340px;
-    width: 385px;
+    width: 180px;
     margin: auto;
     padding: 10px;
     border-radius: 2%;
