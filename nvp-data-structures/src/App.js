@@ -4,6 +4,7 @@ import Auth from './Components/Auth/Auth'
 import Header from './Components/Header/Header';
 import Info from './Components/Information/Info'
 // import Py from './Components/pytest/Py';
+// import './Components/pytest/Py.html'
 
 function App() {
   return (
