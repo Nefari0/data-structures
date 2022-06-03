@@ -10,8 +10,9 @@ import CancerDisplay from './CancerStats/CancerDisplay'
 // import AddCancerStat from './AddCancerStat'
 import Employee from './Employee'
 import Loading from '../Loading/Loading'
-import Titanic from './Titanic/Titanic'
-import Passenger from './Passenger'
+// import Titanic from './Titanic/Titanic'
+import TitanicDisplay from './Titanic/TitanicDisplay'
+// import Passenger from './Titanic/Passenger'
 import { connect } from 'react-redux'
 import { logoutUser } from './../../redux/userReducer'
 // import Py from '../pytest/Py'
@@ -45,17 +46,6 @@ class Info extends Component {
         this.handleForm = this.handleForm.bind(this)
         this.addEmployeeData = this.addEmployeeData.bind(this)
         this.refreshEmployees = this.refreshEmployees.bind(this)
-        this.refreshPassengers = this.refreshPassengers.bind(this)
-    }
-
-    componentDidMount(){
-        axios.get('api/employees/all').then(res => {
-            this.setState({nvpEmployees : res.data})
-        })
-
-        axios.get('api/passengers/all').then(res => {
-            this.setState({passengers : res.data})
-        })
     }
 
     // ---- State Management ---- //
@@ -65,15 +55,22 @@ class Info extends Component {
         })
     }
 
-    // ---- Titanic data functions ---- //
-    refreshPassengers() {
-        // this.startLoading()
-        axios.get('api/passengers/all').then(res => {
-            this.setState({passengers:res.data})
-            // this.startLoading()
-        })
+    // --- selecting views --- //
+    selectView(prop,val) {
+        this.handleForm(prop,val)
+        this.setState({currentMenu:''})
     }
-    // -------------------------------  //
+
+    // --- selecting menus --- //
+    openMenu(prop,val) {
+        if(val === this.state[prop]) { // closes menu if already open
+            return this.setState({currentMenu:''})
+        } else {
+            return this.handleForm(prop,val)
+        }
+
+
+    }
 
     // ---- Employee data functions ---- //
     handleEmployeeSearch = (filter) => {
@@ -83,11 +80,9 @@ class Info extends Component {
         this.setState({employeeDataInput:!this.state.employeeDataInput})
     }
     refreshEmployees = async () => {
-        // this.startLoading()
         this.resetEmployeeStats().then(
             axios.get('api/employees/all').then(res => {
                 this.setState({nvpEmployees:res.data})
-                // this.startLoading()
             })
         )}
     resetEmployeeStats = async () => {
@@ -96,6 +91,7 @@ class Info extends Component {
             employeeSearch:""
         })
     }
+    // ---------------------------------- //
 
     render(){
         
@@ -106,27 +102,25 @@ class Info extends Component {
             return <Employee key={element.index} id={element.index} name={element.name} age={element.age} start_month={element.start_month} start_year={element.start_year} end_month={element.end_month} end_year={element.end_year} employment_duration={element.employment_duration} distance={element.distance} married={element.married} pay={element.pay} attendance={element.attendance} />
         })
 
-        const mappedPassengers = passengers.map(element => {
-            return <Passenger data={element} key={element.index} age={element.age} name={element.name} pclass={element.pclass} sex={element.sex} siblings_spouses_aboard={element.siblings_spouses_aboard} parents_children_aboard={element.parents_children_aboard} survived={element.survived} />
-        })
+        // const mappedPassengers = passengers.map(element => {
+        //     return <Passenger data={element} key={element.index} age={element.age} name={element.name} pclass={element.pclass} sex={element.sex} siblings_spouses_aboard={element.siblings_spouses_aboard} parents_children_aboard={element.parents_children_aboard} survived={element.survived} />
+        // })
         
         return(
             <div className="info-container">
                 <section className="right-column">
 
                 <div className="data-header">
-                    <div><h3 className="info-h4" onClick={() => this.handleForm('currentMenu','db')} >Database</h3>
+                    <div><h3 className="info-h4" onClick={() => this.openMenu('currentMenu','db')} >Database</h3>
                         <div className={`database-dropdown ${currentMenu === 'db' ? true : 'database-dropdown-hide'}`}>
 
-                            <h4 className={` ${currentView === 'cancerView' ? 'info-h3-selected' : 'info-h3'}`} onClick={() => this.handleForm('currentView','cancerView')}>cancer stats</h4>
-
-                            <h4 className={`${currentView === 'passengersView' ? 'info-h3-selected' : 'info-h3' }`} onClick={() => this.handleForm('currentView','passengersView')}>passengers</h4>
-
-                            <h4 className={`${currentView === 'employeeView' ? 'infor-h3-selected' : 'infor-h3'}`} onClick={() => this.handleForm('currentView','employeeView')}>employees</h4>
+                            <h4 className={` ${currentView === 'cancerView' ? 'info-h3-selected' : 'info-h3'}`} onClick={() => this.selectView('currentView','cancerView')}>cancer stats</h4>
+                            <h4 className={`${currentView === 'passengersView' ? 'info-h3-selected' : 'info-h3' }`} onClick={() => this.selectView('currentView','passengersView')}>passengers</h4>
+                            <h4 className={`${currentView === 'employeeView' ? 'infor-h3-selected' : 'infor-h3'}`} onClick={() => this.selectView('currentView','employeeView')}>employees</h4>
 
                         </div>
                     </div>
-                    <div><h3 className="info-h3"  onClick={() => this.handleForm('currentMenu','ml')} >machine learning</h3>
+                    <div><h3 className="info-h3"  onClick={() => this.openMenu('currentMenu','ml')} >machine learning</h3>
                         {/* <div className={`database-dropdown ${!showMachineLearning ? true : 'database-dropdown-hide'}`}>
                             { (<h4 className="info-h3">regression</h4>) : (<h4 className="info-h4-selected" >regression</h4>)}
                             {(<h4 className="info-h3" >classification</h4>) : (<h4 className="info-h4-selected" >classification</h4>)}
@@ -143,25 +137,18 @@ class Info extends Component {
                         </div>
                     </div>
 
-                    <div><h3 onClick={() => this.handleForm('currentMenu','docs')} >documents</h3></div>
+                    <div><h3 onClick={() => this.openMenu('currentMenu','docs')} >documents</h3></div>
 
                 </div>
 
                     <p className="p-logout-text" onClick={() => this.props.logoutUser()}>logout</p>
-                    
-                    {currentView === 'passengersView' ? (
-                        <div>
-                            <div className="search-bar" ><p className="p-search-line" >add info?</p><p className="p-search-line" onClick={this.refreshPassengers}>refresh</p><input onChange={e => this.handleCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
-                            <div className="stats-container">
-                                {isLoading ? <Loading/> : null}
-                                <div className="data-spec"><a style={{marginLeft:'30px',paddingRight:'40px'}}>name</a><a style={{marginLeft:'50px'}}>class</a><a>gender</a><a>siblings_spouses_aboard</a><a>parents_children_aboard</a><a>results</a></div>
-                                <span className="data-spec-list">{mappedPassengers}</span>
-                            </div>
-                        </div>
-                    ) : null}
 
-                    {currentView === 'cancerView' ? <CancerDisplay /> : null}
+                    {currentView === 'cancerView' ? <CancerDisplay handleForm={this.handleForm} /> : null}
 
+                    {currentView === 'passengersView' ? <TitanicDisplay handleForm={this.handleForm} /> : null}
+                    {/* <TitanicDisplay /> */}
+
+                    {/* MOVING THIS CODE TO EXTERNAL */}
                     {/* {employeeView ? 
                     <div>
                         <div className="search-bar" ><p className="p-search-line"  onClick={this.addEmployeeData}>add info?</p><p className="p-search-line" onClick={this.refreshEmployees}>refresh</p><input onChange={e => this.handleEmployeeSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
