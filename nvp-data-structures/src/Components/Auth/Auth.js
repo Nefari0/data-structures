@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 // import a
 import './Auth.css'
 import { loginUser,logoutUser } from '../../redux/userReducer'
-import { updateCharacters } from '../../redux/breakingBadReducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Info from '../Information/Info'
@@ -128,8 +127,8 @@ class Auth extends Component {
                     {/* <button className='dark-button' onClick={this.register}> Register </button> */}
                 </div>
                 </div>
-                // : (<Route path="/info" component={Info}/>)}
-                : (<Info logout={this.thisLogout}/>)}
+                : (<Route to="/info/" component={Info}/>)}
+                {/* : (<Info logout={this.thisLogout}/>)} */}
             </div>
         )
     }
@@ -140,5 +139,5 @@ function mapStateToProps(reduxState){
 }
 
 // export default Auth
-export default connect(mapStateToProps, {loginUser,logoutUser,updateCharacters})(Auth)
 // export default withRouter(connect(null, {loginUser})(Auth))
+export default connect(mapStateToProps, {loginUser,logoutUser})(Auth)
