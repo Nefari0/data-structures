@@ -117,9 +117,10 @@ class Auth extends Component {
                 {this.state.errorMsg && <h3 className='auth-error-msg'>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
                 <div className='auth-input-box'>
                     <p >Email:</p>
-                    <input value={this.state.email} placeholder={email} onChange={e => this.handleChange('email', e.target.value)} />
+                    <input placeholder={email} onChange={e => this.handleChange('email', e.target.value)} />
                 </div>
                 <div className='auth-input-box'>
+                    <p >Password:</p>
                     <input value={this.state.password} type='password' onChange={e => this.handleChange('password', e.target.value)} />
                 </div>
                 <div className='auth-button-container'>
