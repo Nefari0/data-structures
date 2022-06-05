@@ -27,8 +27,6 @@
   /* --- cd labs --- */
   /* background-image: linear-gradient(120deg,#ffffff 20%,rgba(.386, 0, .223, 1)),url(abstract_refined.jfif); */
 
-
-
   background-repeat: no-repeat;
   /* background-size: 100% 100%; */
   background-position: right top;
@@ -79,20 +77,46 @@ h3:hover {
 /* .info-h4
 .info-h3{
     color: #555;
-}
+} */
 
-.info-h3:hover,
+/* .info-h3:hover,
 .info-h4:hover {
     background-color: #FFF7AE;
     transition: all 500ms;
-}
+} */
 
 .info-h3-selected{
     color: orange;
     border-bottom: 1px solid orange;
 }
 
-.info-h2{
+/* .info-h2{
     color: #297F87;
     margin-left: 35%;
 } */
+
+.p-text-search,
+.p-text{
+    margin: auto;
+    margin-left: 0;
+    color: #297F87;
+}
+
+/* .p-search-line {
+  color: orange;
+  margin-left: 20px;
+  margin-right: 20px;
+} */
+
+.p-text-search{
+    margin-left: 4px;
+}
+
+/* .p-logout-text{
+  margin-left: 75%;
+  color: orange;
+} */
+
+a {
+  color: orange;
+}
