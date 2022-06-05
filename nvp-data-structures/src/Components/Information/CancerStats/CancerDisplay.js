@@ -1,29 +1,14 @@
-import CancerStat from "../CancerStat"
+import CancerStat from "./CancerStat"
 import Loading from "../../Loading/Loading"
 import { useState,useEffect } from "react"
 import axios from "axios"
-import { handle } from "express/lib/application"
+// import { handle } from "express/lib/application"
 
 const CancerDisplay = (props) => {
 
-    // axios.get('api/cancer/all').then(res => {
-        // this.setState({cancerStats : res.data})
-    // })
+    const [state,setState] = useState({})
 
-    const [state,setState] = useState({
-        id:0,
-        clump_thickness:0,
-        uniformity_of_cell_size:0,
-        uniformity_of_cell_shape:0,
-        marginal_adhesion:0,
-        single_epithelial_cell_size:0,
-        bare_nuclei:0,
-        bland_chromatin:0,
-        normal_nuceoli:0,
-        mitoses:0,
-    })
-
-    const returnZeros = () => {
+    const returnZeros = () => { // sets / resets form values
         setState({
             id:0,
             clump_thickness:0,
@@ -45,6 +30,7 @@ const CancerDisplay = (props) => {
 
     useEffect(() => {
         grabStats()
+        returnZeros()
     },[])
 
     const handleInputChange = (prop,event) => {
@@ -86,9 +72,10 @@ const CancerDisplay = (props) => {
     return(
         <div>
             <section className="search-bar" >
-                <p className="p-search-line" onClick={() => setFormOpen(!formOpen)}>add info?</p>
-                <p className="p-search-line" onClick={() => grabStats()}>refresh</p>
+                <a onClick={() => setFormOpen(!formOpen)}>add info?</a>
+                <a onClick={() => grabStats()}>refresh</a>
                 <input onChange={e => setCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" />
+                <a onClick={() => props.handleForm('currentView','')}>close</a>
             </section>
             <form className={`stats-input ${formOpen ? false : 'stats-input-hide'}`}>
                 <input placeholder="id" onChange={e => handleInputChange('id',e)}/>
