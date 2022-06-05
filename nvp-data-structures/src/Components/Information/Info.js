@@ -141,7 +141,7 @@ class Info extends Component {
 
                 </div>
 
-                    <p className="p-logout-text" onClick={() => this.props.logoutUser()}>logout</p>
+                    <a style={{marginLeft:'75%'}} onClick={() => this.props.logoutUser()}>logout</a>
 
                     {currentView === 'cancerView' ? <CancerDisplay handleForm={this.handleForm} /> : null}
 

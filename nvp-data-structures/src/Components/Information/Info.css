@@ -26,30 +26,26 @@
 	align-content: stretch;
 } */
 
-.header-menu{
+/* .header-menu{ */
     /* position: absolute; */
-    height: 800px;
-    width: 800px;
+    /* height: 800px; */
+    /* width: 800px; */
     /* margin: 50px; */
     /* padding-right: 10px; */
     /* padding-left: 10px; */
     /* background-color: #fff; */
-    background-color: rgb(30, 210, 60);
+    /* background-color: rgb(30, 210, 60); */
     /* border-right: 1px solid #297F87; */
-    border-bottom: 1px solid #4bdfec;
+    /* border-bottom: 1px solid #4bdfec; */
     /* border-left: 1px solid #297F87; */
     /* overflow: auto; */
-}
+/* } */
 
 .data-header{
     width: 1200px;
-    /* width: 100vw; */
-    /* padding-left: 60px; */
-    /* background-color: #f7f4de; */
     border-bottom: 1px solid #4bdfec;
     display: flex;
 	flex-direction: row;
-	/* flex-wrap: nowrap; */
 	justify-content: space-around;
 	align-items: stretch;
 	align-content: stretch;
@@ -58,12 +54,7 @@
 
 .right-column{
     height: 800px;
-    /* min-width: 500px; */
     width: 1200px;
-    /* width: 100%; */
-    /* padding-top: 50px; */
-    /* background-color: #fff; */
-    /* background-color: #8b1b1b; */
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -95,17 +86,16 @@
     margin-left: 35%;
 } */
 
-.p-text-search,
+/* .p-text-search,
 .p-text{
     margin: auto;
     margin-left: 0;
-    /* color: orange; */
     color: #297F87;
 }
 
 .p-text-search{
     margin-left: 4px;
-}
+} */
 
 /* .p-text-generic{
     color: #297F87;
@@ -113,17 +103,17 @@
     margin: auto;
 } */
 
-.p-logout-text{
+/* .p-logout-text{
     margin-left: 75%;
     color: orange;
-}
+} */
 
 .p-add-stat-text{
     color: orange;
     margin-left: 20px;
 }
 
-.info-list{
+/* .info-list{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -131,12 +121,12 @@
 	align-items: stretch;
 	align-content: stretch;
     overflow: hidden;
-}
+} */
 
-.cancer-stats-input{
+.stats-input{
     /* height: 300px; */
     position: absolute;
-    height: 340px;
+    min-height: 240px;
     width: 180px;
     margin: auto;
     padding: 10px;
@@ -147,55 +137,50 @@
     opacity: 100;
     transition: all 150ms;
     z-index: 5;
-    /* background-color: #555; */
 }
 
-.cancer-stats-input-hide{
+.stats-input-hide{
     height: 0;
     width: 0;
     opacity: 0;
     margin: 0px;
 }
 
-div.data-spec {
+header.data-spec {
     position: sticky;
     top:0;
-    /* background-color: #333; */
     background-color: #297F87;
     overflow: auto;
     white-space: nowrap;
-    /* margin-left: 10px; */
     padding-left: 15px;
     padding-right: 15px;
     z-index: 4;
     display: flex;
 	flex-direction: row;
-	/* flex-wrap: wrap; */
-	/* justify-content: space-around; */
     justify-content: space-between;
 	align-items: stretch;
 	align-content: center;
   }
 
-  div.data-spec a {
+header.data-spec a,
+header.data-spec strong {
     display: inline-block;
     color: white;
     text-align: center;
     padding: 14px;
+    font-weight: 400;
     text-decoration: none;
   }
 
-  div.data-spec a:hover {
+header.data-spec a:hover,
+header.data-spec strong:hover {
     background-color: #8b1b1b;
     transition: all 500ms;
   }
 
-  .stats-container {
+.stats-container {
     min-height: 80vh;
-    /* width: 90vw; */
-    /* margin: auto; */
-    /* position: fixed; */
-    /* overflow: auto; */
+    max-width: 80vw;
     display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -284,20 +269,30 @@ div.data-spec {
     margin: 0px;
 }
 
-.input-element{
+/* .input-element{
     height: 30px;
-    /* margin-left: 10px; */
-}
+    margin-left: 10px;
+} */
 
 .search-bar{
+    /* background-color: yellow; */
+    width: 80vw;
+    height: 30px;
     margin-left: 20px;
-    /* margin-bottom: 5px; */
-    display: flex;
+    margin-top: 10px;
+    /* display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-items: center;
-	align-content: center;
+	align-content: center; */
+
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: baseline;
+	/* align-content: stretch; */
 }
 
 .search-input {
@@ -305,12 +300,11 @@ div.data-spec {
     margin-left: 40px;
 }
 
-.p-search-line {
+/* .p-search-line {
     color: orange;
-    /* margin: none; */
     margin-left: 20px;
     margin-right: 20px;
-}
+} */
 
 /* ------- screen size query ------- */
 @media (max-width: 1600px) {
