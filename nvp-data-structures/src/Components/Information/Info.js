@@ -1,22 +1,15 @@
 import React, { Component } from 'react'
-// import axios from 'axios';
 import axios from 'axios'
 import './Info.css'
-import data from './data'
-// import InfoItem from './InfoItem'
-// import BookData from './BookData'
-// import CancerStat from './CancerStat'
 import CancerDisplay from './CancerStats/CancerDisplay'
-// import AddCancerStat from './AddCancerStat'
 import Employee from './Employee'
-import Loading from '../Loading/Loading'
-// import Titanic from './Titanic/Titanic'
 import TitanicDisplay from './Titanic/TitanicDisplay'
-// import Passenger from './Titanic/Passenger'
+import Documents from './Documents/Documents'
 import { connect } from 'react-redux'
-import { loginUser, logoutUser } from './../../redux/userReducer'
-// import Py from '../pytest/Py'
+import { logoutUser, browserLogin } from './../../redux/userReducer'
 import { withRouter } from 'react-router';
+import { Switch, Route } from 'react-router-dom'
+import Auth from '../Auth/Auth'
 
 
 class Info extends Component {
@@ -24,6 +17,7 @@ class Info extends Component {
         super();
 
         this.state = {
+            dUserNotes:[],
             isLoading:false,
 
             employeeSearch:"",
@@ -48,6 +42,38 @@ class Info extends Component {
         this.handleForm = this.handleForm.bind(this)
         this.addEmployeeData = this.addEmployeeData.bind(this)
         this.refreshEmployees = this.refreshEmployees.bind(this)
+    }
+
+    theWindow(prop,val){
+        localStorage.setItem(prop,val)
+    }
+
+    componentDidMount() {
+        const { auth } = this.props.user.user 
+        const browser_id = localStorage['browser_id']
+        const savedEmail = localStorage['email']
+        if(auth != true){this.props.browserLogin(savedEmail,browser_id)}
+
+        const uniqueId = () => {
+            const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            return s4() + s4() + '-' + s4();
+          };
+        if(browser_id === undefined){this.theWindow('browser_id',uniqueId())}
+    }
+
+    componentDidUpdate() {
+        const { isLoggedIn } = this.props.user
+        if(isLoggedIn === false){this.props.history.push('/')}
+    }
+
+    handleLogout() {
+        const uniqueId = () => {
+            const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            return s4() + s4() + '-' + s4();
+          };
+        this.theWindow('browser_id',uniqueId())
+        this.theWindow('email',undefined)
+        this.props.logoutUser()
     }
 
     // ---- State Management ---- //
@@ -98,20 +124,13 @@ class Info extends Component {
     render(){
         
         const { currentView,employeeDataInput,isLoading,currentMenu,showMachineLearning,data3View: employeeView,cancerSearch,dataItems,dataItems1,dataView,data1View,data2View: cancerView,cancerDataInput,cancerStats,isMobile,evenTable,nvpEmployees,employeeSearch,cols,showPassengers: passengersView,passengers } = this.state
-
         const filterEmployee = nvpEmployees.filter(element => element.name.toString().includes(employeeSearch))
         const mappedEmployees = filterEmployee.map(element => {
             return <Employee key={element.index} id={element.index} name={element.name} age={element.age} start_month={element.start_month} start_year={element.start_year} end_month={element.end_month} end_year={element.end_year} employment_duration={element.employment_duration} distance={element.distance} married={element.married} pay={element.pay} attendance={element.attendance} />
         })
-
-        // const mappedPassengers = passengers.map(element => {
-        //     return <Passenger data={element} key={element.index} age={element.age} name={element.name} pclass={element.pclass} sex={element.sex} siblings_spouses_aboard={element.siblings_spouses_aboard} parents_children_aboard={element.parents_children_aboard} survived={element.survived} />
-        // })
         
         return(
             <div className="info-container">
-                <section className="right-column">
-
                 <div className="data-header">
                     <div><h3 className="info-h4" onClick={() => this.openMenu('currentMenu','db')} >Database</h3>
                         <div className={`database-dropdown ${currentMenu === 'db' ? true : 'database-dropdown-hide'}`}>
@@ -139,15 +158,17 @@ class Info extends Component {
                         </div>
                     </div>
 
-                    <div><h3 onClick={() => this.openMenu('currentMenu','docs')} >documents</h3></div>
+                    <div><h3 onClick={() => this.selectView('currentView','docsView')} >documents</h3></div>
 
                 </div>
 
-                    <a style={{marginLeft:'75%'}} onClick={() => this.props.logoutUser()}>logout</a>
+                    <a style={{marginLeft:'75%'}} onClick={() => this.handleLogout()}>logout</a>
 
                     {currentView === 'cancerView' ? <CancerDisplay handleForm={this.handleForm} /> : null}
 
                     {currentView === 'passengersView' ? <TitanicDisplay handleForm={this.handleForm} /> : null}
+
+                    {currentView === 'docsView' ? <Documents handleForm={this.handleForm} /> : null}
                     {/* <TitanicDisplay /> */}
 
                     {/* MOVING THIS CODE TO EXTERNAL */}
@@ -173,8 +194,6 @@ class Info extends Component {
                         </div>
 
                     </div> : null} */}
-
-                </section>
             </div>
         )
     }
@@ -184,4 +203,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, {logoutUser})(Info)
+export default connect(mapStateToProps, {logoutUser,browserLogin})(Info)
