@@ -9,6 +9,6 @@ import Auth from './Components/Auth/Auth'
 export default (
     <Switch>
         <Route exact path="/" component={Auth} />
-        <Route path="/info" component={Info} />
+        <Route path="/info/:id" component={Info} />
     </Switch>
 )
