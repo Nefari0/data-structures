@@ -14,8 +14,10 @@ import Loading from '../Loading/Loading'
 import TitanicDisplay from './Titanic/TitanicDisplay'
 // import Passenger from './Titanic/Passenger'
 import { connect } from 'react-redux'
-import { logoutUser } from './../../redux/userReducer'
+import { loginUser, logoutUser } from './../../redux/userReducer'
 // import Py from '../pytest/Py'
+import { withRouter } from 'react-router';
+
 
 class Info extends Component {
     constructor(props){
