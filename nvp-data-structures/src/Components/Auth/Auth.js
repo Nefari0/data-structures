@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Auth.css'
-import { loginUser,logoutUser } from '../../redux/userReducer'
+import { loginUser,browserLogin } from '../../redux/userReducer'
 import { connect } from 'react-redux'
 
 class Auth extends Component {
@@ -9,35 +9,32 @@ class Auth extends Component {
         super(props);
 
         this.state = {
-            user:{},
-            email:'email',
-            password:'password',
-            setPermission:true,
-            isAuthenticated:false
+            email:'',
+            password:'',
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.resetState = this.resetState.bind(this)
-        this.thisLogout = this.thisLogout.bind(this)
+    }
+
+    theWindow(prop,val){
+        localStorage.setItem(prop,val)
     }
 
     componentDidMount(){
-        const { user } = this.props
+        const browser_id = localStorage['browser_id']
+        const uniqueId = () => {
+            const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            return s4() + s4() + '-' + s4();
+          };
+
+        if(browser_id === undefined){this.theWindow('browser_id',uniqueId())}
     }
 
     componentDidUpdate(){
-        const { auth,id } = this.props.user.user
-        const { isAuthenticated } = this.state
-        if(auth === true && isAuthenticated === false) {
-            this.setState({isAuthenticated:true})
-            this.props.history.push(`/info/${id}`)
-        }
-    }
+        const { auth,email } = this.props.user.user
 
-    resetState(){
-        this.setState({
-            email:'email',
-            password:'password'
-        })
+        if(auth === true) {
+            this.theWindow('email',email)
+            this.props.history.push(`/info`)
+        }
     }
 
     handleChange(prop,val){
@@ -45,40 +42,26 @@ class Auth extends Component {
             [prop]: val
         })
     }
-    
-    // handleLogin = async () => {
-    //     const { email,password } = this.state
-
-    thisLogout() {
-        this.setState({
-            isAuthenticated:false,
-            user:{}
-        })
-    }
-
 
     render() {
-        const { auth } = this.props.user.user
         const { email,password } = this.state
+        const browser_id = localStorage['browser_id'] // -- Added to user table
 
         return(
-            <div>
                <div className="auth-container">
-                    <h1 className='auth-title'>Data Structures</h1>
-                    {this.state.errorMsg && <h3 className='auth-error-msg'>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
-                    <div className='auth-input-box'>
+                    <h1>Data Structures</h1>
+                    <div>
                         <p >Email:</p>
-                        <input placeholder={email} onChange={e => this.handleChange('email', e.target.value)} />
+                        <input placeholder="email" onChange={e => this.handleChange('email', e.target.value)} />
                     </div>
-                    <div className='auth-input-box'>
+                    <div>
                         <p >Password:</p>
-                        <input value={this.state.password} type='password' onChange={e => this.handleChange('password', e.target.value)} />
+                        <input type='password' onChange={e => this.handleChange('password', e.target.value)} />
                     </div>
-                    <div className='auth-button-container'>
-                        <button className='dark-button' onClick={() => this.props.loginUser(email,password)}> Login </button>
+                    <div >
+                        <button onClick={() => this.props.loginUser(email,password,browser_id)}> Login </button>
                     </div>
                 </div>
-            </div>
         )
     }
 }
@@ -87,4 +70,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {loginUser,logoutUser})(Auth)
+export default connect(mapStateToProps, {loginUser,browserLogin})(Auth)
