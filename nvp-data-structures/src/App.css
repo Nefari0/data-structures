@@ -1,45 +1,11 @@
 
 
-
-/* .App {
-  height: 500px;
-  width: 500px;
-  background-color: blueviolet;
-  display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	align-content: stretch;
-} */
-
 .App {
   width: 100vw;
   min-height: 100vh;
-  /* background-color: brown; */
-  /* background-color: rgb(253, 253, 253); */
-
-  /* background-color: rgba(175, 175, 175, 0.178); */
-
-  /* --- nvp --- */
   background-image: linear-gradient(120deg,#ffffff 20%,rgba(150, 150, 150, .9)),url(abstract_refined.jfif);
-
-  /* --- cd labs --- */
-  /* background-image: linear-gradient(120deg,#ffffff 20%,rgba(.386, 0, .223, 1)),url(abstract_refined.jfif); */
-
   background-repeat: no-repeat;
-  /* background-size: 100% 100%; */
   background-position: right top;
-
-  /* background-image: ; */
-
-  /* background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70); */
-  /* background-image: linear-gradient(99deg, #ff5959, #ff9770 40%, #6d8bcc 73%, #33497a); */
-  /* background-image: linear-gradient(97deg,#99e7ee 10%, #4ee4f1 90%,rgba(167, 167, 167, 0.7)); */
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-
   display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -68,32 +34,10 @@ h3:hover {
   border-bottom: 1px solid orange;
 }
 
-/* .header {
-  height: 100px;
-  width: 100vw;
-  background-color: brown;
-} */
-
-/* .info-h4
-.info-h3{
-    color: #555;
-} */
-
-/* .info-h3:hover,
-.info-h4:hover {
-    background-color: #FFF7AE;
-    transition: all 500ms;
-} */
-
 .info-h3-selected{
     color: orange;
     border-bottom: 1px solid orange;
 }
-
-/* .info-h2{
-    color: #297F87;
-    margin-left: 35%;
-} */
 
 .p-text-search,
 .p-text{
@@ -102,21 +46,16 @@ h3:hover {
     color: #297F87;
 }
 
-/* .p-search-line {
-  color: orange;
-  margin-left: 20px;
-  margin-right: 20px;
-} */
-
 .p-text-search{
     margin-left: 4px;
 }
 
-/* .p-logout-text{
-  margin-left: 75%;
-  color: orange;
-} */
-
 a {
   color: orange;
+}
+
+@media (max-width:320px) {
+  h1 {
+    font-size: 30px;
+  }
 }
