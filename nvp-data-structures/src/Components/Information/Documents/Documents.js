@@ -26,8 +26,8 @@ const Documents = (props) => {
         await setIsLoading(true)
         await axios.get('/api/memos/get').then(res => {
             setDocs(res.data)
-        })
-        await setIsLoading(false)
+            setIsLoading(false)
+        }).catch(err => console.log('error',err))
     }
 
     const mappedDocs = docs.map(el => {
@@ -44,8 +44,8 @@ const Documents = (props) => {
             </section>
 
             <section className="stats-container">
-                {isLoading ? <Loading/> : null}
-                {mappedDocs}
+                {isLoading ? <Loading/> : mappedDocs}
+                {/* {mappedDocs} */}
             </section>
         </div>
     )

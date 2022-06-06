@@ -34,11 +34,9 @@
     max-width: 90vw;
     margin: auto;
     overflow: scroll;
-    /* background-color: yellow; */
 }
 
 .stats-input{
-    /* height: 300px; */
     position: absolute;
     min-height: 240px;
     width: 180px;
@@ -184,25 +182,3 @@ header.data-spec strong:hover {
         width: 100vw;
     }
 }
-
-@media (max-width:1090px) {
-
-    .right-column {
-        width: 800px;
-    }
-    .data-spec {
-        max-width: 800px;
-    }
-}
-
-@media (max-width: 475px) {
-    .info-container {
-        width: 400px;
-    }
-}
-
-@media (max-width:340px) {
-    .info-container {
-        width: 200px;
-    }
-} 

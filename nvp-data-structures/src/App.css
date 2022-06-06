@@ -54,6 +54,12 @@ a {
   color: orange;
 }
 
+@media (max-width:460px) {
+  h3 {
+    font-size: 10px;
+  }
+}
+
 @media (max-width:320px) {
   h1 {
     font-size: 30px;
