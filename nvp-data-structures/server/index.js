@@ -7,7 +7,9 @@ const cancerStatController = require('./controllers/cancerStatController');
 const dataTestController = require('./controllers/dataTestController');
 const employeeController = require('./controllers/employeeController');
 const titanicController = require('./controllers/titanicController');
-const path = require('path')
+const docsController = require('./controllers/docsController')
+const path = require('path');
+// const docsController = require('./controllers/docsController');
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -29,6 +31,9 @@ app.post('/api/auth/register', authController.register)
 app.post('/api/auth/login', authController.login)
 app.get('/api/auth/logout', authController.logout)
 app.post('/api/auth/browser/login', authController.browserLogin)
+
+// --- memos / docs endpoinds --- //
+app.get('/api/memos/get',docsController.getDocs)
 
 // test data endpoints
 app.get('/api/testdata/all', dataTestController.getData)
