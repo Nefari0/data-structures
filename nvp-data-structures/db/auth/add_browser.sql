@@ -1,0 +1,1 @@
+UPDATE data_user SET from_browser = $1 WHERE email = $2
