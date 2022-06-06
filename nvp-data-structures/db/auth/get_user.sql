@@ -1,1 +1,1 @@
-SELECT * FROM nvp_user WHERE email = $1
+SELECT * FROM data_user WHERE email = $1
