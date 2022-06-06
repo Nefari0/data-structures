@@ -1,0 +1,25 @@
+
+.text-container {
+    position: relative;
+    height: 430px;
+    max-width: 800px;
+    background-color: #fff;
+}
+
+.admin-memo-body {
+    width: 95%;
+}
+
+.is-saving {
+    height: 30px;
+    width: 100px;
+    margin: auto;
+    background-color: #6495ed;
+}
+
+
+@media (max-width:800px) {
+    .text-container {
+        width: 100vw;
+    }
+}
