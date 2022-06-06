@@ -9,11 +9,20 @@ const initialState = {
 
 const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
+const BROWSER_LOGIN = 'BROWSER_LOGIN'
 
-export function loginUser(email, password) {
+export function loginUser(email, password, browser_id) {
     return {
         type: LOGIN_USER,
-        payload: axios.post('/api/auth/login', {email,password}).catch(err => console.log('error',err))
+        payload: axios.post('/api/auth/login', {email,password,browser_id}).catch(err => console.log('error',err))
+    }
+}
+
+export function browserLogin(email,browser_id) {
+    console.log('hit function',email,browser_id)
+    return {
+        type:BROWSER_LOGIN,
+        payload: axios.post('/api/auth/browser/login', {email,browser_id}).catch(err => console.log('error',err))
     }
 }
 
@@ -30,8 +39,8 @@ export function logoutUser() {
 
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
+        // ---- MANUAL LOGIN ---- //
         case LOGIN_USER + '_PENDING':
-
             return {
                 ...state,
                 isLoading:true
@@ -50,7 +59,27 @@ export default function userReducer(state = initialState, action) {
                 isError:true
             }
 
-        case LOGOUT_USER + 'PENDING':
+        // ---- AUTO LOGIN ---- //
+        case BROWSER_LOGIN + '_PENDING':
+            return {
+                ...state,
+                isLoading:true,
+            }
+        case BROWSER_LOGIN+ '_FULFILLED':
+            console.log('hit fulfilled')
+            return {
+                ...state,
+                user: action.payload.data, isLoggedIn:true, isLoading:false
+            }
+        case BROWSER_LOGIN + '_REJECTED':
+            return {
+                ...state,
+                isLoading:false,
+                isError:true
+            }
+
+        // ---- LOGOUT ---- //
+        case LOGOUT_USER + '_PENDING':
             return {
                 ...state, isLoading: true,
             }
