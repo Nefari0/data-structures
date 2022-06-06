@@ -61,7 +61,7 @@ const TitanicDisplay = (props) => {
     })
 
     return(
-        <div>
+        <div className="display-matrix">
             <section className="search-bar" >
                 <a onClick={() => setFormOpen(!formOpen)}>add info?</a>
                 <a onClick={() => grabStats()}>refresh</a>
@@ -80,9 +80,9 @@ const TitanicDisplay = (props) => {
             </form>
             <section className="stats-container">
                 {isLoading ? <Loading/> : null}
-                <header className="data-spec"><strong style={{marginLeft:'30px',paddingRight:'40px'}}>name</strong><strong style={{marginLeft:'50px'}}>class</strong><strong>gender</strong><strong>siblings_spouses_aboard</strong><strong>parents_children_aboard</strong><strong>results</strong></header>
+                <header className="data-spec"><strong style={{marginLeft:'30px',paddingRight:'40px'}}>name</strong><strong style={{marginLeft:'50px'}}>class</strong><strong>gender</strong><strong>siblings_spouses_aboard</strong><strong>parents_children_aboard</strong><strong>Fare</strong><strong>results</strong></header>
 
-                <span className="data-spec-list">{mappedPassengers}</span>
+                <div className="data-spec-list">{mappedPassengers}</div>
             </section>
         </div>
     )

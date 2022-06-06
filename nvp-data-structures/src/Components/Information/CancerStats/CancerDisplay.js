@@ -70,7 +70,7 @@ const CancerDisplay = (props) => {
     // ------------------------------------- //
 
     return(
-        <div>
+        <div className="display-matrix">
             <section className="search-bar" >
                 <a onClick={() => setFormOpen(!formOpen)}>add info?</a>
                 <a onClick={() => grabStats()}>refresh</a>
@@ -94,7 +94,7 @@ const CancerDisplay = (props) => {
                 {isLoading ? <Loading/> : null}
                 <header className="data-spec"><strong>id</strong><strong>clump Thickness</strong><strong>unif. cell size</strong><strong>unif. cell shape</strong><strong>marg. adhesion</strong><strong>single epi. cell size</strong><strong>bare nuclei</strong><strong>bland chrom.</strong><strong>norm. nuceoli</strong><strong>mitoses</strong><strong>results</strong></header>
 
-                <span className="data-spec-list">{mappedCancerStatsS}</span>
+                <div className="data-spec-list">{mappedCancerStatsS}</div>
             </section>
         </div>
     )
