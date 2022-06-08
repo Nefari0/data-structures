@@ -29,6 +29,32 @@ h3:hover {
   transition: all 500ms;
 }
 
+form {
+  position: absolute;
+  min-height: 240px;
+  width: 180px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 2%;
+  background-color: rgb(240, 240, 240);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  opacity: 100;
+  transition: all 150ms;
+  z-index: 5;
+}
+.hide {
+  height: 0;
+  width: 0;
+  opacity: 0;
+  margin: 0px;
+}
+
+textarea {
+  width: 100%;
+  background-color: #fff;
+}
+
 .selected {
   color: orange;
   border-bottom: 1px solid orange;
