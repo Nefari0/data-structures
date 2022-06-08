@@ -34,6 +34,7 @@ app.post('/api/auth/browser/login', authController.browserLogin)
 
 // --- memos / docs endpoinds --- //
 app.get('/api/memos/get',docsController.getDocs)
+app.post('/api/memo/update',docsController.editMemo)
 
 // test data endpoints
 app.get('/api/testdata/all', dataTestController.getData)
