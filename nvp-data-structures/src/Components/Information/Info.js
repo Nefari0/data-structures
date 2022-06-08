@@ -168,7 +168,7 @@ class Info extends Component {
 
                     {currentView === 'passengersView' ? <TitanicDisplay handleForm={this.handleForm} /> : null}
 
-                    {currentView === 'docsView' ? <Documents handleForm={this.handleForm} /> : null}
+                    {currentView === 'docsView' ? <Documents handleForm={this.handleForm} theWindow={this.theWindow} /> : null}
                     {/* <TitanicDisplay /> */}
 
                     {/* MOVING THIS CODE TO EXTERNAL */}
