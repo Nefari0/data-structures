@@ -60,7 +60,7 @@ module.exports = {
         const { email,browser_id } = req.body
         const findUser = await req.app.get('db').auth.get_user([email])
         const authenticate = bcrypt.compareSync(browser_id, findUser[0].from_browser);
-        console.log('hit browser login',authenticate)
+        // console.log('hit browser login',authenticate)
         
         if(authenticate != true){
             return res.status(401).send('user not found')
