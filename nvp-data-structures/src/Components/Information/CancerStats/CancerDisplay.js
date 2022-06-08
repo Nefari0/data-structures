@@ -77,7 +77,7 @@ const CancerDisplay = (props) => {
                 <input onChange={e => setCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" />
                 <a onClick={() => props.handleForm('currentView','')}>close</a>
             </section>
-            <form className={`stats-input ${formOpen ? false : 'stats-input-hide'}`}>
+            <form className={`${formOpen ? false : 'hide'}`}>
                 <input placeholder="id" onChange={e => handleInputChange('id',e)}/>
                 <input placeholder="Clump Thickness" onChange={e => handleInputChange('clump_thickness',e)}/>
                 <input placeholder="Uniformity of cell size" onChange={e => handleInputChange('uniformity_of_cell_size',e)}/>
