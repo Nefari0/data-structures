@@ -2,7 +2,6 @@ import CancerStat from "./CancerStat"
 import Loading from "../../Loading/Loading"
 import { useState,useEffect } from "react"
 import axios from "axios"
-// import { handle } from "express/lib/application"
 
 const CancerDisplay = (props) => {
 
@@ -57,13 +56,10 @@ const CancerDisplay = (props) => {
         await setIsLoading(false)
     }
 
-    // const mappedCancerStatsS = cancerStats.map(element => {            
-    //     return <CancerStat key={element.id} data_id={element.id} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
-    // })
 
     // ---- THESE BLOCKS FOR SEARCHING ----- ///
     const filterCancer = cancerStats.filter(element => element.id.toString().includes(cancerSearch))
-    // console.log('here is cancer stats',filterCancer)
+
     const mappedCancerStatsS = filterCancer.map(element => {            
         return <CancerStat key={element.id} data_id={element.id} eclass={element.class} id={element.id} clump_thickness={element.clump_thickness} uniformity_of_cell_size={element.uniformity_of_cell_size} uniformity_of_cell_shape={element.uniformity_of_cell_shape}  marginal_adhesion={element.marginal_adhesion} single_epithelial_cell_size={element.single_epithelial_cell_size} bare_nuclei={element.bare_nuclei} bland_chromatin={element.bland_chromatin} normal_nuceoli={element.normal_nuceoli} mitoses={element.mitoses} />
     })
@@ -71,12 +67,14 @@ const CancerDisplay = (props) => {
 
     return(
         <div className="display-matrix">
+
             <section className="search-bar" >
                 <a onClick={() => setFormOpen(!formOpen)}>add info?</a>
                 <a onClick={() => grabStats()}>refresh</a>
                 <input onChange={e => setCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" />
                 <a onClick={() => props.handleForm('currentView','')}>close</a>
             </section>
+            
             <form className={`${formOpen ? false : 'hide'}`}>
                 <input placeholder="id" onChange={e => handleInputChange('id',e)}/>
                 <input placeholder="Clump Thickness" onChange={e => handleInputChange('clump_thickness',e)}/>
@@ -90,11 +88,24 @@ const CancerDisplay = (props) => {
                 <input placeholder="Mitoses" onChange={e => handleInputChange('mitoses',e)}/>
                 <button onClick={() => addToCancerPending()}>submit</button>
             </form>
+            
             <section className="stats-container">
                 {isLoading ? <Loading/> : null}
-                <header className="data-spec"><strong>id</strong><strong>clump Thickness</strong><strong>unif. cell size</strong><strong>unif. cell shape</strong><strong>marg. adhesion</strong><strong>single epi. cell size</strong><strong>bare nuclei</strong><strong>bland chrom.</strong><strong>norm. nuceoli</strong><strong>mitoses</strong><strong>results</strong></header>
+                <header className="data-spec">
+                    <strong>id</strong>
+                    <strong>clump Thickness</strong>
+                    <strong>unif. cell size</strong>
+                    <strong>unif. cell shape</strong>
+                    <strong>marg. adhesion</strong>
+                    <strong>single epi. cell size</strong>
+                    <strong>bare nuclei</strong>
+                    <strong>bland chrom.</strong>
+                    <strong>norm. nuceoli</strong>
+                    <strong>mitoses</strong>
+                    <strong>results</strong>
+                </header>
 
-                <div className="data-spec-list">{mappedCancerStatsS}</div>
+                <object><div className="data-spec-list" >{mappedCancerStatsS}</div></object>
             </section>
         </div>
     )
