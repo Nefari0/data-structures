@@ -52,11 +52,11 @@ class Auth extends Component {
                     <h1>Data Structures</h1>
                     <div>
                         <p >Email:</p>
-                        <input placeholder="email" onChange={e => this.handleChange('email', e.target.value)} />
+                        <input placeholder="email" onChange={e => this.handleChange('email', e.target.value)} style={{width:'100%'}} />
                     </div>
                     <div>
                         <p >Password:</p>
-                        <input type='password' onChange={e => this.handleChange('password', e.target.value)} />
+                        <input type='password' onChange={e => this.handleChange('password', e.target.value)} style={{width:'100%'}} />
                     </div>
                     <div >
                         <button onClick={() => this.props.loginUser(email,password,browser_id)}> Login </button>
