@@ -3,9 +3,9 @@ import image from '../logo.png'
 
 const Header = (props) => {
     return(
-        <div className="header">
+        <header className="header">
             <img src={image} className="logo" alt="CD"/>
-        </div>
+        </header>
     )
 }
 
