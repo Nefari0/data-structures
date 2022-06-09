@@ -1,29 +1,43 @@
 import './Documents.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
-// import Notice from './../Notice/Notice'
 
 const OneDoc = (props) => {
 
     const { body,title,memo_id } = props
-    var [ text,setText ] = useState(body)
     var [ sending,setSending ] = useState(false)
-    const notDefault = true
-    
-    // const sendUpdate = () => {
-    //     setSending(true)
-    //     axios.post('/api/memo/update', {text,memo_id}).then(res => {
-    //         setSending(false)
-    //     })
-    // }
+    var [ state,setState ] = useState({
+        body:body,
+        title:title,
+        memo_id:memo_id
+    })
 
-    return(<div className="text-container" >
-        <input value={title} style={{width:'95%',marginBottom:'5px'}}></input>
-        <textarea name="text" rows="23" cols="50" wrap="soft" placeholder='text' onChange={(e) => setText(e.target.value)} value={text} className="admin-memo-body" > </textarea>
-        {/* <button onClick={() => sendUpdate()} >submit</button> */}
-        <div className="is-saving" >{sending === true ? <p style={{color:'#fff',fontWeight:'600'}} >sending...</p> : <p style={{color:'#fff',fontWeight:'600'}} >save</p>}</div>
-        {/* <div className='notice-placement' ><Notice notDefault={notDefault} item={'saving text'} /></div> */}
-    </div>)
+    const input = (prop,event) => {
+        event.persist();
+        setState((state) => ({
+            ...state,
+            [prop]: event.target.value,
+        }));
+    };
+    
+    const sendUpdate = () => {
+        const { body,memo_id,title } = state
+        setSending(true)
+        axios.post('/api/memo/update', {body,memo_id,title}).then(res => {
+            setSending(false)
+        })
+    }
+
+    return(
+    <form className="admin-memo-body">
+        <header className='data-spec' >
+            <strong onClick={() => props.selectMemo('null')}>close</strong>
+            <strong onClick={() => setState('body',props.body)}>reset</strong>
+            <strong onClick={() => sendUpdate()} >{sending === true ? 'saving...' : 'save'}</strong>
+        </header>
+        <textarea value={state.title} onChange={(e) => input('title',e)} ></textarea>
+        <textarea value={state.body} onChange={(e) => input('body',e)} rows="10"  > </textarea>
+    </form>)
 }
 
 export default OneDoc
