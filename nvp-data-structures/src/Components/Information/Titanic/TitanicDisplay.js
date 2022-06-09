@@ -6,6 +6,7 @@ import Passenger from "./Passenger"
 
 const TitanicDisplay = (props) => {
 
+    const specItemWidth = '14.25%'
     const [state,setState] = useState({})
 
     const returnZeros = () => { // sets / resets form values
@@ -65,10 +66,10 @@ const TitanicDisplay = (props) => {
             <section className="search-bar" >
                 <a onClick={() => setFormOpen(!formOpen)}>add info?</a>
                 <a onClick={() => grabStats()}>refresh</a>
-                <input onChange={e => setPassengerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" />
-                <p className="p-search-line" onClick={() => props.handleForm('currentView','')}>close</p>
+                <input onChange={e => setPassengerSearch(e.target.value)} type="text" placeholder="Search" />
+                <a className="p-search-line" onClick={() => props.handleForm('currentView','')}>close</a>
             </section>
-            <form className={`${formOpen ? false : 'hide'}`}>
+            <form className={`${formOpen ? false : 'hide'}`} style={{top:'40px',left:'30px'}} >
                 <input placeholder="name" onChange={e => handleInputChange('name',e)}/>
                 <input placeholder="class" onChange={e => handleInputChange('class',e)}/>
                 <input placeholder="gender" onChange={e => handleInputChange('gender',e)}/>
@@ -80,9 +81,20 @@ const TitanicDisplay = (props) => {
             </form>
             <section className="stats-container">
                 {isLoading ? <Loading/> : null}
-                <header className="data-spec"><strong style={{marginLeft:'30px',paddingRight:'40px'}}>name</strong><strong style={{marginLeft:'50px'}}>class</strong><strong>gender</strong><strong>siblings_spouses_aboard</strong><strong>parents_children_aboard</strong><strong>Fare</strong><strong>results</strong></header>
 
-                <div className="data-spec-list">{mappedPassengers}</div>
+                <header className="data-spec">
+                    <strong style={{width:specItemWidth}} >name</strong>
+                    <strong style={{width:specItemWidth}}>class</strong>
+                    <strong style={{width:specItemWidth}}>gender</strong>
+                    <strong style={{width:specItemWidth}}>siblings<br/>spouses</strong>
+                    <strong style={{width:specItemWidth}}>parents<br/>children</strong>
+                    <strong style={{width:specItemWidth}}>Fare</strong>
+                    <strong style={{width:specItemWidth}}>results</strong>
+                </header>
+
+                <object style={{height:'50%'}} >
+                    <div className="data-spec-list"   >{mappedPassengers}</div>
+                </object>
             </section>
         </div>
     )
