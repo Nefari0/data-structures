@@ -5,24 +5,24 @@ import axios from "axios"
 
 const Documents = (props) => {
 
-    const [state,setState] = useState({})
-    const [docs,setDocs] = useState([])
-    const [formOpen,setFormOpen] = useState(false)
+    const [docs,setDocs] = useState([]) // -- All docs in DB
     const [isLoading,setIsLoading] = useState(false)
+    const [selected,setSelected] = useState(null) // -- For displaying currently selected document
+    const currentDoc = localStorage['currentDoc'] // -- For auto loading currently selected document
 
     useEffect(() => {
         grabDocs()
+        if(localStorage['currentDoc'] === undefined){
+            localStorage.setItem('currentDoc','null')
+        }
+        selectMemo(currentDoc)
     },[])
 
-    // const handleInputChange = (prop,event) => {
-    //     event.persist();
-    //     setState((state) => ({
-    //         ...state,
-    //         [prop]: event.target.value,
-    //     }));
-    // };
+        // -- Get all docs - Reset current doc if param === true -- //
+    const grabDocs = async (clearCurrent) => { 
 
-    const grabDocs = async () => {
+        if(clearCurrent){selectMemo('null')}
+
         await setIsLoading(true)
         await axios.get('/api/memos/get').then(res => {
             setDocs(res.data)
@@ -30,22 +30,33 @@ const Documents = (props) => {
         }).catch(err => console.log('error',err))
     }
 
-    const mappedDocs = docs.map(el => {
-        return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} />
+    // -- Select doc to open -- //
+    const selectMemo = (id) => {
+        localStorage.setItem('currentDoc',id)
+        setSelected(id)
+    }
+
+    // -- Find & Display Currently Selected Doc -- //
+    const currentItem = docs.filter(docEl => docEl.memo_id === parseInt(selected)) 
+    const mappedItem = currentItem.map(el => {
+        return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} title={el.title} selectMemo={selectMemo} />
+    })
+
+    // -- List of all Docs in DB -- //
+    const mappedDocList = docs.map(el => {
+        return <header className="data-spec" key={el.memo_id} memo_id={el.memo_id} onClick={() => selectMemo(el.memo_id)} style={{margin:'2px'}} ><strong>{el.title}</strong></header>
     })
 
     return(
         <div className="display-matrix">
-            <section className="search-bar" >
-                {/* <a onClick={() => setFormOpen(!formOpen)}>add info?</a> */}
-                <a onClick={() => grabDocs()}>refresh</a>
-                {/* <input  type="text" placeholder="Search" className="search-input" /> */}
+            <section className="search-bar" style={{margin:'0px'}}>
+                {isLoading ? <Loading/> : null}
+                <a onClick={() => grabDocs(true)}>reload all</a>
                 <a onClick={() => props.handleForm('currentView','')}>close</a>
             </section>
-
+    
             <section className="stats-container">
-                {isLoading ? <Loading/> : mappedDocs}
-                {/* {mappedDocs} */}
+                {selected === 'null' ? mappedDocList : mappedItem}
             </section>
         </div>
     )
