@@ -7,30 +7,18 @@ import TitanicDisplay from './Titanic/TitanicDisplay'
 import Documents from './Documents/Documents'
 import { connect } from 'react-redux'
 import { logoutUser, browserLogin } from './../../redux/userReducer'
-import { withRouter } from 'react-router';
-import { Switch, Route } from 'react-router-dom'
-import Auth from '../Auth/Auth'
-
 
 class Info extends Component {
     constructor(props){
         super();
 
         this.state = {
-            dUserNotes:[],
-            isLoading:false,
-
-            employeeSearch:"",
-            nvpEmployees:[],
-            indexing:0,
-            isMobile:false,
+            // isLoading:false,
 
             // employee data //
             employeeDataInput:false,
-
-            // passenger data
-            showPassengers:false,
-            passengers:[],
+            employeeSearch:"",
+            nvpEmployees:[],
 
             // - selecting view - //
             currentView:'',
@@ -91,7 +79,7 @@ class Info extends Component {
 
     // --- selecting menus --- //
     openMenu(prop,val) {
-        if(val === this.state[prop]) { // closes menu if already open
+        if(val === this.state[prop]) { // --- closes menu if already open
             return this.setState({currentMenu:''})
         } else {
             return this.handleForm(prop,val)
@@ -131,17 +119,17 @@ class Info extends Component {
         
         return(
             <div className="info-container">
-                <div className="data-header">
-                    <div><h3 className="info-h4" onClick={() => this.openMenu('currentMenu','db')} >Database</h3>
-                        <div className={`database-dropdown ${currentMenu === 'db' ? true : 'database-dropdown-hide'}`}>
+                <header className="data-header">
 
-                            <h4 className={` ${currentView === 'cancerView' ? 'info-h3-selected' : 'info-h3'}`} onClick={() => this.selectView('currentView','cancerView')}>cancer stats</h4>
-                            <h4 className={`${currentView === 'passengersView' ? 'info-h3-selected' : 'info-h3' }`} onClick={() => this.selectView('currentView','passengersView')}>passengers</h4>
-                            <h4 className={`${currentView === 'employeeView' ? 'infor-h3-selected' : 'infor-h3'}`} onClick={() => this.selectView('currentView','employeeView')}>employees</h4>
+                    <section><h3 className="info-h4" onClick={() => this.openMenu('currentMenu','db')} >Database</h3>
+                        <form className={`${currentMenu === 'db' ? true : 'hide'}`}>
+                            <h4 className={` ${currentView === 'cancerView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','cancerView')}>cancer stats</h4>
+                            <h4 className={`${currentView === 'passengersView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','passengersView')}>passengers</h4>
+                            <h4 className={`${currentView === 'employeeView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','employeeView')}>employees</h4>
+                        </form>
+                    </section>
 
-                        </div>
-                    </div>
-                    <div><h3 className="info-h3"  onClick={() => this.openMenu('currentMenu','ml')} >machine learning</h3>
+                    <section><h3 className="info-h3"  onClick={() => this.openMenu('currentMenu','ml')} >machine learning</h3>
                         {/* <div className={`database-dropdown ${!showMachineLearning ? true : 'database-dropdown-hide'}`}>
                             { (<h4 className="info-h3">regression</h4>) : (<h4 className="info-h4-selected" >regression</h4>)}
                             {(<h4 className="info-h3" >classification</h4>) : (<h4 className="info-h4-selected" >classification</h4>)}
@@ -153,14 +141,15 @@ class Info extends Component {
                             {(<h4 className="info-h3" >dimensionality reduction</h4>) : (<h4 className="info-h4-selected" >dimensionality reduction</h4>)}
                         </div> */}
 
-                        <div className={`database-dropdown ${currentMenu === 'ml' ? true : 'database-dropdown-hide'}`}>
+                    <form className={`${currentMenu === 'ml' ? true : 'hide'}`}>
                         <h4>neural networks</h4>
-                        </div>
-                    </div>
+                    </form>
+                    </section>
 
-                    <div><h3 onClick={() => this.selectView('currentView','docsView')} >documents</h3></div>
+                    <section><h3 onClick={() => this.selectView('currentView','docsView')} >documents</h3></section>
 
-                </div>
+                </header>
+             
 
                     <a style={{marginLeft:'75%'}} onClick={() => this.handleLogout()}>logout</a>
 
@@ -169,22 +158,14 @@ class Info extends Component {
                     {currentView === 'passengersView' ? <TitanicDisplay handleForm={this.handleForm} /> : null}
 
                     {currentView === 'docsView' ? <Documents handleForm={this.handleForm} theWindow={this.theWindow} /> : null}
-                    {/* <TitanicDisplay /> */}
+                    
 
                     {/* MOVING THIS CODE TO EXTERNAL */}
                     {/* {employeeView ? 
                     <div>
                         <div className="search-bar" ><p className="p-search-line"  onClick={this.addEmployeeData}>add info?</p><p className="p-search-line" onClick={this.refreshEmployees}>refresh</p><input onChange={e => this.handleEmployeeSearch(e.target.value)} type="text" placeholder="Search" className="search-input" /></div>
                         <div className={`cancer-stats-input ${employeeDataInput ? false : 'cancer-stats-input-hide'}`}>
-                                <div className="input-element"><input placeholder="name" onChange={e => this.handleForm('id',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="Age" onChange={e => this.handleForm('clump_thickness',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="Start Month" onChange={e => this.handleForm('uniformity_of_cell_size',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="Start Year" onChange={e => this.handleForm('uniformity_of_cell_shape',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="End Month" onChange={e => this.handleForm('marginal_adhesion',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="Employment Duration" onChange={e => this.handleForm('single_epithelial_cell_size',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="Distance" onChange={e => this.handleForm('bare_nuclei',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="Pay Rate" onChange={e => this.handleForm('bland_chromatin',e.target.value)}/></div>
-                                <div className="input-element"><input placeholder="Attendance" onChange={e => this.handleForm('normal_nuceoli',e.target.value)}/></div>
+                                <div className="input-element"><input placeholder="" onChange={e => this.handleForm('id',e.target.value)}/></div>
                                 <button>submit</button>
                         </div>
                         <div className="data-spec"><a>Name</a><a>Age</a><a>Start Month</a><a>Start Year</a><a>End Month</a><a>End Year</a><a>Employment Duration</a><a>Distance</a><a>Married</a><a>Pay Rate</a><a>Attendance</a></div>
@@ -194,6 +175,7 @@ class Info extends Component {
                         </div>
 
                     </div> : null} */}
+            
             </div>
         )
     }
