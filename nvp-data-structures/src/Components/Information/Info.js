@@ -151,7 +151,7 @@ class Info extends Component {
                 </header>
              
 
-                    <a style={{marginLeft:'75%'}} onClick={() => this.handleLogout()}>logout</a>
+                    <i style={{marginLeft:'75%'}} onClick={() => this.handleLogout()}>logout</i>
 
                     {currentView === 'cancerView' ? <CancerDisplay handleForm={this.handleForm} /> : null}
 

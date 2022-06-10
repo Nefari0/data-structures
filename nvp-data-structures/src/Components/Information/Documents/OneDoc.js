@@ -24,7 +24,7 @@ const OneDoc = (props) => {
     }
 
     return(
-    <form className="admin-memo-body">
+    <form className="admin-memo-body" style={{opacity:'.8'}} >
         <header className='data-spec' >
             <strong onClick={() => props.selectMemo('null')}>close</strong>
             {!props.memo_id ? null :<strong onClick={() => props.deleteDoc(state)}>delete</strong>}

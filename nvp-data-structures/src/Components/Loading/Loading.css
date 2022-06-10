@@ -24,9 +24,11 @@
     width: 44px;
     height: 44px;
     border-radius: 15px;
-    background-color: #8b1b1b;
+    /* background-color: #8b1b1b; */
+    background-color: #2D0E94;
     margin: 10px;
-    border: solid 1px #297F87;
+    /* border: solid 5px #297F87; */
+    border: solid 1px #A70082;
     z-index: 9;
   }
   

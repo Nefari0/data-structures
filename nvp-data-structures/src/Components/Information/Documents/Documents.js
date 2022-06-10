@@ -68,7 +68,10 @@ const Documents = (props) => {
 
     // -- List of all Docs in DB -- //
     const mappedDocList = docs.map(el => {
-        return <header className="data-spec" key={el.memo_id} memo_id={el.memo_id} onClick={() => selectMemo(el.memo_id)} style={{margin:'2px'}} ><strong>{el.title}</strong></header>
+        return (
+        <header key={el.memo_id} memo_id={el.memo_id} onClick={() => selectMemo(el.memo_id)} style={{padding:'10px'}} >
+            <strong style={{fontWeight:'400'}} >{el.title}</strong>
+        </header>)
     })
 
     return(
@@ -86,8 +89,8 @@ const Documents = (props) => {
             </section>
     
             <section className="stats-container">
-
-                {!create ? (selected === 'null' ? mappedDocList : mappedItem) : <OneDoc body={''} memo_id={null} title={''}  selectMemo={selectMemo} DB={newDoc} isLoading={isLoading} />}
+                
+                {!create ? (selected === 'null' ? <div className="data-spec-list" >{mappedDocList}</div> : mappedItem) : <OneDoc body={''} memo_id={null} title={''}  selectMemo={selectMemo} DB={newDoc} isLoading={isLoading} />}
 
             </section>
         </div>

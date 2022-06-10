@@ -22,11 +22,13 @@ h2,
 h1 {    
     font-weight: 300;
     text-transform: uppercase;
+    color: #555;
 }
 h4:hover,
 h3:hover {
   background-color: #F9F871;
   transition: all 500ms;
+  border-radius: 5px;
 }
 
 form {
@@ -54,10 +56,14 @@ object {
   width: 100%;
 }
 
+i,
 a {
   color: #FFB746;
 }
-
+i {
+  font-weight: 600;
+  font-size: 10px;
+}
 
 /* --- REUSABLE --- */
 .selected {

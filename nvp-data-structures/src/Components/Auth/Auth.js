@@ -49,7 +49,7 @@ class Auth extends Component {
 
         return(
                <div className="auth-container">
-                    <h1>Data Structures</h1>
+                    <h1 style={{color:'black'}} >Data Structures</h1>
                     <div>
                         <p >Email:</p>
                         <input placeholder="email" onChange={e => this.handleChange('email', e.target.value)} style={{width:'100%'}} />

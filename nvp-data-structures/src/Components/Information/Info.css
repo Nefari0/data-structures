@@ -34,6 +34,7 @@ header.data-spec {
     position: sticky;
     top:0;
     background-color: #297F87;
+    /* background-color: #00C3D8; */
     white-space: nowrap;
     padding-left: 15px;
     padding-right: 15px;
@@ -55,7 +56,7 @@ header.data-spec strong {
 }
 
 header.data-spec strong:hover {
-    background-color: #8b1b1b;
+    background-color: #009FE7;
     transition: all 500ms;
   }
 
@@ -66,11 +67,13 @@ header.data-spec strong:hover {
 	flex-direction: column;
 }
 
-  .data-spec-list div:nth-of-type(2n+1) {
-    background-color: rgb(240, 240, 240);
-  }
+.data-spec-list header:nth-of-type(2n+1),
+.data-spec-list div:nth-of-type(2n+1) {
+    /* background-color: rgb(240, 240, 240); */
+    background-color: rgba(240, 240, 240, .5);
+}
 
-  div.scrollitems{
+div.scrollitems{
     width: 100%;
     height: 50px;
     margin: auto;
@@ -79,9 +82,9 @@ header.data-spec strong:hover {
     white-space: nowrap;
     font-size: 10px;
     font-weight: 600;
-  }
+}
 
-  .scrollitems p {
+.scrollitems p {
      height: 20px;
       position: relative;
       display: flex;
@@ -89,13 +92,13 @@ header.data-spec strong:hover {
       align-items: center;
       overflow: none;
       justify-content: center;
-  }
+}
 
-  div.scrollitems:hover {
+div.scrollitems:hover {
       background-color: #297F87;
       color: #fff;
       transition: all 500ms;
-  }
+}
 
 
 .search-bar {
