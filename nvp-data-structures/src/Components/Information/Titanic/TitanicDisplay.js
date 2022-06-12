@@ -92,9 +92,9 @@ const TitanicDisplay = (props) => {
                     <strong style={{width:specItemWidth}}>results</strong>
                 </header>
 
-                <object style={{height:'50%'}} >
+                {/* <object style={{height:'50%'}} > */}
                     <div className="data-spec-list"   >{mappedPassengers}</div>
-                </object>
+                {/* </object> */}
             </section>
         </div>
     )
