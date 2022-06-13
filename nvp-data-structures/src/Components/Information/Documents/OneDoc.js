@@ -4,11 +4,12 @@ import axios from 'axios'
 
 const OneDoc = (props) => {
 
-    const { body,title,memo_id } = props
+    const { body,title,memo_id,category } = props
     var [ state,setState ] = useState({
         body:body,
         title:title,
-        memo_id:memo_id
+        memo_id:memo_id,
+        category:category
     })
 
     const input = (prop,event) => {
@@ -32,6 +33,7 @@ const OneDoc = (props) => {
         </header>
         <textarea value={state.title} onChange={(e) => input('title',e)} ></textarea>
         <textarea value={state.body} onChange={(e) => input('body',e)} rows="10"  > </textarea>
+        <textarea value={state.category} onChange={(e) => input('category',e)} ></textarea>
     </form>)
 }
 

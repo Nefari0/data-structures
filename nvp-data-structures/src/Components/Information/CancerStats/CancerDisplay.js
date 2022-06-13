@@ -105,7 +105,7 @@ const CancerDisplay = (props) => {
                     <strong>results</strong>
                 </header>
 
-                <object><div className="data-spec-list" >{mappedCancerStatsS}</div></object>
+                <div className="data-spec-list" >{mappedCancerStatsS}</div>
             </section>
         </div>
     )

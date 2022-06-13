@@ -93,7 +93,7 @@ const TitanicDisplay = (props) => {
                 </header>
 
                 {/* <object style={{height:'50%'}} > */}
-                    <div className="data-spec-list"   >{mappedPassengers}</div>
+                    <div className="data-spec-list" >{mappedPassengers}</div>
                 {/* </object> */}
             </section>
         </div>
