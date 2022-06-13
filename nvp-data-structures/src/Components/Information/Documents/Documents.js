@@ -10,6 +10,7 @@ const Documents = (props) => {
     const [create,setCreate] = useState(false) // -- Create new document
     const [selected,setSelected] = useState(null) // -- For displaying currently selected document
     const currentDoc = localStorage['currentDoc'] // -- For auto loading currently selected document
+    const width = '50%'
 
     useEffect(() => {
         grabDocs()
@@ -63,14 +64,15 @@ const Documents = (props) => {
     // -- Find & Display Currently Selected Doc -- //
     const currentItem = docs.filter(docEl => docEl.memo_id === parseInt(selected)) 
     const mappedItem = currentItem.map(el => {
-        return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} title={el.title} selectMemo={selectMemo} DB={sendUpdate} isLoading={isLoading} deleteDoc={deleteDoc} />
+        return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} title={el.title} category={el.category} selectMemo={selectMemo} DB={sendUpdate} isLoading={isLoading} deleteDoc={deleteDoc} />
     })
 
     // -- List of all Docs in DB -- //
     const mappedDocList = docs.map(el => {
         return (
-        <header key={el.memo_id} memo_id={el.memo_id} onClick={() => selectMemo(el.memo_id)} style={{padding:'10px'}} >
-            <strong style={{fontWeight:'400'}} >{el.title}</strong>
+        <header className="data-spec" key={el.memo_id} memo_id={el.memo_id} category={el.category} onClick={() => selectMemo(el.memo_id)} style={{padding:'10px',width:'100%',backgroundColor:''}} >
+            <td style={{fontWeight:'400',width:'50%',backgroundColor:''}} >{el.title}</td>
+            <td style={{fontWeight:'400',width:'50%',backgroundColor:''}} >{el.category}</td>
         </header>)
     })
 
@@ -89,8 +91,17 @@ const Documents = (props) => {
             </section>
     
             <section className="stats-container">
+                {/* {selected === 'null' ? <thead><th style={{width:width,backgroundColor:'red'}} >Title</th><th style={{width:width}} >category</th></thead> : null} */}
                 
-                {!create ? (selected === 'null' ? <div className="data-spec-list" >{mappedDocList}</div> : mappedItem) : <OneDoc body={''} memo_id={null} title={''}  selectMemo={selectMemo} DB={newDoc} isLoading={isLoading} />}
+                {!create ? (selected === 'null' ? 
+                <table>
+                <thead>
+                    <th style={{width:width,backgroundColor:''}} >Title</th>
+                    <th style={{width:width,backgroundColor:''}} >category</th>
+                </thead>
+                <tbody className="data-spec-list" style={{margin:''}} >{mappedDocList}</tbody>
+                </table>
+                 : mappedItem) : <OneDoc body={'title'} memo_id={null} title={'title'} category={'category'} selectMemo={selectMemo} DB={newDoc} isLoading={isLoading} />}
 
             </section>
         </div>
