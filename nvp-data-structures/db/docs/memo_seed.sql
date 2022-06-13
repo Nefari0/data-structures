@@ -2,7 +2,8 @@
 -- CREATE TABLE data_memos (
 --   memo_id SERIAL PRIMARY KEY,
 --   title VARCHAR(250),
---   body text
+--   body text,
+--   category VARCHAR(250)
 -- )
 
 -- INSERT INTO ddata_memos (title,body)
