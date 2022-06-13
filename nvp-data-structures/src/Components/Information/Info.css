@@ -29,7 +29,7 @@
     flex-direction: column;
 }
 
-
+thead,
 header.data-spec {
     position: sticky;
     top:0;
@@ -42,18 +42,25 @@ header.data-spec {
     display: flex;
     justify-content: space-around;
     width: 100%;
-  }
+}
 
+th {
+    color: #fff;
+    padding: 16px 24px;
+    text-align: left;
+}
 
+td,
 header.data-spec strong {
     display: inline-block;
-    color: white;
-    text-align: center;
+    text-align: left;
     padding: 14px 0px 14px 0px;
     font-weight: 600;
     text-decoration: none;
     font-size: 10px;
 }
+
+td {text-align: left;}
 
 header.data-spec strong:hover {
     background-color: #009FE7;
@@ -76,9 +83,10 @@ header.data-spec strong:hover {
 div.scrollitems{
     width: 100%;
     height: 50px;
-    margin: auto;
     display: flex;
+    /* justify-content: flex-start; */
 	justify-content: space-around;
+    margin-left: 20px;
     white-space: nowrap;
     font-size: 10px;
     font-weight: 600;
@@ -116,4 +124,5 @@ div.scrollitems:hover {
 
 @media (max-width:550px) {
     .search-bar input {width: 50px;}
+    th {font-size: 10px;}
 }
