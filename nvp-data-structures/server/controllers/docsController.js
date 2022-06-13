@@ -1,8 +1,8 @@
 module.exports = {
     newMemo: async (req,res) => {
         const db = req.app.get('db')
-        const { body,title } = req.body
-        const memo = await db.docs.new_memo([body,title])
+        const { body,title,category } = req.body
+        const memo = await db.docs.new_memo([body,title,category])
         return res.status(200).send(memo[0])
     },
 
@@ -13,9 +13,9 @@ module.exports = {
     },
 
     editMemo: async (req,res) => {
-        const { memo_id,body,title } = req.body
+        const { memo_id,body,title,category } = req.body
         const db = req.app.get('db')
-        const memo = await db.docs.edit_memo([body,title,memo_id])
+        const memo = await db.docs.edit_memo([body,title,category,memo_id])
         return res.status(200).send(memo)
     },
 
