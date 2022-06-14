@@ -7,6 +7,7 @@ const cancerStatController = require('./controllers/cancerStatController');
 const employeeController = require('./controllers/employeeController');
 const titanicController = require('./controllers/titanicController');
 const docsController = require('./controllers/docsController')
+const tableController = require('./controllers/tableController')
 const path = require('path');
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
@@ -47,6 +48,9 @@ app.get('/api/employees/all',employeeController.getAllEmployees)
 
 // --- titanic end points --- //
 app.get('/api/passengers/all', titanicController.getAll)
+
+// --- Get column names --- //
+app.post('/api/column/names',tableController.getNames)
 
 // -----server ------
 app.use( express.static( __dirname + '/../build'));
