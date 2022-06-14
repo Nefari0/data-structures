@@ -1,4 +1,5 @@
 import OneDoc from "./OneDoc"
+import '../../Table/Table.css'
 import Loading from "../../Loading/Loading"
 import { useState,useEffect } from "react"
 import axios from "axios"
@@ -70,10 +71,10 @@ const Documents = (props) => {
     // -- List of all Docs in DB -- //
     const mappedDocList = docs.map(el => {
         return (
-        <header className="data-spec" key={el.memo_id} memo_id={el.memo_id} category={el.category} onClick={() => selectMemo(el.memo_id)} style={{padding:'10px',width:'100%',backgroundColor:''}} >
-            <td style={{fontWeight:'400',width:'50%',backgroundColor:''}} >{el.title}</td>
-            <td style={{fontWeight:'400',width:'50%',backgroundColor:''}} >{el.category}</td>
-        </header>)
+        <tr key={el.memo_id} memo_id={el.memo_id} category={el.category} onClick={() => selectMemo(el.memo_id)} style={{padding:'10px',width:'100%',backgroundColor:''}} >
+            <td style={{width:width}} >{el.title}</td>
+            <td style={{width:width}} >{el.category}</td>
+        </tr>)
     })
 
     return(
@@ -90,16 +91,18 @@ const Documents = (props) => {
 
             </section>
     
-            <section className="stats-container">
+            <section>
                 {/* {selected === 'null' ? <thead><th style={{width:width,backgroundColor:'red'}} >Title</th><th style={{width:width}} >category</th></thead> : null} */}
                 
                 {!create ? (selected === 'null' ? 
                 <table>
                 <thead>
-                    <th style={{width:width,backgroundColor:''}} >Title</th>
-                    <th style={{width:width,backgroundColor:''}} >category</th>
+                    <tr>
+                        <th style={{width:width,backgroundColor:''}} >Title</th>
+                        <th style={{width:width,backgroundColor:''}} >category</th>
+                    </tr>
                 </thead>
-                <tbody className="data-spec-list" style={{margin:''}} >{mappedDocList}</tbody>
+                <tbody  style={{margin:''}}>{mappedDocList}</tbody>
                 </table>
                  : mappedItem) : <OneDoc body={'title'} memo_id={null} title={'title'} category={'category'} selectMemo={selectMemo} DB={newDoc} isLoading={isLoading} />}
 
