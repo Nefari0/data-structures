@@ -1,0 +1,102 @@
+
+/* --- ENTIRE TABLE DISAPLEYED IN THIS CLASS --- */
+table,
+.stats-container {
+    max-height: 70%;
+    min-width: 80vw;
+    display: flex;
+	flex-direction: column;
+    /* background-color: green; */
+}
+
+/*  --- TABLE HEAD --- */
+thead,
+header.data-spec { /* --- will phase this out --- */
+    position: sticky;
+    text-align: left;
+    top:0;
+    background-color: #297F87;
+    /* background-color: #00C3D8; */
+    white-space: nowrap;
+    padding-left: 15px;
+    padding-right: 15px;
+    z-index: 4;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+thead th:hover,
+header.data-spec strong:hover { /* -- will phase out -- */
+    background-color: #8b1b1b;
+    transition: all 500ms;
+  }
+
+/* -- TABLE HEAD COLUMN -- */
+th {
+    color: #fff;
+    padding: 16px 24px;
+    text-align: left;
+}
+
+/* -- TABLE DATA -- */
+td,
+header.data-spec strong { /* -- will phase out --*/
+    display: inline-block;
+    /* text-align: left; */
+    /* text-align: center; */
+    padding: 14px 0px 14px 0px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+td {text-align: left;}
+
+tbody tr:nth-of-type(2n+1),
+.data-spec-list header:nth-of-type(2n+1), /* -- will phase this out -- */
+.data-spec-list div:nth-of-type(2n+1) { /* -- will phase this out -- */
+    /* background-color: rgb(240, 240, 240); */
+    background-color: rgba(240, 240, 240, .5);
+}
+
+/* --- ROWS --- */
+tr,
+div.scrollitems {
+    width: 100%;
+    height: 50px;
+    display: flex;
+	justify-content: space-around;
+    margin-left: 20px;
+    white-space: nowrap;
+    font-size: 10px;
+    font-weight: 600;
+    /* background-color: yellow; */
+}
+
+/* -- COLUMNS -- */
+tbody tr td,
+/* .scrollitems td, */
+.scrollitems p {
+    min-width: 30px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* align-items: left; */
+    overflow: none;
+    justify-content: center;
+      /* background-color: purple; */
+}
+
+tbody tr:hover,
+div.scrollitems:hover {
+      background-color: #297F87;
+      color: #fff;
+      transition: all 500ms;
+}
+tr td:hover {
+    background-color: #8b1b1b;
+    /* transition: all 500ms; */
+}
