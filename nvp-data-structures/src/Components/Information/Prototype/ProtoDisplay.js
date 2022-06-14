@@ -1,5 +1,6 @@
 import './ProtoDisplay.css'
-import Table from "../../Table/Table"
+// import Table from "../../Table/Table"
+import Line from '../ProductionLine/Line'
 
 const ProtoDislplay = (props) => {
 
@@ -8,7 +9,8 @@ const ProtoDislplay = (props) => {
 
     return(
         <div className='proto-container' >
-            <Table endpoint={endpoint} table_name={table_name} />
+            <Line selectView={props.selectView} />
+            {/* <Table endpoint={endpoint} table_name={table_name} /> */}
         </div>
     )
 }
