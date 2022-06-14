@@ -78,6 +78,27 @@ i {
   margin: 0px;
 }
 
+.btn-selected,
+.btn {
+  background-color: #fff;
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-selected {
+  background-color: #297F87;
+  color: #fff;
+}
+
 /* ------ MEDIA QUERIES -------*/
 
 @media (max-width:550px) {
