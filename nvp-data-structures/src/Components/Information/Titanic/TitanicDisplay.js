@@ -1,7 +1,7 @@
 import Loading from "../../Loading/Loading"
 import { useState,useEffect } from "react"
 import axios from "axios"
-import Passenger from "./Passenger"
+import PassengerRow from "./PassengerRow"
 
 
 const TitanicDisplay = (props) => {
@@ -58,7 +58,7 @@ const TitanicDisplay = (props) => {
 
     const filterPassenger = titanicPassengers.filter(element => element.name.toString().includes(passengerSearch))
     const mappedPassengers = filterPassenger.map(element => {            
-        return <Passenger key={element.index} index={element.index} pclass={element.pclass} siblings_spouses_aboard={element.siblings_spouses_aboard} parents_children_aboard={element.parents_children_aboard} age={element.age} survived={element.survived} sex={element.sex} fare={element.fare} name={element.name} />
+        return <PassengerRow key={element.index} index={element.index} pclass={element.pclass} siblings_spouses_aboard={element.siblings_spouses_aboard} parents_children_aboard={element.parents_children_aboard} age={element.age} survived={element.survived} sex={element.sex} fare={element.fare} name={element.name} />
     })
 
     return(
@@ -79,23 +79,28 @@ const TitanicDisplay = (props) => {
                 <input placeholder="result" onChange={e => handleInputChange('results',e)}/>
                 <button onClick={() => addToCancerPending()}>submit</button>
             </form>
-            <section className="stats-container">
-                {isLoading ? <Loading/> : null}
 
-                <header className="data-spec">
-                    <strong style={{width:specItemWidth}} >name</strong>
-                    <strong style={{width:specItemWidth}}>class</strong>
-                    <strong style={{width:specItemWidth}}>gender</strong>
-                    <strong style={{width:specItemWidth}}>siblings<br/>spouses</strong>
-                    <strong style={{width:specItemWidth}}>parents<br/>children</strong>
-                    <strong style={{width:specItemWidth}}>Fare</strong>
-                    <strong style={{width:specItemWidth}}>results</strong>
-                </header>
+            {isLoading ? <Loading/> : null}
 
-                {/* <object style={{height:'50%'}} > */}
-                    <div className="data-spec-list" >{mappedPassengers}</div>
-                {/* </object> */}
-            </section>
+            <table >
+
+                <thead>
+                    <tr>
+                        <th style={{width:specItemWidth}} >name</th>
+                        <th style={{width:specItemWidth}}>class</th>
+                        <th style={{width:specItemWidth}}>gender</th>
+                        <th style={{width:specItemWidth}}>siblings<br/>spouses</th>
+                        <th style={{width:specItemWidth}}>parents<br/>children</th>
+                        <th style={{width:specItemWidth}}>Fare</th>
+                        <th style={{width:specItemWidth}}>results</th>
+                    </tr>
+                </thead>
+                    {/* -- ORIGINAL -- */}
+                    {/* <div className="data-spec-list" >{mappedPassengers}</div> */}
+
+                <tbody>{mappedPassengers}</tbody>
+          
+            </table>
         </div>
     )
 }
