@@ -65,7 +65,7 @@ const Documents = (props) => {
     // -- Find & Display Currently Selected Doc -- //
     const currentItem = docs.filter(docEl => docEl.memo_id === parseInt(selected)) 
     const mappedItem = currentItem.map(el => {
-        return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} title={el.title} category={el.category} selectMemo={selectMemo} DB={sendUpdate} isLoading={isLoading} deleteDoc={deleteDoc} />
+        return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} title={el.title} category={el.category} grabDocs={grabDocs} DB={sendUpdate} isLoading={isLoading} deleteDoc={deleteDoc} />
     })
 
     // -- List of all Docs in DB -- //
@@ -87,7 +87,7 @@ const Documents = (props) => {
 
                 {selected === 'null' ? <a onClick={() => setCreate(!create)} >{!create ? 'new' : 'cancel'}</a> : null}
 
-                <a onClick={() => props.handleForm('currentView','')}>close</a>
+                <a onClick={() => props.handleForm('currentView','')}>close doc</a>
 
             </section>
     
