@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './Info.css'
+import '../Table/Table.css'
 import CancerDisplay from './CancerStats/CancerDisplay'
 import Employee from './Employee'
 import TitanicDisplay from './Titanic/TitanicDisplay'
 import Documents from './Documents/Documents'
 import { connect } from 'react-redux'
 import { logoutUser, browserLogin } from './../../redux/userReducer'
+// import Table from '../Table/Table'
+import ProtoDislplay from './Prototype/ProtoDisplay'
 
 class Info extends Component {
     constructor(props){
@@ -123,8 +126,9 @@ class Info extends Component {
 
                     <section><h3 className="info-h4" onClick={() => this.openMenu('currentMenu','db')} >Database</h3>
                         <form className={`${currentMenu === 'db' ? true : 'hide'}`}>
+                            <h4 className={`${currentView === 'tableView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','tableView')}>table</h4>
                             <h4 className={` ${currentView === 'cancerView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','cancerView')}>cancer stats</h4>
-                            <h4 className={`${currentView === 'passengersView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','passengersView')}>passengers</h4>
+                            <h4 className={`${currentView === 'passengersView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','passengersView')}>Titanic</h4>
                             <h4 className={`${currentView === 'employeeView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','employeeView')}>employees</h4>
                         </form>
                     </section>
@@ -158,6 +162,8 @@ class Info extends Component {
                     {currentView === 'passengersView' ? <TitanicDisplay handleForm={this.handleForm} /> : null}
 
                     {currentView === 'docsView' ? <Documents handleForm={this.handleForm} theWindow={this.theWindow} /> : null}
+
+                    {currentView === 'tableView' ? <ProtoDislplay handleForm={this.handleForm} theWindow={this.theWindow} /> : null}
                     
 
                     {/* MOVING THIS CODE TO EXTERNAL */}
