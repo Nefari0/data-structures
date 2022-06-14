@@ -33,6 +33,7 @@ class Info extends Component {
         this.handleForm = this.handleForm.bind(this)
         this.addEmployeeData = this.addEmployeeData.bind(this)
         this.refreshEmployees = this.refreshEmployees.bind(this)
+        this.selectView = this.selectView.bind(this)
     }
 
     theWindow(prop,val){
@@ -126,7 +127,7 @@ class Info extends Component {
 
                     <section><h3 className="info-h4" onClick={() => this.openMenu('currentMenu','db')} >Database</h3>
                         <form className={`${currentMenu === 'db' ? true : 'hide'}`}>
-                            <h4 className={`${currentView === 'tableView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','tableView')}>table</h4>
+                            <h4 className={`${currentView === 'tableView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','tableView')}>prototype</h4>
                             <h4 className={` ${currentView === 'cancerView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','cancerView')}>cancer stats</h4>
                             <h4 className={`${currentView === 'passengersView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','passengersView')}>Titanic</h4>
                             <h4 className={`${currentView === 'employeeView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','employeeView')}>employees</h4>
@@ -163,7 +164,7 @@ class Info extends Component {
 
                     {currentView === 'docsView' ? <Documents handleForm={this.handleForm} theWindow={this.theWindow} /> : null}
 
-                    {currentView === 'tableView' ? <ProtoDislplay handleForm={this.handleForm} theWindow={this.theWindow} /> : null}
+                    {currentView === 'tableView' ? <ProtoDislplay selectView={this.selectView} /> : null}
                     
 
                     {/* MOVING THIS CODE TO EXTERNAL */}
