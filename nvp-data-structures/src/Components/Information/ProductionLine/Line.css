@@ -1,0 +1,16 @@
+.line-form {
+    height: 140px;
+    position: fixed;
+}
+
+.line-btn {
+    position: absolute;
+    left: 80%;
+    top:35px;
+}
+
+@media (max-height:345px) {
+    .line-form {
+        top: 0px;
+    }
+}
