@@ -33,7 +33,7 @@ h3:hover {
 
 form {
   position: absolute;
-  min-height: 240px;
+  min-height: 100px;
   width: 180px;
   margin: auto;
   padding: 10px;
