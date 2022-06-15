@@ -1,6 +1,5 @@
 import './Documents.css'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
 
 const OneDoc = (props) => {
 
