@@ -92,7 +92,6 @@ const Documents = (props) => {
             </section>
     
             <section>
-                {/* {selected === 'null' ? <thead><th style={{width:width,backgroundColor:'red'}} >Title</th><th style={{width:width}} >category</th></thead> : null} */}
                 
                 {!create ? (selected === 'null' ? 
                 <table>
