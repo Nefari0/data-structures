@@ -79,7 +79,7 @@ const Documents = (props) => {
 
     return(
         <div className="display-matrix">
-            <section className="search-bar" style={{margin:'0px'}}>
+            <section className="search-bar" >
 
                 {isLoading ? <Loading/> : null}
 
