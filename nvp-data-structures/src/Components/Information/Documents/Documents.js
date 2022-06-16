@@ -71,7 +71,7 @@ const Documents = (props) => {
     // -- List of all Docs in DB -- //
     const mappedDocList = docs.map(el => {
         return (
-        <tr key={el.memo_id} memo_id={el.memo_id} category={el.category} onClick={() => selectMemo(el.memo_id)} style={{padding:'10px',width:'100%',backgroundColor:''}} >
+        <tr key={el.memo_id} memo_id={el.memo_id} category={el.category} onClick={() => selectMemo(el.memo_id)} style={{padding:'',width:'100%',backgroundColor:''}} >
             <td style={{width:width}} >{el.title}</td>
             <td style={{width:width}} >{el.category}</td>
         </tr>)
