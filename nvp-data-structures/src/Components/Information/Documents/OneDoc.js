@@ -24,16 +24,21 @@ const OneDoc = (props) => {
     }
 
     return(
-    <form className="admin-memo-body" style={{opacity:'.8'}} >
-        <header className='data-spec' >
-            <strong onClick={() => props.grabDocs(true)}>close</strong>
-            {!props.memo_id ? null :<strong onClick={() => props.deleteDoc(state)}>delete</strong>}
-            <strong onClick={() => handleDB(state)} >{props.isLoading ? 'saving...' : 'save'}</strong>
-        </header>
-        <textarea value={state.title} onChange={(e) => input('title',e)} ></textarea>
+    <form className="admin-memo-body">
+        <thead>  
+            <tr>
+                <th onClick={() => props.grabDocs(true)}>close</th>
+
+                {!props.memo_id ? null :<th onClick={() => props.deleteDoc(state)}>delete</th>}
+
+                <th onClick={() => handleDB(state)} >{props.isLoading ? 'saving...' : 'save'}</th>
+            </tr>
+        </thead>
+        <input value={state.title} onChange={(e) => input('title',e)} ></input>
+        <input value={state.category} onChange={(e) => input('category',e)} ></input>
         <textarea value={state.body} onChange={(e) => input('body',e)} rows="10"  > </textarea>
-        <textarea value={state.category} onChange={(e) => input('category',e)} ></textarea>
-    </form>)
+    </form>
+    )
 }
 
 export default OneDoc
