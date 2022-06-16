@@ -24,20 +24,22 @@ const OneDoc = (props) => {
     }
 
     return(
-    <form className="admin-memo-body">
-        <thead>  
-            <tr>
-                <th onClick={() => props.grabDocs(true)}>close</th>
+    <object className="admin-memo-body">
+        <table>
+            <thead>  
+                <tr>
+                    <th onClick={() => props.grabDocs(true)}>close</th>
 
-                {!props.memo_id ? null :<th onClick={() => props.deleteDoc(state)}>delete</th>}
+                    {!props.memo_id ? null :<th onClick={() => props.deleteDoc(state)}>delete</th>}
 
-                <th onClick={() => handleDB(state)} >{props.isLoading ? 'saving...' : 'save'}</th>
-            </tr>
-        </thead>
+                    <th onClick={() => handleDB(state)} >{props.isLoading ? 'saving...' : 'save'}</th>
+                </tr>
+            </thead>
+        </table>
         <input value={state.title} onChange={(e) => input('title',e)} ></input>
         <input value={state.category} onChange={(e) => input('category',e)} ></input>
-        <textarea value={state.body} onChange={(e) => input('body',e)} rows="10"  > </textarea>
-    </form>
+        <textarea value={state.body} onChange={(e) => input('body',e)} rows=""  > </textarea>
+    </object>
     )
 }
 
