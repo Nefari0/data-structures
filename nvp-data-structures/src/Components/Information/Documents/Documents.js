@@ -11,6 +11,8 @@ const Documents = (props) => {
     const [create,setCreate] = useState(false) // -- Create new document
     const [selected,setSelected] = useState(null) // -- For displaying currently selected document
     const currentDoc = localStorage['currentDoc'] // -- For auto loading currently selected document
+    const currentCategory = localStorage['currentCategory']
+    const [search,setSearch] = useState('')
     const width = '50%'
 
     useEffect(() => {
@@ -19,7 +21,19 @@ const Documents = (props) => {
             localStorage.setItem('currentDoc','null')
         }
         selectMemo(currentDoc)
+
+        if(localStorage['currentCategory'] === undefined){
+            localStorage.setItem('currentCategory','')
+        }
+        setSearch(currentCategory)
+
     },[])
+
+    // -- Search docs by category -- //
+    const searchForCat = (val) => {
+        setSearch(val)
+        props.theWindow('currentCategory',val)
+    }
 
 // ------------ DB managment ------------------ //
     // -- Create new document -- //
@@ -39,7 +53,10 @@ const Documents = (props) => {
     }
     // -- Get all docs - Reset current doc if param === true -- //
     const grabDocs = async (clearCurrent) => { 
-        if(clearCurrent){selectMemo('null')}
+        if(clearCurrent){
+            selectMemo('null')
+            setCreate(false)
+        }
         await setIsLoading(true)
         await axios.get('/api/memos/get').then(res => {
             setDocs(res.data)
@@ -68,8 +85,10 @@ const Documents = (props) => {
         return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} title={el.title} category={el.category} grabDocs={grabDocs} DB={sendUpdate} isLoading={isLoading} deleteDoc={deleteDoc} />
     })
 
+    // -- Search for doc by category -- //
+    const searchedDocs = docs.filter(el => { return el.category.includes(search) })
     // -- List of all Docs in DB -- //
-    const mappedDocList = docs.map(el => {
+    const mappedDocList = searchedDocs.map(el => {
         return (
         <tr key={el.memo_id} memo_id={el.memo_id} category={el.category} onClick={() => selectMemo(el.memo_id)} style={{padding:'',width:'100%',backgroundColor:''}} >
             <td style={{width:width}} >{el.title}</td>
@@ -79,13 +98,15 @@ const Documents = (props) => {
 
     return(
         <div className="display-matrix">
+            {isLoading ? <Loading/> : null}
             <section className="search-bar" >
 
-                {isLoading ? <Loading/> : null}
 
                 <a onClick={() => grabDocs(true)}>reload all</a>
 
-                {selected === 'null' ? <a onClick={() => setCreate(!create)} >{!create ? 'new' : 'cancel'}</a> : null}
+                <input value={search} placeholder="Search" onChange={(e) => searchForCat(e.target.value)} />
+
+                <a onClick={() => searchForCat('')} >clear search?</a>
 
                 <a onClick={() => props.handleForm('currentView','')}>close doc</a>
 
@@ -95,15 +116,16 @@ const Documents = (props) => {
                 
                 {!create ? (selected === 'null' ? 
                 <table>
-                <thead>
-                    <tr>
-                        <th style={{width:width,backgroundColor:''}} >Title</th>
-                        <th style={{width:width,backgroundColor:''}} >category</th>
-                    </tr>
-                </thead>
-                <tbody  style={{margin:''}}>{mappedDocList}</tbody>
+                    <thead>
+                        <tr>
+                            <th style={{width:width,backgroundColor:''}} >Title</th>
+                            <th style={{width:width,backgroundColor:''}} >category</th>
+                            <th style={{width:'30px',backgroundColor:''}} onClick={() => setCreate(true)} ><i>new?</i></th>
+                        </tr>
+                    </thead>
+                <tbody>{mappedDocList}</tbody>
                 </table>
-                 : mappedItem) : <OneDoc body={'title'} memo_id={null} title={'title'} category={'category'} selectMemo={selectMemo} DB={newDoc} isLoading={isLoading} />}
+                 : mappedItem) : <OneDoc body={'text'} memo_id={null} title={'title'} category={'category'} selectMemo={selectMemo} DB={newDoc} grabDocs={grabDocs} isLoading={isLoading} />}
 
             </section>
         </div>
