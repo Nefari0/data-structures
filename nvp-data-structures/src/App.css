@@ -29,6 +29,7 @@ h3:hover {
   background-color: #F9F871;
   transition: all 500ms;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 form {
@@ -59,6 +60,7 @@ object {
 i,
 a {
   color: #FFB746;
+  cursor: pointer;
 }
 i {
   font-weight: 600;
