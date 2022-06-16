@@ -16,17 +16,17 @@ class Auth extends Component {
 
     theWindow(prop,val){
         localStorage.setItem(prop,val)
-    }
+    };
 
     componentDidMount(){
         const browser_id = localStorage['browser_id']
         const uniqueId = () => {
             const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
             return s4() + s4() + '-' + s4();
-          };
+        }
 
         if(browser_id === undefined){this.theWindow('browser_id',uniqueId())}
-    }
+    };
 
     componentDidUpdate(){
         const { auth,email } = this.props.user.user
@@ -35,13 +35,13 @@ class Auth extends Component {
             this.theWindow('email',email)
             this.props.history.push(`/info`)
         }
-    }
+    };
 
     handleChange(prop,val){
         this.setState({
             [prop]: val
         })
-    }
+    };
 
     render() {
         const { email,password } = this.state
