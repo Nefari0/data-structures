@@ -1,43 +1,45 @@
 
 
-.admin-memo-body {
-    padding: 0px;
+.admin-memo {
+    width: 100%;
     position: fixed;
     top: 40px;
-    background-color: transparent;
-    overflow: hidden;
+    background: rgba(116, 116, 116, 0.5);
 }
 
-.admin-memo-body table{
+.admin-memo table{
     margin: 0px;
     width: 100%;
 }
 
-.admin-memo-body input {
+.admin-memo input {
     width: 49%;
     padding: 0px;
 }
-.admin-memo-body textarea {
-    width: 97%;
-    height: 70%;
-    margin-left: 1px;
+
+.admin-memo section {
+    width: 100%;
+    height: 75vh;
+    display: flex;
 }
 
+/* ---- MEDIA QUERIES ---- */
 
-
-@media (max-height:480px) {
-    .admin-memo-body {top: 0px;}
-}
-
-@media (max-width:940px) {
-    .admin-memo-body {
-        margin-left: 3%;
-        width: 90%;
+@media (max-height:440px) {
+    .admin-memo {
+        top: 0px;
+        height: 20vh;
     }
 }
 
-@media (max-width:450px) {
-    .admin-memo-body input {
-        width: 48%;
+@media (max-height:299px) {
+    .admin-memo textarea {
+        height: 60vh;
+    }
+}
+
+@media (max-height:200px) {
+    .admin-memo textarea {
+        height: 50vh;
     }
 }
