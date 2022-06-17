@@ -1,15 +1,14 @@
 
 /* --- ENTIRE TABLE DISAPLEYED IN THIS CLASS --- */
-table,
-.stats-container { /* -- phasing out -- */
+table {
     min-width: 80vw;
     display: flex;
 	flex-direction: column;
 }
+/* --------------------------------------------- */
 
 /*  --- TABLE HEAD --- */
-thead,
-header.data-spec { /* --- will phase this out --- */
+thead {
     position: sticky;
     text-align: left;
     top:0;
@@ -21,11 +20,10 @@ header.data-spec { /* --- will phase this out --- */
     width: 100%;
 }
 
-thead th:hover,
-header.data-spec strong:hover { /* -- will phase out -- */
+thead th:hover {
     background-color: #8b1b1b;
     transition: all 500ms;
-  }
+}
 
 /* -- TABLE HEAD COLUMN -- */
 th {
@@ -35,26 +33,24 @@ th {
 }
 
 /* -- TABLE DATA -- */
-td,
-header.data-spec strong { /* -- will phase out --*/
+td {
     display: inline-block;
     padding: 14px 0px 14px 0px;
     font-weight: 600;
     text-decoration: none;
     font-size: 10px;
+    text-align: left;
+    overflow: hidden;
+    margin-left: 2px;
 }
 
-td {text-align: left;}
 
-tbody tr:nth-of-type(2n+1),
-.data-spec-list header:nth-of-type(2n+1), /* -- will phase this out -- */
-.data-spec-list div:nth-of-type(2n+1) { /* -- will phase this out -- */
+/* --- ROWS --- */
+tbody tr:nth-of-type(2n+1) {
     background-color: rgba(240, 240, 240, .5);
 }
 
-/* --- ROWS --- */
-tr,
-div.scrollitems {
+tr {
     width: 100%;
     height: 50px;
     display: flex;
@@ -67,8 +63,7 @@ div.scrollitems {
 }
 
 /* -- COLUMNS -- */
-tbody tr td,
-.scrollitems p {
+/* tbody tr td {
     min-width: 30px;
     height: 20px;
     position: relative;
@@ -77,14 +72,15 @@ tbody tr td,
     align-items: center;
     overflow: none;
     justify-content: center;
-}
+    padding: 14px 0px 14px 0px;
+} */
 
-tbody tr:hover,
-div.scrollitems:hover {
+tbody tr:hover {
       background-color: #297F87;
       color: #fff;
       transition: all 500ms;
 }
+
 tr td:hover {
     background-color: #8b1b1b;
     cursor: pointer;
