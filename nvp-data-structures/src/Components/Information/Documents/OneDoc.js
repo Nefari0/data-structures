@@ -24,7 +24,7 @@ const OneDoc = (props) => {
     }
 
     return(
-    <object className="admin-memo-body">
+    <div className='admin-memo'>
         <table>
             <thead>  
                 <tr>
@@ -36,10 +36,17 @@ const OneDoc = (props) => {
                 </tr>
             </thead>
         </table>
-        <input value={state.title} onChange={(e) => input('title',e)} ></input>
-        <input value={state.category} onChange={(e) => input('category',e)} ></input>
-        <textarea value={state.body} onChange={(e) => input('body',e)} rows=""  > </textarea>
-    </object>
+        
+        <section style={{height:'20px'}}>
+            <input value={state.title} onChange={(e) => input('title',e)} ></input>
+            <input value={state.category} onChange={(e) => input('category',e)} ></input>
+        </section>
+
+        <section>
+            <textarea value={state.body} onChange={(e) => input('body',e)} rows=""  > </textarea>
+        </section>
+        
+    </div>
     )
 }
 
