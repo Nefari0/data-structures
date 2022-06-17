@@ -31,8 +31,9 @@ const Documents = (props) => {
 
     // -- Search docs by category -- //
     const searchForCat = (val) => {
-        setSearch(val)
-        props.theWindow('currentCategory',val)
+        var alpha = val.toLowerCase()
+        setSearch(alpha)
+        props.theWindow('currentCategory',alpha)
     }
 
 // ------------ DB managment ------------------ //
@@ -52,7 +53,7 @@ const Documents = (props) => {
         axios.put('/api/memos/update', state).then(() => setIsLoading(false))
     }
     // -- Get all docs - Reset current doc if param === true -- //
-    const grabDocs = async (clearCurrent) => { 
+    const grabDocs = async (clearCurrent) => {
         if(clearCurrent){
             selectMemo('null')
             setCreate(false)
@@ -85,9 +86,9 @@ const Documents = (props) => {
         return <OneDoc key={el.memo_id} body={el.body} memo_id={el.memo_id} title={el.title} category={el.category} grabDocs={grabDocs} DB={sendUpdate} isLoading={isLoading} deleteDoc={deleteDoc} />
     })
 
-    // -- Search for doc by category -- //
-    const searchedDocs = docs.filter(el => { return el.category.includes(search) })
-    // -- List of all Docs in DB -- //
+    // -- Search for doc by category (default value is empty string) -- //
+    const searchedDocs = docs.filter(el => { return el.category.toLowerCase().includes(search) })
+    // -- Displays all docs in search list -- //
     const mappedDocList = searchedDocs.map(el => {
         return (
         <tr key={el.memo_id} memo_id={el.memo_id} category={el.category} onClick={() => selectMemo(el.memo_id)} style={{padding:'',width:'100%',backgroundColor:''}} >
@@ -125,6 +126,7 @@ const Documents = (props) => {
                     </thead>
                 <tbody>{mappedDocList}</tbody>
                 </table>
+                
                  : mappedItem) : <OneDoc body={'text'} memo_id={null} title={'title'} category={'category'} selectMemo={selectMemo} DB={newDoc} grabDocs={grabDocs} isLoading={isLoading} />}
 
             </section>
