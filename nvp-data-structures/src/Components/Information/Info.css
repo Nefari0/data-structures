@@ -43,6 +43,11 @@
 /* ------- MEDIA QUERIES ------- */
 
 @media (max-width:550px) {
-    .search-bar input {width: 50px;}
-    th {font-size: 10px;}
+    .search-bar {width: 100%;}
+    .search-bar input {
+        width: 50px;
+        padding: 0px;
+    }
+    
+    .display-matrix{padding: 0px;}
 }
