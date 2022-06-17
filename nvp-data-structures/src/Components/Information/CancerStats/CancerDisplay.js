@@ -89,24 +89,26 @@ const CancerDisplay = (props) => {
                 <button onClick={() => addToCancerPending()}>submit</button>
             </form>
             
-            <section className="stats-container">
+            <table>
                 {isLoading ? <Loading/> : null}
-                <header className="data-spec">
-                    <strong>id</strong>
-                    <strong>clump Thickness</strong>
-                    <strong>unif. cell size</strong>
-                    <strong>unif. cell shape</strong>
-                    <strong>marg. adhesion</strong>
-                    <strong>single epi. cell size</strong>
-                    <strong>bare nuclei</strong>
-                    <strong>bland chrom.</strong>
-                    <strong>norm. nuceoli</strong>
-                    <strong>mitoses</strong>
-                    <strong>results</strong>
-                </header>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>clump Thickness</th>
+                        <th>unif. cell size</th>
+                        <th>unif. cell shape</th>
+                        <th>marg. adhesion</th>
+                        <th>single epi. cell size</th>
+                        <th>bare nuclei</th>
+                        <th>bland chrom.</th>
+                        <th>norm. nuceoli</th>
+                        <th>mitoses</th>
+                        <th>results</th>
+                    </tr>
+                </thead>
 
-                <div className="data-spec-list" >{mappedCancerStatsS}</div>
-            </section>
+                <tbody>{mappedCancerStatsS}</tbody>
+            </table>
         </div>
     )
 }
