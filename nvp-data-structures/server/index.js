@@ -36,6 +36,7 @@ app.get('/api/memos/get',docsController.getDocs)
 app.put('/api/memos/update',docsController.editMemo)
 app.post('/api/memos/new',docsController.newMemo)
 app.delete('/api/memos/delete/:memo_id',docsController.deleteMemo)
+app.get('/api/memos/encrypt/all',docsController.encryptAll) // Tests encryption
 
 // --- cancer stats endpoints --- //
 app.get('/api/cancer/all', cancerStatController.getAllStats)
