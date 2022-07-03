@@ -1,0 +1,13 @@
+-- CREATE TABLE data_links (
+--   link_id SERIAL PRIMARY KEY,
+--   link_name VARCHAR(250),
+--   url VARCHAR(250),
+--   description text
+-- )
+
+-- INSERT INTO data_links (link_name,url,description)
+-- VALUES (
+--   'first link',
+--   'here is the url',
+--   'this is the first data_link'
+-- )
