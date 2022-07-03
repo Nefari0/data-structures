@@ -8,6 +8,7 @@ const employeeController = require('./controllers/employeeController');
 const titanicController = require('./controllers/titanicController');
 const docsController = require('./controllers/docsController')
 const tableController = require('./controllers/tableController')
+const linksController = require('./controllers/linksController');
 const path = require('path');
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
@@ -52,6 +53,12 @@ app.get('/api/passengers/all', titanicController.getAll)
 
 // --- Get column names --- //
 app.post('/api/column/names',tableController.getNames)
+
+// --- Links --- //
+app.get('/api/links/get', linksController.getLinks)
+app.post('/api/links/new', linksController.newLink)
+app.put('/api/links/edit', linksController.editLink)
+app.delete('/api/links/delete/:link_id', linksController.deleteLink)
 
 // -----server ------
 app.use( express.static( __dirname + '/../build'));
