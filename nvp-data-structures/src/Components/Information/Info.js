@@ -6,6 +6,8 @@ import CancerDisplay from './CancerStats/CancerDisplay'
 import Employee from './Employee'
 import TitanicDisplay from './Titanic/TitanicDisplay'
 import Documents from './Documents/Documents'
+import Home from './Home/Home'
+import Links from './Links/Links'
 import { connect } from 'react-redux'
 import { logoutUser, browserLogin } from './../../redux/userReducer'
 // import Table from '../Table/Table'
@@ -24,7 +26,7 @@ class Info extends Component {
             nvpEmployees:[],
 
             // - selecting view - //
-            currentView:'',
+            currentView:'home',
 
             // - selecting menu - //
             currentMenu:'',
@@ -127,7 +129,7 @@ class Info extends Component {
 
                     <section><h3 className="info-h4" onClick={() => this.openMenu('currentMenu','db')} >Database</h3>
                         <form className={`${currentMenu === 'db' ? true : 'hide'}`}>
-                            <h4 className={`${currentView === 'tableView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','tableView')}>prototype</h4>
+                            <h4 className={`${currentView === 'home' ? 'selected' : null}`} onClick={() => this.selectView('currentView','home')} >home</h4>
                             <h4 className={` ${currentView === 'cancerView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','cancerView')}>cancer stats</h4>
                             <h4 className={`${currentView === 'passengersView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','passengersView')}>Titanic</h4>
                             <h4 className={`${currentView === 'employeeView' ? 'selected' : null}`} onClick={() => this.selectView('currentView','employeeView')}>employees</h4>
@@ -165,6 +167,10 @@ class Info extends Component {
                     {currentView === 'docsView' ? <Documents handleForm={this.handleForm} theWindow={this.theWindow} /> : null}
 
                     {currentView === 'tableView' ? <ProtoDislplay selectView={this.selectView} /> : null}
+
+                    {currentView === 'home' ? <Home selectView={this.selectView} /> : null}
+
+                    {currentView === 'webDevTools' ? <Links selectView={this.selectView} /> : null}
                     
 
                     {/* MOVING THIS CODE TO EXTERNAL */}
