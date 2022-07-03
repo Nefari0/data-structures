@@ -1,0 +1,19 @@
+.confirmation {
+    height: 75px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: blue;
+  }
+
+
+  
+.confirmation header {
+    /* margin: 10px; */
+    background-color: green;
+}
+
+.confirmation a {
+    margin: auto;
+}
