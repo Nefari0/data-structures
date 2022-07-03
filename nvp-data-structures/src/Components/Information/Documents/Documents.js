@@ -109,7 +109,7 @@ const Documents = (props) => {
 
                 <a onClick={() => searchForCat('')} >clear search?</a>
 
-                <a onClick={() => props.handleForm('currentView','')}>close doc</a>
+                <a onClick={() => props.handleForm('currentView','home')}>close doc</a>
 
             </section>
     

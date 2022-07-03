@@ -72,7 +72,7 @@ const CancerDisplay = (props) => {
                 <a onClick={() => setFormOpen(!formOpen)}>add info?</a>
                 <a onClick={() => grabStats()}>refresh</a>
                 <input onChange={e => setCancerSearch(e.target.value)} type="text" placeholder="Search" className="search-input" />
-                <a onClick={() => props.handleForm('currentView','')}>close</a>
+                <a onClick={() => props.handleForm('currentView','home')}>close</a>
             </section>
             
             <form className={`${formOpen ? false : 'hide'}`}>

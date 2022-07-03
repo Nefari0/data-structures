@@ -63,7 +63,7 @@ const Line = (props) => {
                 <strong>Run</strong>
             </button>
 
-            <button className="btn line-btn" onClick={() => props.selectView('currentView','')} >
+            <button className="btn line-btn" onClick={() => props.selectView('currentView','home')} >
                 <strong>exit</strong>
             </button>
         </form>

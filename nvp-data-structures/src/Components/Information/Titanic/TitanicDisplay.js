@@ -67,7 +67,7 @@ const TitanicDisplay = (props) => {
                 <a onClick={() => setFormOpen(!formOpen)}>add info?</a>
                 <a onClick={() => grabStats()}>refresh</a>
                 <input onChange={e => setPassengerSearch(e.target.value)} type="text" placeholder="Search" />
-                <a className="p-search-line" onClick={() => props.handleForm('currentView','')}>close</a>
+                <a className="p-search-line" onClick={() => props.handleForm('currentView','home')}>close</a>
             </section>
             <form className={`${formOpen ? false : 'hide'}`} style={{top:'40px',left:'30px'}} >
                 <input placeholder="name" onChange={e => handleInputChange('name',e)}/>
