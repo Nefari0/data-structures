@@ -8,7 +8,7 @@ import TitanicDisplay from './Titanic/TitanicDisplay'
 import Documents from './Documents/Documents'
 import Home from './Home/Home'
 import Links from './Links/Links'
-// import SpecDocs from './SpecDocs/SpecDocs'
+import SpecDocs from './SpecDocs/SpecDocs'
 import { connect } from 'react-redux'
 import { logoutUser, browserLogin } from './../../redux/userReducer'
 // import Table from '../Table/Table'
@@ -173,7 +173,7 @@ class Info extends Component {
 
                     {currentView === 'webDevTools' ? <Links selectView={this.selectView} /> : null}
 
-                    {/* {currentView === 'specDocs' ? <SpecDocs /> : null} */}
+                    {currentView === 'specDocs' ? <SpecDocs selectView={this.selectView} /> : null}
                     
 
                     {/* MOVING THIS CODE TO EXTERNAL */}
