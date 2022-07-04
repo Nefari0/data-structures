@@ -13,6 +13,7 @@
 
 # decryption
 /server/middleware/cryptKeys.js
+/src/cryptKeys.js
 
 # misc
 .env
