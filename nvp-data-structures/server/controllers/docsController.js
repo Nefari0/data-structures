@@ -48,5 +48,11 @@ module.exports = {
         });
 
         return
-    }
+    },
+
+    getSpecDocs: async (req,res) => {
+        const db = req.app.get('db')
+        const doc = await db.docs.get_spec_docs()
+        return res.status(200).send(doc)
+    },
 }
