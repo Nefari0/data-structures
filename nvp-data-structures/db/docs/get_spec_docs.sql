@@ -1,0 +1,1 @@
+SELECT * FROM data_memos WHERE num_mark = 2
