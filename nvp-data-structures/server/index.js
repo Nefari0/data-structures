@@ -35,6 +35,7 @@ app.post('/api/auth/browser/login', authController.browserLogin)
 // --- memos / docs endpoinds --- //
 app.get('/api/memos/get',docsController.getDocs)
 app.get('/api/memos/spec/get',docsController.getSpecDocs)
+app.put('/api/memos/spec/put',docsController.writeSpecDoc)
 app.put('/api/memos/update',docsController.editMemo)
 app.post('/api/memos/new',docsController.newMemo)
 app.delete('/api/memos/delete/:memo_id',docsController.deleteMemo)

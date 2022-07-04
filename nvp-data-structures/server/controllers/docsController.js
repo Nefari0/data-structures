@@ -55,4 +55,11 @@ module.exports = {
         const doc = await db.docs.get_spec_docs()
         return res.status(200).send(doc)
     },
+
+    writeSpecDoc: async (req,res) => {
+        const { memo_id,body,category,num_mark,title } = req.body
+        const db = req.app.get('db')
+        const doc = db.docs.update_spec_doc([memo_id,body,category,num_mark,title])
+        return res.status(200).send(doc)
+    }
 }
