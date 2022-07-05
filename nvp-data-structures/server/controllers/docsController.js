@@ -4,8 +4,9 @@ module.exports = {
     newMemo: async (req,res) => {
         const db = req.app.get('db')
         const { title,category } = req.body
+        const num_mark = 1
         var body = cryptKeys.encrypt(req.body.body)
-        const memo = await db.docs.new_memo([body,title,category])
+        const memo = await db.docs.new_memo([body,title,category,num_mark])
         return res.status(200).send(memo[0])
     },
 
